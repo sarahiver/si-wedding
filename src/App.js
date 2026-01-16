@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.jsx
+import { useState } from "react"
+import { Toaster } from "react-hot-toast"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { ThemeProvider } from "styled-components"
+import { GlobalStyles } from "./styles/GlobalStyles"
+import { themes } from "./styles/themes"
+
+// Pages
+import HomePage from "./pages/HomePage"
+import AdminPage from "./pages/admin/AdminPage"
+import CustomerFormPage from "./pages/form/CustomerFormPage"
 
 function App() {
+  const [currentTheme, setCurrentTheme] = useState("gold")
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={themes[currentTheme]}>
+      <GlobalStyles />
+      <Toaster position='top-right' />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route
+            path='/admin'
+            element={<AdminPage setTheme={setCurrentTheme} />}
+          />
+          <Route path='/form/:slug' element={<CustomerFormPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App
