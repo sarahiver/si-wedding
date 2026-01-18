@@ -9,6 +9,7 @@ import MarketingFooter from "../components/marketing/MarketingFooter"
 import MarketingHero from "../components/marketing/MarketingHero"
 import MarketingNav from "../components/marketing/MarketingNav"
 import PricingSection from "../components/marketing/PricingSection"
+import SaveTheDateSection from "../components/marketing/SaveTheDateSection"
 import ThemeShowcase from "../components/marketing/ThemeShowcase"
 import USPSection from "../components/marketing/USPSection"
 
@@ -42,6 +43,7 @@ function HomePage() {
 
       {/* Preise */}
       <PricingSection />
+      <SaveTheDateSection />
 
       {/* Über uns */}
       <AboutSection />
