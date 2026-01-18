@@ -190,7 +190,7 @@ function CustomerFormPage() {
           project.id,
           componentType,
           content,
-          images
+          images,
         )
 
         if (error) throw new Error(error)
@@ -206,7 +206,7 @@ function CustomerFormPage() {
         setSaveStatus((prev) => ({ ...prev, [componentType]: "error" }))
       }
     }, 1500),
-    [project]
+    [project],
   )
 
   // Update form data and trigger auto-save
@@ -228,7 +228,7 @@ function CustomerFormPage() {
       autoSave(
         componentType,
         updated[componentType].content,
-        updated[componentType].images
+        updated[componentType].images,
       )
 
       return updated
@@ -251,7 +251,7 @@ function CustomerFormPage() {
       autoSave(
         componentType,
         updated[componentType].content,
-        updated[componentType].images
+        updated[componentType].images,
       )
 
       return updated
