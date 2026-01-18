@@ -137,7 +137,7 @@ const AddButton = styled.button`
   }
 `
 
-function TimelineEditor({ events = [], onEventsChange }) {
+function TimeLineEditor({ events = [], onEventsChange }) {
   const handleTimeChange = (index, time) => {
     const newEvents = [...events]
     newEvents[index] = { ...newEvents[index], time }
@@ -204,4 +204,4 @@ function TimelineEditor({ events = [], onEventsChange }) {
   )
 }
 
-export default TimelineEditor
+export default TimeLineEditor

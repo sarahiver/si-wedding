@@ -1,39 +1,58 @@
 // src/styles/GlobalStyles.js
 import { createGlobalStyle } from "styled-components"
 
-export const GlobalStyles = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;700;900&display=swap');
+const GlobalStyles = createGlobalStyle`
 
-  * {
+  *, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    font-family: 'Montserrat', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: ${(props) => props.theme.background};
-    color: ${(props) => props.theme.text};
-    transition: all 0.3s ease;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
   }
 
-  html, body, #root {
-    height: 100%;
-  }
-
-  button {
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  input, textarea, select {
-    font-family: inherit;
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    line-height: 1.2;
   }
 
   a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+
+  ::selection {
+    background: #000;
+    color: #FFF;
   }
 `
+
+export default GlobalStyles

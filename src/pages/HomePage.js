@@ -1,12 +1,16 @@
 // src/pages/HomePage.js
 import styled from "styled-components"
 import AboutSection from "../components/marketing/AboutSection"
+import ComponentsShowcase from "../components/marketing/ComponentsShowcase"
 import ContactSection from "../components/marketing/ContactSection"
+import ExamplesShowcase from "../components/marketing/ExamplesShowcase"
+import HowItWorksSection from "../components/marketing/HowItWorksSection"
 import MarketingFooter from "../components/marketing/MarketingFooter"
 import MarketingHero from "../components/marketing/MarketingHero"
 import MarketingNav from "../components/marketing/MarketingNav"
 import PricingSection from "../components/marketing/PricingSection"
 import ThemeShowcase from "../components/marketing/ThemeShowcase"
+import USPSection from "../components/marketing/USPSection"
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -16,12 +20,36 @@ const PageContainer = styled.div`
 function HomePage() {
   return (
     <PageContainer>
+      {/* Navigation */}
       <MarketingNav />
+
+      {/* Hero Section */}
       <MarketingHero />
+
+      {/* Komponenten-Showcase */}
+      <ComponentsShowcase />
+
+      {/* So funktioniert's - 4 Schritte */}
+      <HowItWorksSection />
+
+      {/* Theme Showcase - 7 verschiedene Designs */}
       <ThemeShowcase />
+
+      <ExamplesShowcase />
+
+      {/* USP / Warum S&I */}
+      <USPSection />
+
+      {/* Preise */}
       <PricingSection />
+
+      {/* Über uns */}
       <AboutSection />
+
+      {/* Kontakt */}
       <ContactSection />
+
+      {/* Footer */}
       <MarketingFooter />
     </PageContainer>
   )

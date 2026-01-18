@@ -9,7 +9,7 @@ import {
   markFormComplete,
   saveFormUpload,
 } from "../../lib/formUpload"
-import { GlobalStyles } from "../../styles/GlobalStyles"
+import GlobalStyles from "../../styles/GlobalStyles"
 import { themes } from "../../styles/themes"
 
 // Components
@@ -19,7 +19,7 @@ import { InputRow, TextArea, TextInput } from "../../components/form/FormInputs"
 import FormSection from "../../components/form/FormSection"
 import FormSuccess from "../../components/form/FormSuccess"
 import ImageUploader from "../../components/form/ImageUploader"
-import TimelineEditor from "../../components/form/TimelineEditor"
+import TimeLineEditor from "../../components/form/TimeLineEditor"
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -457,7 +457,7 @@ function CustomerFormPage() {
               description='Wie ist der Ablauf eures Hochzeitstages geplant?'
               saveStatus={saveStatus.ablauf}
             >
-              <TimelineEditor
+              <TimeLineEditor
                 events={getValue("ablauf", "events") || []}
                 onEventsChange={(events) =>
                   updateFormData("ablauf", "events", events)
