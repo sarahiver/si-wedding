@@ -179,6 +179,7 @@ function CustomerFormPage() {
   }, [slug])
 
   // Auto-save function
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const autoSave = useCallback(
     debounce(async (componentType, content, images) => {
       if (!project) return
