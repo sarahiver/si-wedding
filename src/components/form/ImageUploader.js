@@ -111,16 +111,6 @@ const UploadingOverlay = styled.div`
   font-size: 0.8rem;
 `
 
-const ProgressBar = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  background: ${(props) => props.theme.primary};
-  width: ${(props) => props.progress}%;
-  transition: width 0.3s ease;
-`
-
 function ImageUploader({
   label,
   images = [],
@@ -148,7 +138,7 @@ function ImageUploader({
     setIsDragging(false)
 
     const files = Array.from(e.dataTransfer.files).filter((file) =>
-      file.type.startsWith("image/")
+      file.type.startsWith("image/"),
     )
 
     handleFiles(files)
@@ -181,7 +171,7 @@ function ImageUploader({
         const result = await uploadToCloudinary(
           preview.file,
           uploadPreset,
-          projectSlug
+          projectSlug,
         )
 
         // Remove from uploading, add to images

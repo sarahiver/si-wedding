@@ -1,6 +1,5 @@
 // src/components/form/FAQEditor.js
 import styled from "styled-components"
-import { useState } from "react"
 
 const FAQContainer = styled.div`
   margin-bottom: 1.5rem;
