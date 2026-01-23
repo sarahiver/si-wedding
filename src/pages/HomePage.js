@@ -1,5 +1,6 @@
 // src/pages/HomePage.js
 import styled from "styled-components"
+import { useTheme } from "../context/ThemeContext"
 import AboutSection from "../components/marketing/AboutSection"
 import ComponentsShowcase from "../components/marketing/ComponentsShowcase"
 import ContactSection from "../components/marketing/ContactSection"
@@ -14,12 +15,15 @@ import USPSection from "../components/marketing/USPSection"
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background: #0a0a0a;
+  background: ${p => p.$theme?.background || '#0a0a0a'};
+  transition: background 0.5s ease;
 `
 
 function HomePage() {
+  const { theme } = useTheme()
+  
   return (
-    <PageContainer>
+    <PageContainer $theme={theme}>
       {/* Navigation */}
       <MarketingNav />
 

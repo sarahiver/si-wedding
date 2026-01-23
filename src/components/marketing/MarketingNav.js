@@ -5,7 +5,7 @@ import { useTheme } from '../../context/ThemeContext'
 
 const bounce = keyframes`
   0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
 `
 
 const Nav = styled.nav`
@@ -19,9 +19,9 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${p => p.$scrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent'};
+  background: ${p => p.$scrolled ? `rgba(${p.$isDark ? '10, 10, 10' : '255, 255, 255'}, 0.95)` : 'transparent'};
   backdrop-filter: ${p => p.$scrolled ? 'blur(20px)' : 'none'};
-  border-bottom: ${p => p.$scrolled ? '1px solid rgba(184, 151, 106, 0.1)' : 'none'};
+  border-bottom: ${p => p.$scrolled ? `1px solid ${p.$accent}20` : 'none'};
   transition: all 0.4s ease;
 `
 
@@ -29,12 +29,13 @@ const Logo = styled.a`
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.8rem;
   font-weight: 300;
-  color: #ffffff;
+  color: ${p => p.$textColor};
   text-decoration: none;
   letter-spacing: 0.1em;
+  transition: color 0.4s ease;
   
   span {
-    color: #B8976A;
+    color: ${p => p.$accent};
   }
 `
 
@@ -54,12 +55,12 @@ const NavLink = styled.a`
   font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: ${p => p.$textColor}99;
   text-decoration: none;
   transition: color 0.3s ease;
   
   &:hover {
-    color: #B8976A;
+    color: ${p => p.$accent};
   }
 `
 
@@ -88,7 +89,8 @@ const ArrowHint = styled.div`
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #B8976A;
+  color: ${p => p.$accent};
+  order: 2;
   
   span {
     font-size: 1rem;
@@ -98,20 +100,21 @@ const ArrowHint = styled.div`
 
 const ThemeDropdown = styled.div`
   position: relative;
+  order: 1;
 `
 
 const DropdownButton = styled.button`
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: ${p => p.$isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.03)'};
+  border: 1px solid ${p => p.$isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
   padding: 10px 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   
   &:hover {
-    border-color: rgba(184, 151, 106, 0.4);
+    border-color: ${p => p.$accent}66;
   }
 `
 
@@ -120,7 +123,7 @@ const ThemeDot = styled.div`
   height: 12px;
   border-radius: 50%;
   background: ${p => p.$color};
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid ${p => p.$isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)'};
 `
 
 const ThemeName = styled.span`
@@ -129,28 +132,30 @@ const ThemeName = styled.span`
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: ${p => p.$textColor};
+  transition: color 0.4s ease;
 `
 
 const DropdownArrow = styled.span`
   font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.5);
-  transition: transform 0.3s ease;
+  color: ${p => p.$textColor}80;
+  transition: transform 0.3s ease, color 0.4s ease;
   transform: rotate(${p => p.$open ? '180deg' : '0deg'});
 `
 
 const DropdownMenu = styled.div`
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
-  background: rgba(10, 10, 10, 0.98);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  left: 0;
+  background: ${p => p.$isDark ? 'rgba(10, 10, 10, 0.98)' : 'rgba(255, 255, 255, 0.98)'};
+  border: 1px solid ${p => p.$isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
   backdrop-filter: blur(20px);
   min-width: 180px;
   opacity: ${p => p.$open ? 1 : 0};
   visibility: ${p => p.$open ? 'visible' : 'hidden'};
   transform: translateY(${p => p.$open ? '0' : '-10px'});
   transition: all 0.3s ease;
+  z-index: 100;
 `
 
 const DropdownItem = styled.button`
@@ -159,13 +164,13 @@ const DropdownItem = styled.button`
   gap: 12px;
   width: 100%;
   padding: 14px 16px;
-  background: ${p => p.$active ? 'rgba(184, 151, 106, 0.1)' : 'transparent'};
+  background: ${p => p.$active ? `${p.$accent}15` : 'transparent'};
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
   
   &:hover {
-    background: rgba(184, 151, 106, 0.15);
+    background: ${p => p.$accent}20;
   }
 `
 
@@ -174,7 +179,8 @@ const ItemName = styled.span`
   font-size: 0.7rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: ${p => p.$active ? '#B8976A' : '#ffffff'};
+  color: ${p => p.$active ? p.$accent : p.$textColor};
+  transition: color 0.3s ease;
 `
 
 const CTAButton = styled.a`
@@ -183,14 +189,14 @@ const CTAButton = styled.a`
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #0a0a0a;
-  background: #B8976A;
+  color: ${p => p.$isDark ? '#0a0a0a' : '#ffffff'};
+  background: ${p => p.$accent};
   padding: 12px 25px;
   text-decoration: none;
   transition: all 0.3s ease;
   
   &:hover {
-    background: #D4AF37;
+    filter: brightness(1.1);
   }
   
   @media (max-width: 900px) {
@@ -214,7 +220,7 @@ const MobileMenuButton = styled.button`
   span {
     width: 22px;
     height: 1px;
-    background: #B8976A;
+    background: ${p => p.$accent};
     transition: all 0.3s ease;
   }
 `
@@ -225,7 +231,7 @@ const MobileMenu = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(10, 10, 10, 0.98);
+  background: ${p => p.$isDark ? 'rgba(10, 10, 10, 0.98)' : 'rgba(255, 255, 255, 0.98)'};
   backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
@@ -242,19 +248,19 @@ const MobileNavLink = styled.a`
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 2rem;
   font-weight: 300;
-  color: #ffffff;
+  color: ${p => p.$textColor};
   text-decoration: none;
   transition: color 0.3s ease;
   
   &:hover {
-    color: #B8976A;
+    color: ${p => p.$accent};
   }
 `
 
 const MobileThemeSelect = styled.select`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(184, 151, 106, 0.3);
-  color: #ffffff;
+  background: ${p => p.$isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'};
+  border: 1px solid ${p => p.$accent}50;
+  color: ${p => p.$textColor};
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   padding: 15px 30px;
@@ -262,12 +268,12 @@ const MobileThemeSelect = styled.select`
   cursor: pointer;
   
   option {
-    background: #0a0a0a;
-    color: #ffffff;
+    background: ${p => p.$isDark ? '#0a0a0a' : '#ffffff'};
+    color: ${p => p.$textColor};
   }
 `
 
-const themes = [
+const themesData = [
   { id: 'video', color: '#B8976A', name: 'Video' },
   { id: 'editorial', color: '#1A1A1A', name: 'Editorial' },
   { id: 'botanical', color: '#8B9D83', name: 'Botanical' },
@@ -277,12 +283,17 @@ const themes = [
 ]
 
 function MarketingNav() {
-  const { currentTheme, switchTheme } = useTheme()
+  const { currentTheme, switchTheme, theme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
-  const currentThemeData = themes.find(t => t.id === currentTheme) || themes[0]
+  const currentThemeData = themesData.find(t => t.id === currentTheme) || themesData[0]
+  
+  // Determine if current theme is dark
+  const isDark = ['video', 'luxe', 'neon'].includes(currentTheme)
+  const textColor = isDark ? '#ffffff' : '#1A1A1A'
+  const accent = theme?.primary || '#B8976A'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -304,56 +315,68 @@ function MarketingNav() {
   }, [])
 
   const handleThemeSelect = (themeId) => {
+    console.log('Switching to theme:', themeId)
     switchTheme(themeId)
     setDropdownOpen(false)
   }
 
   return (
     <>
-      <Nav $scrolled={scrolled}>
-        <Logo href="#">
+      <Nav $scrolled={scrolled} $isDark={isDark} $accent={accent}>
+        <Logo href="#" $textColor={textColor} $accent={accent}>
           S<span>&</span>I
         </Logo>
         
         <NavLinks>
-          <NavLink href="#examples">Themes</NavLink>
-          <NavLink href="#features">Features</NavLink>
-          <NavLink href="#pricing">Preise</NavLink>
-          <NavLink href="#about">Über uns</NavLink>
+          <NavLink href="#examples" $textColor={textColor} $accent={accent}>Themes</NavLink>
+          <NavLink href="#features" $textColor={textColor} $accent={accent}>Features</NavLink>
+          <NavLink href="#pricing" $textColor={textColor} $accent={accent}>Preise</NavLink>
+          <NavLink href="#about" $textColor={textColor} $accent={accent}>Über uns</NavLink>
         </NavLinks>
         
         <RightSection>
           <ThemeSwitcherContainer>
-            <ArrowHint>
-              <span>←</span>
-              Design umschalten
-            </ArrowHint>
-            
             <ThemeDropdown className="theme-dropdown">
-              <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
-                <ThemeDot $color={currentThemeData.color} />
-                <ThemeName>{currentThemeData.name}</ThemeName>
-                <DropdownArrow $open={dropdownOpen}>▼</DropdownArrow>
+              <DropdownButton 
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                $isDark={isDark}
+                $accent={accent}
+              >
+                <ThemeDot $color={currentThemeData.color} $isDark={isDark} />
+                <ThemeName $textColor={textColor}>{currentThemeData.name}</ThemeName>
+                <DropdownArrow $open={dropdownOpen} $textColor={textColor}>▼</DropdownArrow>
               </DropdownButton>
               
-              <DropdownMenu $open={dropdownOpen}>
-                {themes.map(theme => (
+              <DropdownMenu $open={dropdownOpen} $isDark={isDark}>
+                {themesData.map(t => (
                   <DropdownItem
-                    key={theme.id}
-                    $active={currentTheme === theme.id}
-                    onClick={() => handleThemeSelect(theme.id)}
+                    key={t.id}
+                    $active={currentTheme === t.id}
+                    $accent={accent}
+                    onClick={() => handleThemeSelect(t.id)}
                   >
-                    <ThemeDot $color={theme.color} />
-                    <ItemName $active={currentTheme === theme.id}>{theme.name}</ItemName>
+                    <ThemeDot $color={t.color} $isDark={isDark} />
+                    <ItemName 
+                      $active={currentTheme === t.id} 
+                      $accent={accent}
+                      $textColor={textColor}
+                    >
+                      {t.name}
+                    </ItemName>
                   </DropdownItem>
                 ))}
               </DropdownMenu>
             </ThemeDropdown>
+            
+            <ArrowHint $accent={accent}>
+              Design umschalten
+              <span>→</span>
+            </ArrowHint>
           </ThemeSwitcherContainer>
           
-          <CTAButton href="#contact">Kontakt</CTAButton>
+          <CTAButton href="#contact" $accent={accent} $isDark={isDark}>Kontakt</CTAButton>
           
-          <MobileMenuButton onClick={() => setMobileOpen(!mobileOpen)}>
+          <MobileMenuButton onClick={() => setMobileOpen(!mobileOpen)} $accent={accent}>
             <span />
             <span />
             <span />
@@ -361,19 +384,22 @@ function MarketingNav() {
         </RightSection>
       </Nav>
       
-      <MobileMenu $open={mobileOpen}>
-        <MobileNavLink href="#examples" onClick={() => setMobileOpen(false)}>Themes</MobileNavLink>
-        <MobileNavLink href="#features" onClick={() => setMobileOpen(false)}>Features</MobileNavLink>
-        <MobileNavLink href="#pricing" onClick={() => setMobileOpen(false)}>Preise</MobileNavLink>
-        <MobileNavLink href="#about" onClick={() => setMobileOpen(false)}>Über uns</MobileNavLink>
-        <MobileNavLink href="#contact" onClick={() => setMobileOpen(false)}>Kontakt</MobileNavLink>
+      <MobileMenu $open={mobileOpen} $isDark={isDark}>
+        <MobileNavLink href="#examples" onClick={() => setMobileOpen(false)} $textColor={textColor} $accent={accent}>Themes</MobileNavLink>
+        <MobileNavLink href="#features" onClick={() => setMobileOpen(false)} $textColor={textColor} $accent={accent}>Features</MobileNavLink>
+        <MobileNavLink href="#pricing" onClick={() => setMobileOpen(false)} $textColor={textColor} $accent={accent}>Preise</MobileNavLink>
+        <MobileNavLink href="#about" onClick={() => setMobileOpen(false)} $textColor={textColor} $accent={accent}>Über uns</MobileNavLink>
+        <MobileNavLink href="#contact" onClick={() => setMobileOpen(false)} $textColor={textColor} $accent={accent}>Kontakt</MobileNavLink>
         
         <MobileThemeSelect 
           value={currentTheme} 
-          onChange={(e) => switchTheme(e.target.value)}
+          onChange={(e) => handleThemeSelect(e.target.value)}
+          $isDark={isDark}
+          $textColor={textColor}
+          $accent={accent}
         >
-          {themes.map(theme => (
-            <option key={theme.id} value={theme.id}>{theme.name}</option>
+          {themesData.map(t => (
+            <option key={t.id} value={t.id}>{t.name}</option>
           ))}
         </MobileThemeSelect>
       </MobileMenu>
