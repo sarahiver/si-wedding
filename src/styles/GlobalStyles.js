@@ -1,7 +1,8 @@
 // src/styles/GlobalStyles.js
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
   *, *::before, *::after {
     box-sizing: border-box;
@@ -22,11 +23,6 @@ const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-    line-height: 1.2;
-  }
-
   a {
     color: inherit;
     text-decoration: none;
@@ -39,7 +35,12 @@ const GlobalStyles = createGlobalStyle`
     background: none;
   }
 
-  img {
+  input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  img, video {
     max-width: 100%;
     height: auto;
     display: block;
@@ -49,10 +50,9 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
 
-  ::selection {
-    background: #000;
-    color: #FFF;
+  [id] {
+    scroll-margin-top: 100px;
   }
-`
+`;
 
-export default GlobalStyles
+export default GlobalStyles;

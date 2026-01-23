@@ -1,56 +1,36 @@
 // src/pages/HomePage.js
-import styled from "styled-components"
-import AboutSection from "../components/marketing/AboutSection"
-import ComponentsShowcase from "../components/marketing/ComponentsShowcase"
-import ContactSection from "../components/marketing/ContactSection"
-import ExamplesShowcase from "../components/marketing/ExamplesShowcase"
-import HowItWorksSection from "../components/marketing/HowItWorksSection"
-import MarketingFooter from "../components/marketing/MarketingFooter"
-import MarketingHero from "../components/marketing/MarketingHero"
-import MarketingNav from "../components/marketing/MarketingNav"
-import PricingSection from "../components/marketing/PricingSection"
-import SaveTheDateSection from "../components/marketing/SaveTheDateSection"
-import USPSection from "../components/marketing/USPSection"
+import React from 'react';
+import styled from 'styled-components';
+import MarketingNav from '../components/marketing/MarketingNav';
+import MarketingHero from '../components/marketing/MarketingHero';
+import ComponentsShowcase from '../components/marketing/ComponentsShowcase';
+import HowItWorks from '../components/marketing/HowItWorks';
+import DesignShowcase from '../components/marketing/DesignShowcase';
+import USPSection from '../components/marketing/USPSection';
+import PricingSection from '../components/marketing/PricingSection';
+import SaveTheDateSection from '../components/marketing/SaveTheDateSection';
+import ContactSection from '../components/marketing/ContactSection';
+import AboutSection from '../components/marketing/AboutSection';
+import MarketingFooter from '../components/marketing/MarketingFooter';
 
-const PageContainer = styled.div`
-  min-height: 100vh;
-  background: #ffffff;
-`
+const Page = styled.div`min-height: 100vh;`;
 
 function HomePage() {
   return (
-    <PageContainer>
-      {/* Navigation */}
+    <Page>
       <MarketingNav />
-
-      {/* Hero Section */}
       <MarketingHero />
-
-      {/* Komponenten-Showcase */}
       <ComponentsShowcase />
-
-      {/* So funktioniert's - 4 Schritte */}
-      <HowItWorksSection />
-
-      <ExamplesShowcase />
-
-      {/* USP / Warum S&I */}
+      <HowItWorks />
+      <DesignShowcase />
       <USPSection />
-
-      {/* Preise */}
       <PricingSection />
       <SaveTheDateSection />
-
-      {/* Über uns */}
       <AboutSection />
-
-      {/* Kontakt */}
       <ContactSection />
-
-      {/* Footer */}
       <MarketingFooter />
-    </PageContainer>
-  )
+    </Page>
+  );
 }
 
-export default HomePage
+export default HomePage;
