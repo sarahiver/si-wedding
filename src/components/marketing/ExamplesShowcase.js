@@ -15,7 +15,7 @@ const Section = styled.section`
 `
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 `
 
@@ -71,10 +71,8 @@ const Grid = styled.div`
 `
 
 const Card = styled.div`
-  background: rgba(184, 151, 106, 0.03);
-  border: 1px solid rgba(184, 151, 106, 0.15);
-  padding: 50px 35px;
-  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -85,30 +83,52 @@ const Card = styled.div`
               border-color 0.4s ease,
               box-shadow 0.4s ease;
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(184, 151, 106, 0.05), transparent);
-    transition: left 0.6s ease;
-  }
-  
   &:hover {
     border-color: rgba(184, 151, 106, 0.4);
     box-shadow: 0 0 50px rgba(184, 151, 106, 0.1);
     
-    &::before {
-      left: 100%;
+    img {
+      transform: scale(1.05);
     }
   }
 `
 
+const ImageWrapper = styled.div`
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  background: ${p => p.$bgColor || '#1a1a1a'};
+`
+
+const PreviewImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+`
+
+const PlaceholderBadge = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(184, 151, 106, 0.9);
+  color: #0a0a0a;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+`
+
+const CardContent = styled.div`
+  padding: 30px 25px;
+  text-align: center;
+`
+
 const CardInitials = styled.div`
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
   letter-spacing: 0.1em;
   background: linear-gradient(135deg, #B8976A, #D4AF37, #B8976A);
@@ -117,36 +137,36 @@ const CardInitials = styled.div`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: ${shimmer} 4s linear infinite;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `
 
 const CardName = styled.h3`
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 400;
   color: #ffffff;
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
 `
 
 const CardTagline = styled.div`
   font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 `
 
 const ColorSwatches = styled.div`
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 25px;
+  gap: 6px;
+  margin-bottom: 15px;
 `
 
 const Swatch = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: ${p => p.$color};
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -154,12 +174,12 @@ const Swatch = styled.div`
 
 const CardCTA = styled.div`
   font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #B8976A;
-  padding-top: 20px;
-  border-top: 1px solid rgba(184, 151, 106, 0.15);
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 `
 
 const themeExamples = [
@@ -168,6 +188,9 @@ const themeExamples = [
     name: 'Video',
     tagline: 'Cineastisch & Dramatisch',
     colors: ['#FAF8F5', '#1A1A1A', '#B8976A'],
+    bgColor: '#0a0a0a',
+    // Platzhalter für Theme Screenshot
+    image: 'https://placehold.co/600x400/0a0a0a/B8976A?text=Video+Theme%0AScreenshot',
     demoUrl: '/demo?theme=video'
   },
   {
@@ -175,6 +198,8 @@ const themeExamples = [
     name: 'Editorial',
     tagline: 'Zeitlose Magazin-Ästhetik',
     colors: ['#FFFFFF', '#1A1A1A', '#666666'],
+    bgColor: '#ffffff',
+    image: 'https://placehold.co/600x400/ffffff/1a1a1a?text=Editorial+Theme%0AScreenshot',
     demoUrl: '/demo?theme=editorial'
   },
   {
@@ -182,6 +207,8 @@ const themeExamples = [
     name: 'Botanical',
     tagline: 'Organisch & Natürlich',
     colors: ['#F8F6F0', '#2D3B2D', '#8B9D83'],
+    bgColor: '#F8F6F0',
+    image: 'https://placehold.co/600x400/F8F6F0/2D3B2D?text=Botanical+Theme%0AScreenshot',
     demoUrl: '/demo?theme=botanical'
   },
   {
@@ -189,6 +216,8 @@ const themeExamples = [
     name: 'Contemporary',
     tagline: 'Modern & Playful',
     colors: ['#FF6B6B', '#4ECDC4', '#FFE66D'],
+    bgColor: '#FAFAFA',
+    image: 'https://placehold.co/600x400/FAFAFA/FF6B6B?text=Contemporary+Theme%0AScreenshot',
     demoUrl: '/demo?theme=contemporary'
   },
   {
@@ -196,6 +225,8 @@ const themeExamples = [
     name: 'Luxe',
     tagline: 'Opulent & Glamourös',
     colors: ['#FAF9F7', '#2A2A2A', '#D4AF37'],
+    bgColor: '#0a0a0a',
+    image: 'https://placehold.co/600x400/0a0a0a/D4AF37?text=Luxe+Theme%0AScreenshot',
     demoUrl: '/demo?theme=luxe'
   },
   {
@@ -203,6 +234,8 @@ const themeExamples = [
     name: 'Neon',
     tagline: 'Bold & Digital',
     colors: ['#0A0A0F', '#00FFFF', '#FF00FF'],
+    bgColor: '#0A0A0F',
+    image: 'https://placehold.co/600x400/0A0A0F/00FFFF?text=Neon+Theme%0AScreenshot',
     demoUrl: '/demo?theme=neon'
   }
 ]
@@ -244,15 +277,25 @@ function ExamplesShowcase() {
               $delay={0.1 + i * 0.08}
               onClick={() => handleCardClick(theme)}
             >
-              <CardInitials>{theme.name.substring(0, 2).toUpperCase()}</CardInitials>
-              <CardName>{theme.name}</CardName>
-              <CardTagline>{theme.tagline}</CardTagline>
-              <ColorSwatches>
-                {theme.colors.map((color, j) => (
-                  <Swatch key={j} $color={color} />
-                ))}
-              </ColorSwatches>
-              <CardCTA>Demo ansehen →</CardCTA>
+              <ImageWrapper $bgColor={theme.bgColor}>
+                <PreviewImage 
+                  src={theme.image} 
+                  alt={`${theme.name} Theme Preview`}
+                />
+                <PlaceholderBadge>📷 Screenshot</PlaceholderBadge>
+              </ImageWrapper>
+              
+              <CardContent>
+                <CardInitials>{theme.name.substring(0, 2).toUpperCase()}</CardInitials>
+                <CardName>{theme.name}</CardName>
+                <CardTagline>{theme.tagline}</CardTagline>
+                <ColorSwatches>
+                  {theme.colors.map((color, j) => (
+                    <Swatch key={j} $color={color} />
+                  ))}
+                </ColorSwatches>
+                <CardCTA>Demo ansehen →</CardCTA>
+              </CardContent>
             </Card>
           ))}
         </Grid>

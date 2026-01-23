@@ -90,6 +90,30 @@ const Preview = styled.div`
   transition-delay: 0.2s;
 `
 
+const PreviewWrapper = styled.div`
+  position: relative;
+`
+
+const PreviewImage = styled.img`
+  width: 100%;
+  height: auto;
+  box-shadow: 0 30px 80px rgba(26, 26, 26, 0.15);
+`
+
+const PlaceholderNote = styled.div`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(184, 151, 106, 0.9);
+  color: #0a0a0a;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 15px;
+`
+
 const PreviewCard = styled.div`
   background: #0a0a0a;
   padding: 60px 50px;
@@ -188,13 +212,25 @@ function SaveTheDateSection() {
         </Content>
         
         <Preview $visible={isVisible}>
-          <PreviewCard>
-            <PreviewEyebrow>— Save the Date —</PreviewEyebrow>
-            <PreviewTitle>Sarah & Iver</PreviewTitle>
-            <PreviewDate>15. August 2026 • Hamburg</PreviewDate>
-            <PreviewDivider />
-            <PreviewText>Wir heiraten und ihr sollt dabei sein</PreviewText>
-          </PreviewCard>
+          <PreviewWrapper>
+            {/* Option 1: Mit echtem Mockup-Bild */}
+            {/* 
+            <PreviewImage 
+              src="https://placehold.co/500x700/0a0a0a/B8976A?text=Save+the+Date%0AMockup%0A(Handy+mit+Karte)"
+              alt="Save the Date Beispiel"
+            />
+            <PlaceholderNote>📷 Mockup ersetzen</PlaceholderNote>
+            */}
+            
+            {/* Option 2: Live Preview Card */}
+            <PreviewCard>
+              <PreviewEyebrow>— Save the Date —</PreviewEyebrow>
+              <PreviewTitle>Sarah & Iver</PreviewTitle>
+              <PreviewDate>15. August 2026 • Hamburg</PreviewDate>
+              <PreviewDivider />
+              <PreviewText>Wir heiraten und ihr sollt dabei sein</PreviewText>
+            </PreviewCard>
+          </PreviewWrapper>
         </Preview>
       </Container>
     </Section>

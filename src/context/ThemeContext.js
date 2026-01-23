@@ -1,6 +1,6 @@
 // src/context/ThemeContext.js
 // Theme-Definitionen exakt wie die Wedding-Seiten
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const themes = {
   editorial: {
@@ -174,10 +174,28 @@ const themes = {
   },
 };
 
+const STORAGE_KEY = 'si-wedding-selected-theme';
+
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [currentTheme, setCurrentTheme] = useState('video');
+  // Initialize from localStorage or default to 'video'
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && themes[saved]) {
+        return saved;
+      }
+    }
+    return 'video';
+  });
+
+  // Persist theme changes to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, currentTheme);
+    }
+  }, [currentTheme]);
 
   const switchTheme = (themeId) => {
     if (themes[themeId]) {

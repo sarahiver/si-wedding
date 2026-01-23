@@ -1,7 +1,13 @@
 // src/components/marketing/MarketingNav.js
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
+
+const bounce = keyframes`
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+`
 
 const Nav = styled.nav`
   position: fixed;
@@ -38,7 +44,7 @@ const NavLinks = styled.div`
   align-items: center;
   gap: 40px;
   
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `
@@ -61,28 +67,76 @@ const NavLink = styled.a`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
 `
 
 const ThemeSwitcherWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 8px 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const ThemeButton = styled.button`
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 2px solid ${p => p.$active ? '#B8976A' : 'rgba(255,255,255,0.2)'};
+  border: 2px solid ${p => p.$active ? '#B8976A' : 'rgba(255,255,255,0.15)'};
   background: ${p => p.$color};
   cursor: pointer;
   transition: all 0.3s ease;
-  transform: scale(${p => p.$active ? 1.1 : 1});
+  transform: scale(${p => p.$active ? 1.15 : 1});
   
   &:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+  }
+`
+
+const DemoLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #B8976A;
+  text-decoration: none;
+  padding: 12px 20px;
+  border: 1px solid rgba(184, 151, 106, 0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(184, 151, 106, 0.1);
     border-color: #B8976A;
-    transform: scale(1.15);
+    
+    span {
+      animation: ${bounce} 0.6s ease infinite;
+    }
+  }
+  
+  span {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  @media (max-width: 900px) {
+    span {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    padding: 10px 15px;
+    font-size: 0.6rem;
   }
 `
 
@@ -102,7 +156,7 @@ const CTAButton = styled.a`
     background: #D4AF37;
   }
   
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `
@@ -114,7 +168,7 @@ const MobileMenuButton = styled.button`
   cursor: pointer;
   padding: 10px;
   
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -160,17 +214,34 @@ const MobileNavLink = styled.a`
   }
 `
 
+const MobileThemeSwitcher = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+`
+
+const MobileThemeButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid ${p => p.$active ? '#B8976A' : 'rgba(255,255,255,0.2)'};
+  background: ${p => p.$color};
+  cursor: pointer;
+  transition: all 0.3s ease;
+`
+
 const themes = [
-  { id: 'video', color: '#B8976A' },
-  { id: 'editorial', color: '#1A1A1A' },
-  { id: 'botanical', color: '#8B9D83' },
-  { id: 'contemporary', color: '#FF6B6B' },
-  { id: 'luxe', color: '#D4AF37' },
-  { id: 'neon', color: '#00FFFF' },
+  { id: 'video', color: '#B8976A', name: 'Video' },
+  { id: 'editorial', color: '#1A1A1A', name: 'Editorial' },
+  { id: 'botanical', color: '#8B9D83', name: 'Botanical' },
+  { id: 'contemporary', color: '#FF6B6B', name: 'Contemporary' },
+  { id: 'luxe', color: '#D4AF37', name: 'Luxe' },
+  { id: 'neon', color: '#00FFFF', name: 'Neon' },
 ]
 
 function MarketingNav() {
   const { currentTheme, switchTheme } = useTheme()
+  const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -181,6 +252,11 @@ function MarketingNav() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleDemoClick = (e) => {
+    e.preventDefault()
+    navigate(`/demo?theme=${currentTheme}`)
+  }
 
   return (
     <>
@@ -204,10 +280,14 @@ function MarketingNav() {
                 $color={theme.color}
                 $active={currentTheme === theme.id}
                 onClick={() => switchTheme(theme.id)}
-                title={theme.id}
+                title={theme.name}
               />
             ))}
           </ThemeSwitcherWrapper>
+          
+          <DemoLink href="#" onClick={handleDemoClick}>
+            Designs ausprobieren <span>→</span>
+          </DemoLink>
           
           <CTAButton href="#contact">Kontakt</CTAButton>
           
@@ -225,6 +305,20 @@ function MarketingNav() {
         <MobileNavLink href="#pricing" onClick={() => setMobileOpen(false)}>Preise</MobileNavLink>
         <MobileNavLink href="#about" onClick={() => setMobileOpen(false)}>Über uns</MobileNavLink>
         <MobileNavLink href="#contact" onClick={() => setMobileOpen(false)}>Kontakt</MobileNavLink>
+        <MobileNavLink as="button" onClick={(e) => { handleDemoClick(e); setMobileOpen(false); }} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+          Demo ansehen →
+        </MobileNavLink>
+        
+        <MobileThemeSwitcher>
+          {themes.map(theme => (
+            <MobileThemeButton
+              key={theme.id}
+              $color={theme.color}
+              $active={currentTheme === theme.id}
+              onClick={() => switchTheme(theme.id)}
+            />
+          ))}
+        </MobileThemeSwitcher>
       </MobileMenu>
     </>
   )
