@@ -7,11 +7,11 @@ export const THEMES = {
     description: "Minimalistisch modern in Schwarz/Weiß",
     color: "#1A1A1A",
   },
-  video: {
-    id: "video",
-    name: "Video",
-    description: "Cineastisch mit Video-Hintergründen",
-    color: "#B8976A",
+  gold: {
+    id: "gold",
+    name: "Gold Luxury",
+    description: "Klassisch elegant mit Gold-Akzenten",
+    color: "#D4AF37",
   },
   botanical: {
     id: "botanical",
@@ -216,9 +216,9 @@ export const THEME_PREVIEWS = {
     fontFamily: "'Playfair Display', serif",
     text: "S & I",
   },
-  video: {
+  gold: {
     background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)",
-    color: "#B8976A",
+    color: "#D4AF37",
     fontFamily: "'Cormorant Garamond', serif",
     text: "S & I",
   },

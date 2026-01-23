@@ -1,18 +1,18 @@
 // src/styles/themes.js
-export const videoTheme = {
-  name: "video",
-  primary: "#B8976A",
+export const goldTheme = {
+  name: "gold",
+  primary: "#d4af37",
   secondary: "#0a0a0a",
   background: "#0a0a0a",
-  surface: "rgba(184, 151, 106, 0.03)",
+  surface: "rgba(212, 175, 55, 0.03)",
   text: "#fefefe",
   textSecondary: "rgba(254, 254, 254, 0.7)",
-  border: "rgba(184, 151, 106, 0.2)",
-  borderHover: "#B8976A",
+  border: "rgba(212, 175, 55, 0.2)",
+  borderHover: "#d4af37",
   inputBg: "rgba(255, 255, 255, 0.05)",
-  inputBorder: "rgba(184, 151, 106, 0.3)",
-  fontHeading: "'Cormorant Garamond', serif",
-  fontBody: "'Inter', sans-serif",
+  inputBorder: "rgba(212, 175, 55, 0.3)",
+  fontHeading: "'Playfair Display', serif",
+  fontBody: "'Montserrat', sans-serif",
   buttonRadius: "0",
   cardRadius: "0",
 }
@@ -55,7 +55,7 @@ export const botanicalTheme = {
 }
 
 export const themes = {
-  video: videoTheme,
+  gold: goldTheme,
   editorial: editorialTheme,
   botanical: botanicalTheme,
 }

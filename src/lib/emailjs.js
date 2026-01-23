@@ -79,7 +79,7 @@ export async function sendContactNotification(data) {
 function formatTheme(theme) {
   const themes = {
     editorial: "Editorial – Minimalistisch",
-    video: "Video – Cineastisch Dramatisch",
+    gold: "Gold – Klassisch Elegant",
     botanical: "Botanical – Natürlich",
     contemporary: "Contemporary – Modern Bold",
     luxe: "Luxe – Zeitlos Edel",

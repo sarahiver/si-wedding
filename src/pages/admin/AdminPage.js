@@ -199,7 +199,7 @@ const LoadingSpinner = styled.div`
 
 const FromRequestBanner = styled.div`
   background: ${(props) =>
-    props.theme.name === "video"
+    props.theme.name === "gold"
       ? "rgba(212, 175, 55, 0.15)"
       : "rgba(139, 115, 85, 0.15)"};
   border: 1px solid ${(props) => props.theme.primary};
