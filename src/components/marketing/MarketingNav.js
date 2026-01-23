@@ -26,7 +26,6 @@ const Nav = styled.nav`
   justify-content: space-between;
   transition: all 0.4s ease;
   
-  /* Contemporary - Rahmen-Style */
   ${p => p.$themeId === 'contemporary' && css`
     top: 20px;
     left: 50%;
@@ -38,9 +37,12 @@ const Nav = styled.nav`
     border: 2px solid #1A1A1A;
     height: 70px;
     padding: 0 30px;
+    @media (max-width: 900px) {
+      width: calc(100% - 40px);
+      top: 10px;
+    }
   `}
   
-  /* Botanical - Schwebend, organisch, Links zentriert */
   ${p => p.$themeId === 'botanical' && css`
     top: 20px;
     left: 50%;
@@ -55,20 +57,21 @@ const Nav = styled.nav`
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
     animation: ${floatNav} 4s ease-in-out infinite;
     justify-content: center;
+    @media (max-width: 900px) {
+      width: calc(100% - 30px);
+      top: 10px;
+      padding: 0 20px;
+      justify-content: space-between;
+      animation: none;
+    }
   `}
   
   ${p => p.$scrolled && css`
     backdrop-filter: blur(20px);
     ${p.$themeId === 'video' && css`background: rgba(10,10,10,0.95); border-bottom: 1px solid rgba(184,151,106,0.1);`}
     ${p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98); border-bottom: 1px solid #E0E0E0;`}
-    ${p.$themeId === 'botanical' && css`
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    `}
-    ${p.$themeId === 'contemporary' && css`
-      background: #FFFFFF;
-      box-shadow: 4px 4px 0 #1A1A1A;
-    `}
+    ${p.$themeId === 'botanical' && css`background: rgba(255, 255, 255, 0.95); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);`}
+    ${p.$themeId === 'contemporary' && css`background: #FFFFFF; box-shadow: 4px 4px 0 #1A1A1A;`}
     ${p.$themeId === 'luxe' && css`background: rgba(10,10,10,0.98); border-bottom: 1px solid rgba(212,175,55,0.1);`}
     ${p.$themeId === 'neon' && css`background: rgba(10,10,15,0.95); border-bottom: 1px solid rgba(0,255,255,0.2);`}
   `}
@@ -77,11 +80,13 @@ const Nav = styled.nav`
 const Logo = styled.a`
   text-decoration: none;
   transition: all 0.3s ease;
+  z-index: 1001;
   
-  /* Botanical - Logo links positionieren */
   ${p => p.$themeId === 'botanical' && css`
-    position: absolute;
-    left: 35px;
+    @media (min-width: 901px) {
+      position: absolute;
+      left: 35px;
+    }
   `}
   
   ${p => p.$themeId === 'video' && css`
@@ -183,11 +188,13 @@ const RightSection = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  z-index: 1001;
   
-  /* Botanical - rechts positionieren */
   ${p => p.$themeId === 'botanical' && css`
-    position: absolute;
-    right: 35px;
+    @media (min-width: 901px) {
+      position: absolute;
+      right: 35px;
+    }
   `}
 `;
 
@@ -349,11 +356,14 @@ const DropdownItem = styled.button`
 const MobileMenuButton = styled.button`
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   padding: 10px;
   background: none;
   border: none;
   cursor: pointer;
+  z-index: 1002;
   
   @media (max-width: 900px) {
     display: flex;
@@ -370,7 +380,189 @@ const MobileMenuButton = styled.button`
     ${p => p.$themeId === 'contemporary' && css`background: #0D0D0D;`}
     ${p => p.$themeId === 'luxe' && css`background: #D4AF37;`}
     ${p => p.$themeId === 'neon' && css`background: #00ffff;`}
+    
+    ${p => p.$open && css`
+      &:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      &:nth-child(2) { opacity: 0; }
+      &:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    `}
   }
+`;
+
+// Mobile Menu Overlay
+const MobileMenuOverlay = styled.div`
+  display: none;
+  
+  @media (max-width: 900px) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    opacity: ${p => p.$open ? 1 : 0};
+    visibility: ${p => p.$open ? 'visible' : 'hidden'};
+    transition: all 0.3s ease;
+    
+    ${p => p.$themeId === 'video' && css`background: rgba(10,10,10,0.98);`}
+    ${p => p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98);`}
+    ${p => p.$themeId === 'botanical' && css`background: rgba(250,249,246,0.98);`}
+    ${p => p.$themeId === 'contemporary' && css`background: #FFFFFF;`}
+    ${p => p.$themeId === 'luxe' && css`background: rgba(10,10,10,0.98);`}
+    ${p => p.$themeId === 'neon' && css`background: rgba(10,10,15,0.98);`}
+  }
+`;
+
+const MobileMenuContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 25px;
+  padding: 100px 30px 50px;
+`;
+
+const MobileNavLink = styled.a`
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  opacity: ${p => p.$open ? 1 : 0};
+  transform: translateY(${p => p.$open ? 0 : '20px'});
+  transition-delay: ${p => p.$delay}s;
+  
+  ${p => p.$themeId === 'video' && css`
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    &:hover { color: #B8976A; }
+  `}
+  ${p => p.$themeId === 'editorial' && css`
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    color: #1A1A1A;
+    &:hover { color: #666; }
+  `}
+  ${p => p.$themeId === 'botanical' && css`
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    color: #2D3B2D;
+    &:hover { color: #7A9972; }
+  `}
+  ${p => p.$themeId === 'contemporary' && css`
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #0D0D0D;
+    &:hover { color: #FF6B6B; }
+  `}
+  ${p => p.$themeId === 'luxe' && css`
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    &:hover { color: #D4AF37; }
+  `}
+  ${p => p.$themeId === 'neon' && css`
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    &:hover { color: #00ffff; text-shadow: 0 0 15px rgba(0,255,255,0.5); }
+  `}
+`;
+
+const MobileThemeSection = styled.div`
+  margin-top: 30px;
+  padding-top: 30px;
+  width: 100%;
+  max-width: 300px;
+  opacity: ${p => p.$open ? 1 : 0};
+  transform: translateY(${p => p.$open ? 0 : '20px'});
+  transition: all 0.5s ease;
+  transition-delay: 0.4s;
+  
+  ${p => p.$themeId === 'video' && css`border-top: 1px solid rgba(184,151,106,0.2);`}
+  ${p => p.$themeId === 'editorial' && css`border-top: 1px solid #E0E0E0;`}
+  ${p => p.$themeId === 'botanical' && css`border-top: 1px solid rgba(139,157,131,0.2);`}
+  ${p => p.$themeId === 'contemporary' && css`border-top: 3px solid #0D0D0D;`}
+  ${p => p.$themeId === 'luxe' && css`border-top: 1px solid rgba(212,175,55,0.2);`}
+  ${p => p.$themeId === 'neon' && css`border-top: 1px solid rgba(0,255,255,0.2);`}
+`;
+
+const MobileThemeTitle = styled.p`
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  
+  ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: #B8976A;`}
+  ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #999;`}
+  ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #7A9972;`}
+  ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: #666;`}
+  ${p => p.$themeId === 'luxe' && css`font-family: 'Montserrat', sans-serif; color: #D4AF37;`}
+  ${p => p.$themeId === 'neon' && css`font-family: 'Space Grotesk', sans-serif; color: #00ffff;`}
+`;
+
+const MobileThemeGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+`;
+
+const MobileThemeButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 10px;
+  background: transparent;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  ${p => p.$themeId === 'video' && css`
+    border-color: ${p.$active ? '#B8976A' : 'rgba(184,151,106,0.2)'};
+    background: ${p.$active ? 'rgba(184,151,106,0.1)' : 'transparent'};
+  `}
+  ${p => p.$themeId === 'editorial' && css`
+    border-color: ${p.$active ? '#1A1A1A' : '#E0E0E0'};
+    background: ${p.$active ? '#F5F5F5' : 'transparent'};
+  `}
+  ${p => p.$themeId === 'botanical' && css`
+    border-color: ${p.$active ? '#7A9972' : 'rgba(139,157,131,0.2)'};
+    background: ${p.$active ? 'rgba(139,157,131,0.1)' : 'transparent'};
+    border-radius: 12px;
+  `}
+  ${p => p.$themeId === 'contemporary' && css`
+    border-color: #0D0D0D;
+    border-width: 2px;
+    background: ${p.$active ? '#0D0D0D' : 'transparent'};
+  `}
+  ${p => p.$themeId === 'luxe' && css`
+    border-color: ${p.$active ? '#D4AF37' : 'rgba(212,175,55,0.2)'};
+    background: ${p.$active ? 'rgba(212,175,55,0.1)' : 'transparent'};
+  `}
+  ${p => p.$themeId === 'neon' && css`
+    border-color: ${p.$active ? '#00ffff' : 'rgba(0,255,255,0.2)'};
+    background: ${p.$active ? 'rgba(0,255,255,0.1)' : 'transparent'};
+  `}
+`;
+
+const MobileThemeDot = styled.span`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: ${p => p.$color};
+`;
+
+const MobileThemeName = styled.span`
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  
+  ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: rgba(255,255,255,0.6);`}
+  ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #666;`}
+  ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #5A6B5A;`}
+  ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: ${p.$active ? '#FFF' : '#0D0D0D'};`}
+  ${p => p.$themeId === 'luxe' && css`font-family: 'Montserrat', sans-serif; color: rgba(255,255,255,0.5);`}
+  ${p => p.$themeId === 'neon' && css`font-family: 'Space Grotesk', sans-serif; color: rgba(255,255,255,0.5);`}
 `;
 
 const themeColors = {
@@ -394,6 +586,7 @@ function MarketingNav() {
   const { currentTheme, switchTheme, themes } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -412,59 +605,120 @@ function MarketingNav() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
   const handleThemeSelect = (themeId) => {
     switchTheme(themeId);
     setDropdownOpen(false);
   };
 
+  const handleMobileThemeSelect = (themeId) => {
+    switchTheme(themeId);
+  };
+
+  const handleMobileLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <Nav $themeId={currentTheme} $scrolled={scrolled}>
-      <Logo href="#" $themeId={currentTheme} $scrolled={scrolled}>
-        S & I
-      </Logo>
-      
-      <NavLinks $themeId={currentTheme}>
-        {navLinks.map(link => (
-          <NavLink key={link.label} href={link.href} $themeId={currentTheme} $scrolled={scrolled}>
-            {link.label}
-          </NavLink>
-        ))}
-      </NavLinks>
-      
-      <RightSection $themeId={currentTheme}>
-        <ThemeDropdown ref={dropdownRef}>
-          <ThemeButton 
-            $themeId={currentTheme} 
-            $scrolled={scrolled}
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
-            <ThemeDot $color={themeColors[currentTheme]} />
-            {themes[currentTheme].name}
-            <DropdownArrow $open={dropdownOpen}>▼</DropdownArrow>
-          </ThemeButton>
-          
-          <DropdownMenu $themeId={currentTheme} $open={dropdownOpen}>
-            {Object.values(themes).map(theme => (
-              <DropdownItem
-                key={theme.id}
-                $themeId={currentTheme}
-                $active={currentTheme === theme.id}
-                onClick={() => handleThemeSelect(theme.id)}
-              >
-                <ThemeDot $color={themeColors[theme.id]} />
-                {theme.name}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </ThemeDropdown>
+    <>
+      <Nav $themeId={currentTheme} $scrolled={scrolled}>
+        <Logo href="#" $themeId={currentTheme} $scrolled={scrolled}>
+          S & I
+        </Logo>
         
-        <MobileMenuButton $themeId={currentTheme}>
-          <span />
-          <span />
-          <span />
-        </MobileMenuButton>
-      </RightSection>
-    </Nav>
+        <NavLinks $themeId={currentTheme}>
+          {navLinks.map(link => (
+            <NavLink key={link.label} href={link.href} $themeId={currentTheme} $scrolled={scrolled}>
+              {link.label}
+            </NavLink>
+          ))}
+        </NavLinks>
+        
+        <RightSection $themeId={currentTheme}>
+          <ThemeDropdown ref={dropdownRef}>
+            <ThemeButton 
+              $themeId={currentTheme} 
+              $scrolled={scrolled}
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              <ThemeDot $color={themeColors[currentTheme]} />
+              {themes[currentTheme].name}
+              <DropdownArrow $open={dropdownOpen}>▼</DropdownArrow>
+            </ThemeButton>
+            
+            <DropdownMenu $themeId={currentTheme} $open={dropdownOpen}>
+              {Object.values(themes).map(theme => (
+                <DropdownItem
+                  key={theme.id}
+                  $themeId={currentTheme}
+                  $active={currentTheme === theme.id}
+                  onClick={() => handleThemeSelect(theme.id)}
+                >
+                  <ThemeDot $color={themeColors[theme.id]} />
+                  {theme.name}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </ThemeDropdown>
+          
+          <MobileMenuButton 
+            $themeId={currentTheme} 
+            $open={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <span />
+            <span />
+            <span />
+          </MobileMenuButton>
+        </RightSection>
+      </Nav>
+
+      {/* Mobile Menu */}
+      <MobileMenuOverlay $themeId={currentTheme} $open={mobileMenuOpen}>
+        <MobileMenuContent>
+          {navLinks.map((link, i) => (
+            <MobileNavLink 
+              key={link.label} 
+              href={link.href} 
+              $themeId={currentTheme}
+              $open={mobileMenuOpen}
+              $delay={0.1 + i * 0.05}
+              onClick={handleMobileLinkClick}
+            >
+              {link.label}
+            </MobileNavLink>
+          ))}
+          
+          <MobileThemeSection $themeId={currentTheme} $open={mobileMenuOpen}>
+            <MobileThemeTitle $themeId={currentTheme}>Theme wählen</MobileThemeTitle>
+            <MobileThemeGrid>
+              {Object.values(themes).map(theme => (
+                <MobileThemeButton
+                  key={theme.id}
+                  $themeId={currentTheme}
+                  $active={currentTheme === theme.id}
+                  onClick={() => handleMobileThemeSelect(theme.id)}
+                >
+                  <MobileThemeDot $color={themeColors[theme.id]} />
+                  <MobileThemeName $themeId={currentTheme} $active={currentTheme === theme.id}>
+                    {theme.name}
+                  </MobileThemeName>
+                </MobileThemeButton>
+              ))}
+            </MobileThemeGrid>
+          </MobileThemeSection>
+        </MobileMenuContent>
+      </MobileMenuOverlay>
+    </>
   );
 }
 
