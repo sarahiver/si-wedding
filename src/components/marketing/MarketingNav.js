@@ -40,7 +40,7 @@ const Nav = styled.nav`
     padding: 0 30px;
   `}
   
-  /* Botanical - Schwebend, organisch */
+  /* Botanical - Schwebend, organisch, Links zentriert */
   ${p => p.$themeId === 'botanical' && css`
     top: 20px;
     left: 50%;
@@ -55,6 +55,7 @@ const Nav = styled.nav`
     padding: 0 35px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
     animation: ${floatNav} 4s ease-in-out infinite;
+    justify-content: center;
   `}
   
   ${p => p.$scrolled && css`
@@ -77,6 +78,12 @@ const Nav = styled.nav`
 const Logo = styled.a`
   text-decoration: none;
   transition: all 0.3s ease;
+  
+  /* Botanical - Logo links positionieren */
+  ${p => p.$themeId === 'botanical' && css`
+    position: absolute;
+    left: 35px;
+  `}
   
   ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -123,13 +130,6 @@ const NavLinks = styled.div`
   display: flex;
   align-items: center;
   gap: 35px;
-  
-  /* Botanical - zentriert */
-  ${p => p.$themeId === 'botanical' && css`
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  `}
   
   @media (max-width: 900px) {
     display: none;
@@ -184,6 +184,12 @@ const RightSection = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  
+  /* Botanical - rechts positionieren */
+  ${p => p.$themeId === 'botanical' && css`
+    position: absolute;
+    right: 35px;
+  `}
 `;
 
 const ThemeDropdown = styled.div`
@@ -426,7 +432,7 @@ function MarketingNav() {
         ))}
       </NavLinks>
       
-      <RightSection>
+      <RightSection $themeId={currentTheme}>
         <ThemeDropdown ref={dropdownRef}>
           <ThemeButton 
             $themeId={currentTheme} 
