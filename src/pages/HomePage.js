@@ -1,6 +1,5 @@
 // src/pages/HomePage.js
 import styled from "styled-components"
-import { useTheme } from "../context/ThemeContext"
 import AboutSection from "../components/marketing/AboutSection"
 import ComponentsShowcase from "../components/marketing/ComponentsShowcase"
 import ContactSection from "../components/marketing/ContactSection"
@@ -11,19 +10,17 @@ import MarketingHero from "../components/marketing/MarketingHero"
 import MarketingNav from "../components/marketing/MarketingNav"
 import PricingSection from "../components/marketing/PricingSection"
 import SaveTheDateSection from "../components/marketing/SaveTheDateSection"
+import ThemeShowcase from "../components/marketing/ThemeShowcase"
 import USPSection from "../components/marketing/USPSection"
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background: ${p => p.$theme?.background || '#0a0a0a'};
-  transition: background 0.5s ease;
+  background: #ffffff;
 `
 
 function HomePage() {
-  const { theme } = useTheme()
-  
   return (
-    <PageContainer $theme={theme}>
+    <PageContainer>
       {/* Navigation */}
       <MarketingNav />
 
@@ -35,6 +32,9 @@ function HomePage() {
 
       {/* So funktioniert's - 4 Schritte */}
       <HowItWorksSection />
+
+      {/* Theme Showcase - 7 verschiedene Designs */}
+      <ThemeShowcase />
 
       <ExamplesShowcase />
 
