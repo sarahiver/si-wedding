@@ -37,8 +37,7 @@ const THEMES = {
     name: 'Video',
     url: 'https://video-example-one.vercel.app/',
     vibe: 'Cineastisch & dramatisch',
-    color: '#0d0d0d',
-    isNew: true
+    color: '#0d0d0d'
   }
 };
 
@@ -119,19 +118,6 @@ const ThemeButton = styled.button`
   }
 `;
 
-const NewIndicator = styled.span`
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: linear-gradient(135deg, #B8976A, #D4AF37);
-  color: #000;
-  font-size: 0.5rem;
-  font-weight: 700;
-  padding: 2px 4px;
-  border-radius: 2px;
-  letter-spacing: 0.05em;
-`;
-
 const BackButton = styled.a`
   font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
@@ -192,15 +178,6 @@ const ThemeName = styled.h2`
   display: flex;
   align-items: center;
   gap: 8px;
-`;
-
-const ThemeNewBadge = styled.span`
-  background: linear-gradient(135deg, #B8976A, #D4AF37);
-  color: #000;
-  font-size: 0.55rem;
-  font-weight: 700;
-  padding: 3px 6px;
-  border-radius: 2px;
 `;
 
 const ThemeVibe = styled.p`
@@ -265,19 +242,6 @@ const ThemeCard = styled.button`
   }
 `;
 
-const CardNewBadge = styled.span`
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: linear-gradient(135deg, #B8976A, #D4AF37);
-  color: #000;
-  font-size: 0.55rem;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 2px;
-  letter-spacing: 0.05em;
-`;
-
 const CardName = styled.h3`
   font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
@@ -318,7 +282,6 @@ function DemoPage() {
               onClick={() => handleThemeChange(key)}
             >
               {theme.name}
-              {theme.isNew && <NewIndicator>NEU</NewIndicator>}
             </ThemeButton>
           ))}
         </ThemeNav>
@@ -338,7 +301,6 @@ function DemoPage() {
           <ThemeInfo>
             <ThemeName>
               {currentTheme.name}
-              {currentTheme.isNew && <ThemeNewBadge>NEU!</ThemeNewBadge>}
             </ThemeName>
             <ThemeVibe>{currentTheme.vibe}</ThemeVibe>
           </ThemeInfo>
@@ -360,7 +322,6 @@ function DemoPage() {
                 $color={theme.color}
                 onClick={() => handleThemeChange(key)}
               >
-                {theme.isNew && <CardNewBadge>NEU!</CardNewBadge>}
                 <CardName>{theme.name}</CardName>
                 <CardVibe>{theme.vibe}</CardVibe>
               </ThemeCard>
