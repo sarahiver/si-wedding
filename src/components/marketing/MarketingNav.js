@@ -9,8 +9,8 @@ const fadeIn = keyframes`
 `;
 
 const floatNav = keyframes`
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-3px); }
 `;
 
 const Nav = styled.nav`
@@ -45,7 +45,6 @@ const Nav = styled.nav`
     top: 20px;
     left: 50%;
     right: auto;
-    transform: translateX(-50%);
     width: calc(100% - 60px);
     max-width: 1100px;
     background: rgba(255, 255, 255, 0.85);
