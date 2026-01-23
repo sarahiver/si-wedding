@@ -124,6 +124,13 @@ const NavLinks = styled.div`
   align-items: center;
   gap: 35px;
   
+  /* Botanical - zentriert */
+  ${p => p.$themeId === 'botanical' && css`
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  `}
+  
   @media (max-width: 900px) {
     display: none;
   }
@@ -411,7 +418,7 @@ function MarketingNav() {
         S & I
       </Logo>
       
-      <NavLinks>
+      <NavLinks $themeId={currentTheme}>
         {navLinks.map(link => (
           <NavLink key={link.label} href={link.href} $themeId={currentTheme} $scrolled={scrolled}>
             {link.label}
