@@ -31,8 +31,8 @@ const Nav = styled.nav`
     backdrop-filter: blur(20px);
     ${p.$themeId === 'video' && css`background: rgba(10,10,10,0.95); border-bottom: 1px solid rgba(184,151,106,0.1);`}
     ${p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98); border-bottom: 1px solid #E0E0E0;`}
-    ${p.$themeId === 'botanical' && css`background: rgba(255,255,255,0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.1);`}
-    ${p.$themeId === 'contemporary' && css`background: rgba(255,255,255,0.98); border-bottom: 2px solid #1A1A1A;`}
+    ${p.$themeId === 'botanical' && css`background: transparent; border: none;`}
+    ${p.$themeId === 'contemporary' && css`background: transparent; border: none;`}
     ${p.$themeId === 'luxe' && css`background: rgba(10,10,10,0.98); border-bottom: 1px solid rgba(212,175,55,0.1);`}
     ${p.$themeId === 'neon' && css`background: rgba(10,10,15,0.95); border-bottom: 1px solid rgba(0,255,255,0.2);`}
   `}
@@ -45,6 +45,7 @@ const NavInner = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
+  transition: all 0.4s ease;
   
   ${p => p.$themeId === 'contemporary' && css`
     @media (min-width: 600px) {
@@ -54,6 +55,7 @@ const NavInner = styled.div`
       max-width: 1200px;
       margin: 10px auto;
       height: calc(100% - 20px);
+      box-shadow: ${p.$scrolled ? '6px 6px 0 #FF6B6B' : 'none'};
     }
   `}
   
@@ -66,7 +68,7 @@ const NavInner = styled.div`
       max-width: 1100px;
       margin: 10px auto;
       height: calc(100% - 20px);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      box-shadow: ${p.$scrolled ? '0 4px 30px rgba(0, 0, 0, 0.12)' : '0 4px 30px rgba(0, 0, 0, 0.05)'};
       animation: ${floatNav} 4s ease-in-out infinite;
     }
   `}
@@ -669,7 +671,7 @@ function MarketingNav() {
   return (
     <>
       <Nav $themeId={currentTheme} $scrolled={scrolled}>
-        <NavInner $themeId={currentTheme}>
+        <NavInner $themeId={currentTheme} $scrolled={scrolled}>
           <Logo href="#" $themeId={currentTheme} $scrolled={scrolled}>
             S & I
           </Logo>

@@ -1,10 +1,16 @@
 // src/components/marketing/ContactSection.js
 import React, { useEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { useTheme } from '../../context/ThemeContext';
+
+const float = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+`;
 
 const Section = styled.section`
   padding: 100px 20px;
+  overflow: hidden;
   @media (min-width: 600px) { padding: 140px 5%; }
   ${p => p.$themeId === 'video' && css`background: #FAF8F5;`}
   ${p => p.$themeId === 'editorial' && css`background: #FAFAFA;`}
@@ -14,11 +20,12 @@ const Section = styled.section`
   ${p => p.$themeId === 'neon' && css`background: #0a0a0f;`}
 `;
 
-const Container = styled.div`max-width: 700px; margin: 0 auto;`;
+const Container = styled.div`max-width: 900px; margin: 0 auto; width: 100%;`;
 
 const Header = styled.div`
-  text-align: center; margin-bottom: 60px;
+  text-align: center; margin-bottom: 50px;
   opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease;
+  @media (min-width: 600px) { margin-bottom: 60px; }
 `;
 
 const Eyebrow = styled.span`
@@ -32,7 +39,7 @@ const Eyebrow = styled.span`
 `;
 
 const Title = styled.h2`
-  font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; margin-bottom: 15px;
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; margin-bottom: 15px;
   ${p => p.$themeId === 'video' && css`font-family: 'Cormorant Garamond', Georgia, serif; color: #1A1A1A;`}
   ${p => p.$themeId === 'editorial' && css`font-family: 'Instrument Serif', Georgia, serif; color: #1A1A1A;`}
   ${p => p.$themeId === 'botanical' && css`font-family: 'Playfair Display', Georgia, serif; color: #2D3B2D;`}
@@ -41,20 +48,125 @@ const Title = styled.h2`
   ${p => p.$themeId === 'neon' && css`font-family: 'Space Grotesk', sans-serif; color: #ffffff; font-weight: 700;`}
 `;
 
-const Form = styled.form`
-  display: flex; flex-direction: column; gap: 25px;
-  opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease 0.2s;
+const Subtitle = styled.p`
+  font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.7;
+  ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: rgba(26,26,26,0.6);`}
+  ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #666;`}
+  ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #6B7B6C;`}
+  ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: #666;`}
+  ${p => p.$themeId === 'luxe' && css`font-family: 'Montserrat', sans-serif; color: rgba(42,42,42,0.6);`}
+  ${p => p.$themeId === 'neon' && css`font-family: 'Space Grotesk', sans-serif; color: rgba(255,255,255,0.5);`}
 `;
 
-const Row = styled.div`
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-  @media (max-width: 500px) { grid-template-columns: 1fr; }
+const ContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  @media (min-width: 768px) { grid-template-columns: 1fr 1fr; gap: 60px; }
 `;
 
-const Field = styled.div`display: flex; flex-direction: column; gap: 8px;`;
+// Contact Options (Left Side)
+const ContactOptions = styled.div`
+  opacity: ${p => p.$visible ? 1 : 0}; 
+  transform: translateY(${p => p.$visible ? 0 : '30px'}); 
+  transition: all 0.8s ease 0.1s;
+`;
+
+const ContactCard = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  
+  ${p => p.$themeId === 'video' && css`
+    background: #FFFFFF; border: 1px solid rgba(184,151,106,0.15);
+    &:hover { border-color: #B8976A; transform: translateX(5px); }
+  `}
+  ${p => p.$themeId === 'editorial' && css`
+    background: #FFFFFF; border: 1px solid #E0E0E0;
+    &:hover { border-color: #1A1A1A; transform: translateX(5px); }
+  `}
+  ${p => p.$themeId === 'botanical' && css`
+    background: #FFFFFF; border: 1px solid rgba(139,157,131,0.2); border-radius: 16px;
+    &:hover { border-color: #8B9D83; transform: translateX(5px); }
+  `}
+  ${p => p.$themeId === 'contemporary' && css`
+    background: #FFFFFF; border: 3px solid #0D0D0D;
+    &:hover { box-shadow: 5px 5px 0 #FF6B6B; transform: translate(-3px, -3px); }
+  `}
+  ${p => p.$themeId === 'luxe' && css`
+    background: #FFFFFF; border: 1px solid rgba(212,175,55,0.15);
+    &:hover { border-color: #D4AF37; transform: translateX(5px); }
+  `}
+  ${p => p.$themeId === 'neon' && css`
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(0,255,255,0.2);
+    &:hover { border-color: #00ffff; box-shadow: 0 0 20px rgba(0,255,255,0.15); transform: translateX(5px); }
+  `}
+`;
+
+const ContactIcon = styled.div`
+  font-size: 1.8rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  ${p => p.$themeId === 'video' && css`background: rgba(184,151,106,0.1); color: #B8976A;`}
+  ${p => p.$themeId === 'editorial' && css`background: #F5F5F5; color: #1A1A1A;`}
+  ${p => p.$themeId === 'botanical' && css`background: rgba(139,157,131,0.1); color: #7A9972; border-radius: 12px;`}
+  ${p => p.$themeId === 'contemporary' && css`background: #FF6B6B; color: #FFF;`}
+  ${p => p.$themeId === 'luxe' && css`background: rgba(212,175,55,0.1); color: #D4AF37;`}
+  ${p => p.$themeId === 'neon' && css`background: rgba(0,255,255,0.1); color: #00ffff;`}
+`;
+
+const ContactInfo = styled.div`flex: 1;`;
+
+const ContactLabel = styled.div`
+  font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 5px;
+  ${p => p.$themeId === 'video' && css`font-family: 'Inter', sans-serif; color: rgba(26,26,26,0.5);`}
+  ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #999;`}
+  ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #7D9D7C;`}
+  ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: #999;`}
+  ${p => p.$themeId === 'luxe' && css`font-family: 'Montserrat', sans-serif; color: rgba(42,42,42,0.5);`}
+  ${p => p.$themeId === 'neon' && css`font-family: 'Space Grotesk', sans-serif; color: rgba(255,255,255,0.4);`}
+`;
+
+const ContactValue = styled.div`
+  font-size: 1rem;
+  ${p => p.$themeId === 'video' && css`font-family: 'Inter', sans-serif; color: #1A1A1A;`}
+  ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #1A1A1A;`}
+  ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #2D3B2D;`}
+  ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: #0D0D0D; font-weight: 600;`}
+  ${p => p.$themeId === 'luxe' && css`font-family: 'Montserrat', sans-serif; color: #2A2A2A;`}
+  ${p => p.$themeId === 'neon' && css`font-family: 'Space Grotesk', sans-serif; color: #ffffff;`}
+`;
+
+// Quick Form (Right Side)
+const QuickForm = styled.form`
+  opacity: ${p => p.$visible ? 1 : 0}; 
+  transform: translateY(${p => p.$visible ? 0 : '30px'}); 
+  transition: all 0.8s ease 0.2s;
+`;
+
+const FormTitle = styled.h3`
+  font-size: 1.3rem; margin-bottom: 25px;
+  ${p => p.$themeId === 'video' && css`font-family: 'Cormorant Garamond', Georgia, serif; color: #1A1A1A;`}
+  ${p => p.$themeId === 'editorial' && css`font-family: 'Instrument Serif', Georgia, serif; color: #1A1A1A;`}
+  ${p => p.$themeId === 'botanical' && css`font-family: 'Playfair Display', Georgia, serif; color: #2D3B2D;`}
+  ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: #0D0D0D; font-weight: 700;`}
+  ${p => p.$themeId === 'luxe' && css`font-family: 'Cormorant Garamond', Georgia, serif; color: #2A2A2A;`}
+  ${p => p.$themeId === 'neon' && css`font-family: 'Space Grotesk', sans-serif; color: #ffffff; font-weight: 600;`}
+`;
+
+const Field = styled.div`margin-bottom: 20px;`;
 
 const Label = styled.label`
-  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  display: block; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
   ${p => p.$themeId === 'video' && css`font-family: 'Inter', sans-serif; color: rgba(26,26,26,0.6);`}
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #666;`}
   ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #5A6B5A;`}
@@ -64,7 +176,7 @@ const Label = styled.label`
 `;
 
 const inputStyles = css`
-  padding: 18px 20px; font-size: 1rem; transition: all 0.3s ease; width: 100%;
+  padding: 16px 18px; font-size: 1rem; transition: all 0.3s ease; width: 100%;
   ${p => p.$themeId === 'video' && css`
     font-family: 'Inter', sans-serif; background: #FFFFFF; color: #1A1A1A;
     border: 1px solid rgba(184,151,106,0.2);
@@ -97,14 +209,12 @@ const inputStyles = css`
 `;
 
 const Input = styled.input`${inputStyles}`;
-const Select = styled.select`${inputStyles} cursor: pointer;`;
-const Textarea = styled.textarea`${inputStyles} min-height: 150px; resize: vertical;`;
-
-const ErrorText = styled.span`font-size: 0.75rem; color: #FF6B6B;`;
+const Textarea = styled.textarea`${inputStyles} min-height: 100px; resize: vertical;`;
+const ErrorText = styled.span`font-size: 0.7rem; color: #FF6B6B; margin-top: 5px; display: block;`;
 
 const SubmitButton = styled.button`
-  padding: 20px 40px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.3s ease; margin-top: 10px; border: none;
+  width: 100%; padding: 18px 30px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s ease; border: none;
   ${p => p.$themeId === 'video' && css`font-family: 'Inter', sans-serif; background: #B8976A; color: #0a0a0a; &:hover { background: #D4AF37; }`}
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; background: #1A1A1A; color: #FFFFFF; &:hover { background: #333; }`}
   ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; background: #8B9D83; color: #FFFFFF; border-radius: 30px; &:hover { background: #6B7D63; }`}
@@ -115,11 +225,15 @@ const SubmitButton = styled.button`
 `;
 
 const SuccessMessage = styled.div`
-  text-align: center; padding: 60px 40px;
+  text-align: center; padding: 50px 30px;
   ${p => p.$themeId === 'video' && css`background: rgba(184,151,106,0.1); border: 1px solid rgba(184,151,106,0.3);`}
+  ${p => p.$themeId === 'editorial' && css`background: #F5F5F5; border: 1px solid #E0E0E0;`}
+  ${p => p.$themeId === 'botanical' && css`background: rgba(139,157,131,0.1); border: 1px solid rgba(139,157,131,0.2); border-radius: 16px;`}
+  ${p => p.$themeId === 'contemporary' && css`background: #FFFFFF; border: 3px solid #0D0D0D;`}
+  ${p => p.$themeId === 'luxe' && css`background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2);`}
   ${p => p.$themeId === 'neon' && css`background: rgba(0,255,255,0.05); border: 1px solid rgba(0,255,255,0.3);`}
-  h3 { font-size: 2rem; margin-bottom: 15px; }
-  p { font-size: 1rem; opacity: 0.7; }
+  h3 { font-size: 1.8rem; margin-bottom: 10px; }
+  p { font-size: 0.95rem; opacity: 0.7; }
 `;
 
 function ContactSection() {
@@ -129,8 +243,7 @@ function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    name1: '', name2: '', email: '', phone: '', weddingDate: '', 
-    guestCount: '', package: '', theme: '', message: ''
+    name: '', email: '', message: ''
   });
 
   useEffect(() => {
@@ -138,21 +251,6 @@ function ContactSection() {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-
-  const getMinDate = () => {
-    const date = new Date();
-    date.setMonth(date.getMonth() + 3);
-    return date.toISOString().split('T')[0];
-  };
-
-  const validateDate = (dateStr) => {
-    if (!dateStr) return 'Bitte Datum wählen';
-    const selected = new Date(dateStr);
-    const minDate = new Date();
-    minDate.setMonth(minDate.getMonth() + 3);
-    if (selected < minDate) return 'Datum muss mindestens 3 Monate in der Zukunft liegen';
-    return null;
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -163,10 +261,9 @@ function ContactSection() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
-    if (!formData.name1) newErrors.name1 = 'Erforderlich';
-    if (!formData.email) newErrors.email = 'Erforderlich';
-    const dateError = validateDate(formData.weddingDate);
-    if (dateError) newErrors.weddingDate = dateError;
+    if (!formData.name) newErrors.name = 'Bitte Name eingeben';
+    if (!formData.email) newErrors.email = 'Bitte E-Mail eingeben';
+    if (!formData.message) newErrors.message = 'Bitte Nachricht eingeben';
     
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -194,83 +291,87 @@ function ContactSection() {
       <Container>
         <Header $visible={isVisible}>
           <Eyebrow $themeId={currentTheme}>— Kontakt —</Eyebrow>
-          <Title $themeId={currentTheme}>Lasst uns starten</Title>
+          <Title $themeId={currentTheme}>Lasst uns sprechen</Title>
+          <Subtitle $themeId={currentTheme}>
+            Schreibt uns direkt oder nutzt das Formular - wir freuen uns auf eure Geschichte!
+          </Subtitle>
         </Header>
         
-        <Form $visible={isVisible} onSubmit={handleSubmit}>
-          <Row>
-            <Field>
-              <Label $themeId={currentTheme}>Name Partner 1 *</Label>
-              <Input $themeId={currentTheme} name="name1" value={formData.name1} onChange={handleChange} $error={errors.name1} placeholder="Vorname" />
-              {errors.name1 && <ErrorText>{errors.name1}</ErrorText>}
-            </Field>
-            <Field>
-              <Label $themeId={currentTheme}>Name Partner 2</Label>
-              <Input $themeId={currentTheme} name="name2" value={formData.name2} onChange={handleChange} placeholder="Vorname" />
-            </Field>
-          </Row>
+        <ContentGrid>
+          {/* Contact Options */}
+          <ContactOptions $visible={isVisible}>
+            <ContactCard href="mailto:wedding@sarahiver.de" $themeId={currentTheme}>
+              <ContactIcon $themeId={currentTheme}>✉️</ContactIcon>
+              <ContactInfo>
+                <ContactLabel $themeId={currentTheme}>E-Mail</ContactLabel>
+                <ContactValue $themeId={currentTheme}>wedding@sarahiver.de</ContactValue>
+              </ContactInfo>
+            </ContactCard>
+            
+            <ContactCard href="https://instagram.com/sarah.iver.wedding" target="_blank" rel="noopener noreferrer" $themeId={currentTheme}>
+              <ContactIcon $themeId={currentTheme}>📷</ContactIcon>
+              <ContactInfo>
+                <ContactLabel $themeId={currentTheme}>Instagram</ContactLabel>
+                <ContactValue $themeId={currentTheme}>@sarah.iver.wedding</ContactValue>
+              </ContactInfo>
+            </ContactCard>
+            
+            <ContactCard href="https://pinterest.de/sandiwedding" target="_blank" rel="noopener noreferrer" $themeId={currentTheme}>
+              <ContactIcon $themeId={currentTheme}>📌</ContactIcon>
+              <ContactInfo>
+                <ContactLabel $themeId={currentTheme}>Pinterest</ContactLabel>
+                <ContactValue $themeId={currentTheme}>S&I Wedding</ContactValue>
+              </ContactInfo>
+            </ContactCard>
+          </ContactOptions>
           
-          <Row>
+          {/* Quick Form */}
+          <QuickForm $visible={isVisible} onSubmit={handleSubmit}>
+            <FormTitle $themeId={currentTheme}>Schnelle Anfrage</FormTitle>
+            
+            <Field>
+              <Label $themeId={currentTheme}>Euer Name *</Label>
+              <Input 
+                $themeId={currentTheme} 
+                name="name" 
+                value={formData.name} 
+                onChange={handleChange} 
+                $error={errors.name} 
+                placeholder="Anna & Max" 
+              />
+              {errors.name && <ErrorText>{errors.name}</ErrorText>}
+            </Field>
+            
             <Field>
               <Label $themeId={currentTheme}>E-Mail *</Label>
-              <Input $themeId={currentTheme} type="email" name="email" value={formData.email} onChange={handleChange} $error={errors.email} placeholder="eure@email.de" />
+              <Input 
+                $themeId={currentTheme} 
+                type="email" 
+                name="email" 
+                value={formData.email} 
+                onChange={handleChange} 
+                $error={errors.email} 
+                placeholder="eure@email.de" 
+              />
               {errors.email && <ErrorText>{errors.email}</ErrorText>}
             </Field>
+            
             <Field>
-              <Label $themeId={currentTheme}>Telefon</Label>
-              <Input $themeId={currentTheme} type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+49 ..." />
+              <Label $themeId={currentTheme}>Eure Nachricht *</Label>
+              <Textarea 
+                $themeId={currentTheme} 
+                name="message" 
+                value={formData.message} 
+                onChange={handleChange}
+                $error={errors.message}
+                placeholder="Wann ist eure Hochzeit? Welches Paket interessiert euch?" 
+              />
+              {errors.message && <ErrorText>{errors.message}</ErrorText>}
             </Field>
-          </Row>
-          
-          <Row>
-            <Field>
-              <Label $themeId={currentTheme}>Hochzeitsdatum *</Label>
-              <Input $themeId={currentTheme} type="date" name="weddingDate" value={formData.weddingDate} onChange={handleChange} min={getMinDate()} $error={errors.weddingDate} />
-              {errors.weddingDate && <ErrorText>{errors.weddingDate}</ErrorText>}
-            </Field>
-            <Field>
-              <Label $themeId={currentTheme}>Gästeanzahl (ca.)</Label>
-              <Select $themeId={currentTheme} name="guestCount" value={formData.guestCount} onChange={handleChange}>
-                <option value="">Bitte wählen</option>
-                <option value="<50">Unter 50</option>
-                <option value="50-100">50 - 100</option>
-                <option value="100-150">100 - 150</option>
-                <option value=">150">Über 150</option>
-              </Select>
-            </Field>
-          </Row>
-          
-          <Row>
-            <Field>
-              <Label $themeId={currentTheme}>Gewünschtes Paket</Label>
-              <Select $themeId={currentTheme} name="package" value={formData.package} onChange={handleChange}>
-                <option value="">Noch nicht sicher</option>
-                <option value="klassik">Klassik (1.490€)</option>
-                <option value="signature">Signature (2.190€)</option>
-                <option value="couture">Couture (2.990€+)</option>
-              </Select>
-            </Field>
-            <Field>
-              <Label $themeId={currentTheme}>Lieblings-Theme</Label>
-              <Select $themeId={currentTheme} name="theme" value={formData.theme} onChange={handleChange}>
-                <option value="">Noch nicht sicher</option>
-                <option value="video">Video</option>
-                <option value="editorial">Editorial</option>
-                <option value="botanical">Botanical</option>
-                <option value="contemporary">Contemporary</option>
-                <option value="luxe">Luxe</option>
-                <option value="neon">Neon</option>
-              </Select>
-            </Field>
-          </Row>
-          
-          <Field>
-            <Label $themeId={currentTheme}>Eure Nachricht</Label>
-            <Textarea $themeId={currentTheme} name="message" value={formData.message} onChange={handleChange} placeholder="Erzählt uns von eurer Hochzeit..." />
-          </Field>
-          
-          <SubmitButton type="submit" $themeId={currentTheme}>Anfrage senden</SubmitButton>
-        </Form>
+            
+            <SubmitButton type="submit" $themeId={currentTheme}>Nachricht senden</SubmitButton>
+          </QuickForm>
+        </ContentGrid>
       </Container>
     </Section>
   );

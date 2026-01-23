@@ -148,9 +148,9 @@ function MarketingFooter() {
         <BottomSection>
           <Copyright $themeId={currentTheme}>© {year} S&I Wedding. Alle Rechte vorbehalten.</Copyright>
           <SocialLinks>
-            <SocialLink href="https://instagram.com" target="_blank" $themeId={currentTheme}>📷</SocialLink>
-            <SocialLink href="https://pinterest.com" target="_blank" $themeId={currentTheme}>📌</SocialLink>
-            <SocialLink href="mailto:hello@siwedding.de" $themeId={currentTheme}>✉️</SocialLink>
+            <SocialLink href="https://instagram.com/sarah.iver.wedding" target="_blank" rel="noopener noreferrer" $themeId={currentTheme}>📷</SocialLink>
+            <SocialLink href="https://pinterest.de/sandiwedding" target="_blank" rel="noopener noreferrer" $themeId={currentTheme}>📌</SocialLink>
+            <SocialLink href="mailto:wedding@sarahiver.de" $themeId={currentTheme}>✉️</SocialLink>
           </SocialLinks>
         </BottomSection>
       </Container>
