@@ -35,20 +35,20 @@ const luxeReveal = keyframes`
   to { clip-path: inset(0 0 0 0); }
 `
 
-const float = keyframes`
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+const newBadgePulse = keyframes`
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 `
 
 // ============================================
-// THEME DATA - Die 5 Demo-Themes
+// THEME DATA - Die 6 Demo-Themes
 // ============================================
 const themeExamples = [
   {
     id: "editorial",
     name: "Editorial",
     tagline: "Zeitlose Magazin-Ästhetik",
-    description: "Minimalistisch, elegant und inspiriert von High-End Magazinen. Klare Linien, viel Weißraum und typografische Raffinesse.",
+    description: "Minimalistisch, elegant und inspiriert von High-End Magazinen.",
     fonts: "Instrument Serif + Inter",
     colors: ["#FFFFFF", "#1A1A1A", "#666666"],
     demoUrl: "/demo?theme=editorial",
@@ -58,7 +58,7 @@ const themeExamples = [
     id: "contemporary",
     name: "Contemporary",
     tagline: "Modern & Playful",
-    description: "Bold, farbenfroh und unerwartet. Geometrische Formen, Gradient-Akzente und eine Prise Verspieltheit.",
+    description: "Bold, farbenfroh und unerwartet.",
     fonts: "Space Grotesk",
     colors: ["#FF6B6B", "#4ECDC4", "#FFE66D"],
     demoUrl: "/demo?theme=contemporary",
@@ -68,7 +68,7 @@ const themeExamples = [
     id: "botanical",
     name: "Botanical",
     tagline: "Organisch & Natürlich",
-    description: "Sanfte Erdtöne, fließende Formen und eine Verbindung zur Natur. Romantisch ohne kitschig zu sein.",
+    description: "Sanfte Erdtöne und Verbindung zur Natur.",
     fonts: "Playfair Display + Lato",
     colors: ["#F8F6F0", "#2D3B2D", "#8B9D83"],
     demoUrl: "/demo?theme=botanical",
@@ -78,7 +78,7 @@ const themeExamples = [
     id: "luxe",
     name: "Luxe",
     tagline: "Opulent & Glamourös",
-    description: "Dunkle Eleganz trifft auf goldene Akzente. Für Paare, die das Außergewöhnliche suchen.",
+    description: "Dunkle Eleganz trifft auf goldene Akzente.",
     fonts: "Cormorant Garamond + Montserrat",
     colors: ["#FAF9F7", "#2A2A2A", "#B4A08C"],
     demoUrl: "/demo?theme=luxe",
@@ -88,11 +88,22 @@ const themeExamples = [
     id: "neon",
     name: "Neon",
     tagline: "Bold & Digital",
-    description: "Cyberpunk-Ästhetik für moderne Paare. Leuchtende Farben, Glitch-Effekte und digitale Eleganz.",
+    description: "Cyberpunk-Ästhetik für moderne Paare.",
     fonts: "Space Grotesk",
     colors: ["#0A0A0F", "#00FFFF", "#FF00FF"],
     demoUrl: "/demo?theme=neon",
     externalUrl: "https://neon-example.vercel.app/"
+  },
+  {
+    id: "video",
+    name: "Video",
+    tagline: "Cineastisch & Dramatisch",
+    description: "Fullscreen Video-Hintergründe treffen auf elegante Typografie.",
+    fonts: "Cormorant Garamond + Inter",
+    colors: ["#FAF8F5", "#1A1A1A", "#B8976A"],
+    demoUrl: "/demo?theme=video",
+    externalUrl: "https://video-example-one.vercel.app/",
+    isNew: true
   }
 ]
 
@@ -225,46 +236,35 @@ const Title = styled.h2`
 
 const Subtitle = styled.p`
   line-height: 1.7;
-  ${(p) => p.$themeId === "editorial" && css`
-    font-family: "Inter", sans-serif;
-    font-size: 1rem;
-    color: #666;
-    margin: 0;
-  `}
-  ${(p) => p.$themeId === "gold" && css`
-    font-family: "Montserrat", sans-serif;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.5);
-    max-width: 500px;
-    margin: 0 auto;
-  `}
-  ${(p) => p.$themeId === "botanical" && css`
-    font-family: "Lato", sans-serif;
-    font-size: 1.05rem;
-    color: #5a6b5a;
-    max-width: 500px;
-    margin: 0 auto;
-  `}
-  ${(p) => p.$themeId === "contemporary" && css`
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1rem;
-    color: #666;
-    margin: 0;
-  `}
-  ${(p) => p.$themeId === "luxe" && css`
-    font-family: "Montserrat", sans-serif;
-    font-size: 0.9rem;
-    color: #888;
-    max-width: 500px;
-    margin: 0 auto;
-  `}
-  ${(p) => p.$themeId === "neon" && css`
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.6);
-    max-width: 500px;
-    margin: 0 auto;
-  `}
+  ${(p) => p.$themeId === "editorial" && css`font-family: "Inter", sans-serif; font-size: 1rem; color: #666; margin: 0;`}
+  ${(p) => p.$themeId === "gold" && css`font-family: "Montserrat", sans-serif; font-size: 1rem; color: rgba(255, 255, 255, 0.5); max-width: 500px; margin: 0 auto;`}
+  ${(p) => p.$themeId === "botanical" && css`font-family: "Lato", sans-serif; font-size: 1.05rem; color: #5a6b5a; max-width: 500px; margin: 0 auto;`}
+  ${(p) => p.$themeId === "contemporary" && css`font-family: "Space Grotesk", sans-serif; font-size: 1rem; color: #666; margin: 0;`}
+  ${(p) => p.$themeId === "luxe" && css`font-family: "Montserrat", sans-serif; font-size: 0.9rem; color: #888; max-width: 500px; margin: 0 auto;`}
+  ${(p) => p.$themeId === "neon" && css`font-family: "Space Grotesk", sans-serif; font-size: 1rem; color: rgba(255, 255, 255, 0.6); max-width: 500px; margin: 0 auto;`}
+`
+
+// ============================================
+// NEW BADGE
+// ============================================
+const NewBadge = styled.span`
+  display: inline-block;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+  margin-left: 10px;
+  vertical-align: middle;
+  animation: ${newBadgePulse} 2s ease-in-out infinite;
+  
+  ${p => p.$themeId === 'editorial' && css`background: #1a1a1a; color: #ffffff;`}
+  ${p => p.$themeId === 'gold' && css`background: linear-gradient(135deg, #d4af37, #f4d03f); color: #0a0a0a;`}
+  ${p => p.$themeId === 'botanical' && css`background: #2d3b2d; color: #ffffff;`}
+  ${p => p.$themeId === 'contemporary' && css`background: #FF6B6B; color: #ffffff;`}
+  ${p => p.$themeId === 'luxe' && css`background: #b4a08c; color: #ffffff;`}
+  ${p => p.$themeId === 'neon' && css`background: linear-gradient(135deg, #00ffff, #ff00ff); color: #0a0a0f;`}
 `
 
 // ============================================
@@ -282,12 +282,12 @@ const Swatch = styled.div`
   border-radius: 50%;
   background: ${p => p.$color};
   border: 1px solid rgba(0,0,0,0.1);
-  ${p => p.$color === '#FFFFFF' && css`border: 1px solid #e0e0e0;`}
+  ${p => (p.$color === '#FFFFFF' || p.$color === '#FAF8F5' || p.$color === '#F8F6F0' || p.$color === '#FAF9F7') && css`border: 1px solid #e0e0e0;`}
   ${p => p.$color === '#0A0A0F' && css`border: 1px solid rgba(255,255,255,0.2);`}
 `
 
 // ============================================
-// EDITORIAL THEME LAYOUT - Clean List
+// EDITORIAL THEME LAYOUT
 // ============================================
 const EditorialGrid = styled.div`
   display: flex;
@@ -322,6 +322,8 @@ const EditorialName = styled.div`
   font-size: 1.8rem;
   font-style: italic;
   color: #1a1a1a;
+  display: flex;
+  align-items: center;
 `
 
 const EditorialTagline = styled.div`
@@ -354,19 +356,15 @@ const EditorialCTA = styled.div`
 `
 
 // ============================================
-// GOLD THEME LAYOUT - Elegant Cards
+// GOLD THEME LAYOUT
 // ============================================
 const GoldGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
   
-  @media (max-width: 1000px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
+  @media (max-width: 1000px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
 `
 
 const GoldCard = styled.div`
@@ -393,9 +391,7 @@ const GoldCard = styled.div`
   &:hover {
     border-color: rgba(212, 175, 55, 0.5);
     box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
-    &::before {
-      left: 100%;
-    }
+    &::before { left: 100%; }
   }
 `
 
@@ -418,6 +414,10 @@ const GoldName = styled.div`
   font-size: 1.4rem;
   color: #ffffff;
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `
 
 const GoldTagline = styled.div`
@@ -440,19 +440,15 @@ const GoldCTA = styled.div`
 `
 
 // ============================================
-// BOTANICAL THEME LAYOUT - Organic Cards
+// BOTANICAL THEME LAYOUT
 // ============================================
 const BotanicalGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   
-  @media (max-width: 1000px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
+  @media (max-width: 1000px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
 `
 
 const BotanicalCard = styled.div`
@@ -463,7 +459,6 @@ const BotanicalCard = styled.div`
   cursor: pointer;
   transition: all 0.4s ease;
   box-shadow: 0 4px 20px rgba(45, 59, 45, 0.08);
-  position: relative;
   
   &:hover {
     transform: translateY(-10px);
@@ -483,6 +478,10 @@ const BotanicalName = styled.div`
   font-size: 1.5rem;
   color: #2d3b2d;
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `
 
 const BotanicalTagline = styled.div`
@@ -512,23 +511,22 @@ const BotanicalCTA = styled.div`
 `
 
 // ============================================
-// CONTEMPORARY THEME LAYOUT - Bold Grid
+// CONTEMPORARY THEME LAYOUT
 // ============================================
 const ContemporaryGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   
-  @media (max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
+  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
 `
 
 const ContemporaryCard = styled.div`
   background: linear-gradient(
     135deg,
-    ${(p) => p.$index === 0 ? "#FF6B6B" : p.$index === 1 ? "#4ECDC4" : p.$index === 2 ? "#FFE66D" : p.$index === 3 ? "#95E1D3" : "#AA96DA"} 0%,
-    ${(p) => p.$index === 0 ? "#FF8E8E" : p.$index === 1 ? "#7DE3D4" : p.$index === 2 ? "#FFF0A5" : p.$index === 3 ? "#B8F0E5" : "#C4B6E5"} 100%
+    ${(p) => p.$index === 0 ? "#FF6B6B" : p.$index === 1 ? "#4ECDC4" : p.$index === 2 ? "#FFE66D" : p.$index === 3 ? "#95E1D3" : p.$index === 4 ? "#AA96DA" : "#B8976A"} 0%,
+    ${(p) => p.$index === 0 ? "#FF8E8E" : p.$index === 1 ? "#7DE3D4" : p.$index === 2 ? "#FFF0A5" : p.$index === 3 ? "#B8F0E5" : p.$index === 4 ? "#C4B6E5" : "#D4AF37"} 100%
   );
   padding: 50px 40px;
   cursor: pointer;
@@ -559,6 +557,9 @@ const ContemporaryName = styled.div`
   text-transform: uppercase;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `
 
 const ContemporaryTagline = styled.div`
@@ -581,7 +582,7 @@ const ContemporaryCTA = styled.div`
 `
 
 // ============================================
-// LUXE THEME LAYOUT - Minimal Elegance
+// LUXE THEME LAYOUT
 // ============================================
 const LuxeGrid = styled.div`
   display: flex;
@@ -598,13 +599,8 @@ const LuxeCard = styled.div`
   cursor: pointer;
   transition: all 0.4s ease;
   
-  &:first-child {
-    border-top: 1px solid rgba(180, 160, 140, 0.2);
-  }
-  
-  &:hover {
-    padding-left: 30px;
-  }
+  &:first-child { border-top: 1px solid rgba(180, 160, 140, 0.2); }
+  &:hover { padding-left: 30px; }
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -620,17 +616,16 @@ const LuxeName = styled.div`
   color: #2a2a2a;
   animation: ${luxeReveal} 1s ease forwards;
   animation-delay: ${(p) => p.$delay || "0s"};
+  display: flex;
+  align-items: center;
+  gap: 12px;
 `
 
 const LuxeCenter = styled.div`
   text-align: center;
   flex: 1;
   padding: 0 40px;
-  
-  @media (max-width: 768px) {
-    text-align: left;
-    padding: 0;
-  }
+  @media (max-width: 768px) { text-align: left; padding: 0; }
 `
 
 const LuxeTagline = styled.div`
@@ -643,10 +638,7 @@ const LuxeTagline = styled.div`
 
 const LuxeRight = styled.div`
   text-align: right;
-  
-  @media (max-width: 768px) {
-    text-align: left;
-  }
+  @media (max-width: 768px) { text-align: left; }
 `
 
 const LuxeCTA = styled.div`
@@ -667,19 +659,15 @@ const LuxeCTA = styled.div`
 `
 
 // ============================================
-// NEON THEME LAYOUT - Cyberpunk Cards
+// NEON THEME LAYOUT
 // ============================================
 const NeonGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   
-  @media (max-width: 1000px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
+  @media (max-width: 1000px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
 `
 
 const NeonCard = styled.div`
@@ -706,9 +694,7 @@ const NeonCard = styled.div`
   &:hover {
     border-color: rgba(0, 255, 255, 0.5);
     animation: ${neonPulse} 2s ease-in-out infinite;
-    &::before {
-      transform: scaleX(1);
-    }
+    &::before { transform: scaleX(1); }
   }
 `
 
@@ -727,6 +713,9 @@ const NeonName = styled.div`
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
   animation: ${neonFlicker} 4s ease-in-out infinite;
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `
 
 const NeonTagline = styled.div`
@@ -746,48 +735,7 @@ const NeonCTA = styled.div`
   align-items: center;
   gap: 8px;
   
-  &::before {
-    content: '>';
-  }
-`
-
-// ============================================
-// PREVIEW BADGE
-// ============================================
-const PreviewBadge = styled.span`
-  display: inline-block;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 3px;
-  margin-left: 10px;
-  
-  ${p => p.$themeId === 'editorial' && css`
-    background: #1a1a1a;
-    color: #ffffff;
-  `}
-  ${p => p.$themeId === 'gold' && css`
-    background: linear-gradient(135deg, #d4af37, #f4d03f);
-    color: #0a0a0a;
-  `}
-  ${p => p.$themeId === 'botanical' && css`
-    background: #2d3b2d;
-    color: #ffffff;
-  `}
-  ${p => p.$themeId === 'contemporary' && css`
-    background: #0d0d0d;
-    color: #ffffff;
-  `}
-  ${p => p.$themeId === 'luxe' && css`
-    background: #b4a08c;
-    color: #ffffff;
-  `}
-  ${p => p.$themeId === 'neon' && css`
-    background: #00ffff;
-    color: #0a0a0f;
-  `}
+  &::before { content: '>'; }
 `
 
 // ============================================
@@ -801,9 +749,7 @@ function ExamplesShowcase() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true)
-      },
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
       { threshold: 0.1 }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
@@ -814,16 +760,15 @@ function ExamplesShowcase() {
     navigate(theme.demoUrl)
   }
 
-  // Theme-spezifische Icons/Emojis für Botanical
   const themeEmojis = {
     editorial: "✒️",
     contemporary: "🎨",
     botanical: "🌿",
     luxe: "✨",
-    neon: "⚡"
+    neon: "⚡",
+    video: "🎬"
   }
 
-  // Render different layouts based on current marketing theme
   const renderCards = () => {
     switch (currentTheme) {
       case "editorial":
@@ -831,7 +776,10 @@ function ExamplesShowcase() {
           <EditorialGrid>
             {themeExamples.map((theme) => (
               <EditorialCard key={theme.id} onClick={() => handleCardClick(theme)}>
-                <EditorialName>{theme.name}</EditorialName>
+                <EditorialName>
+                  {theme.name}
+                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEU!</NewBadge>}
+                </EditorialName>
                 <EditorialTagline>{theme.tagline}</EditorialTagline>
                 <EditorialCTA>Demo ansehen</EditorialCTA>
               </EditorialCard>
@@ -845,12 +793,13 @@ function ExamplesShowcase() {
             {themeExamples.map((theme) => (
               <GoldCard key={theme.id} onClick={() => handleCardClick(theme)}>
                 <GoldInitials>{theme.name.substring(0, 2).toUpperCase()}</GoldInitials>
-                <GoldName>{theme.name}</GoldName>
+                <GoldName>
+                  {theme.name}
+                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEU!</NewBadge>}
+                </GoldName>
                 <GoldTagline>{theme.tagline}</GoldTagline>
                 <ColorSwatches style={{ justifyContent: 'center' }}>
-                  {theme.colors.map((color, i) => (
-                    <Swatch key={i} $color={color} />
-                  ))}
+                  {theme.colors.map((color, i) => (<Swatch key={i} $color={color} />))}
                 </ColorSwatches>
                 <GoldCTA>Entdecken →</GoldCTA>
               </GoldCard>
@@ -863,10 +812,11 @@ function ExamplesShowcase() {
           <BotanicalGrid>
             {themeExamples.map((theme, i) => (
               <BotanicalCard key={theme.id} onClick={() => handleCardClick(theme)}>
-                <BotanicalEmoji $delay={`${i * 0.2}s`}>
-                  {themeEmojis[theme.id]}
-                </BotanicalEmoji>
-                <BotanicalName>{theme.name}</BotanicalName>
+                <BotanicalEmoji $delay={`${i * 0.2}s`}>{themeEmojis[theme.id]}</BotanicalEmoji>
+                <BotanicalName>
+                  {theme.name}
+                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEU!</NewBadge>}
+                </BotanicalName>
                 <BotanicalTagline>{theme.tagline}</BotanicalTagline>
                 <BotanicalCTA>Ansehen</BotanicalCTA>
               </BotanicalCard>
@@ -880,7 +830,10 @@ function ExamplesShowcase() {
             {themeExamples.map((theme, i) => (
               <ContemporaryCard key={theme.id} $index={i} onClick={() => handleCardClick(theme)}>
                 <ContemporaryNumber>{String(i + 1).padStart(2, "0")}</ContemporaryNumber>
-                <ContemporaryName>{theme.name}</ContemporaryName>
+                <ContemporaryName>
+                  {theme.name}
+                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEW!</NewBadge>}
+                </ContemporaryName>
                 <ContemporaryTagline>{theme.tagline}</ContemporaryTagline>
                 <ContemporaryCTA>View Demo →</ContemporaryCTA>
               </ContemporaryCard>
@@ -893,13 +846,12 @@ function ExamplesShowcase() {
           <LuxeGrid>
             {themeExamples.map((theme, i) => (
               <LuxeCard key={theme.id} onClick={() => handleCardClick(theme)}>
-                <LuxeName $delay={`${i * 0.1}s`}>{theme.name}</LuxeName>
-                <LuxeCenter>
-                  <LuxeTagline>{theme.tagline}</LuxeTagline>
-                </LuxeCenter>
-                <LuxeRight>
-                  <LuxeCTA>Ansehen</LuxeCTA>
-                </LuxeRight>
+                <LuxeName $delay={`${i * 0.1}s`}>
+                  {theme.name}
+                  {theme.isNew && <NewBadge $themeId={currentTheme}>NOUVEAU</NewBadge>}
+                </LuxeName>
+                <LuxeCenter><LuxeTagline>{theme.tagline}</LuxeTagline></LuxeCenter>
+                <LuxeRight><LuxeCTA>Ansehen</LuxeCTA></LuxeRight>
               </LuxeCard>
             ))}
           </LuxeGrid>
@@ -911,7 +863,10 @@ function ExamplesShowcase() {
             {themeExamples.map((theme, i) => (
               <NeonCard key={theme.id} onClick={() => handleCardClick(theme)}>
                 <NeonIndex>{"// "}{String(i + 1).padStart(2, "0")}</NeonIndex>
-                <NeonName>{theme.name}</NeonName>
+                <NeonName>
+                  {theme.name}
+                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEW!</NewBadge>}
+                </NeonName>
                 <NeonTagline>{theme.tagline}</NeonTagline>
                 <NeonCTA>LAUNCH_DEMO()</NeonCTA>
               </NeonCard>
@@ -924,21 +879,20 @@ function ExamplesShowcase() {
     }
   }
 
-  // Theme-spezifische Titel
   const getTitles = () => {
     switch (currentTheme) {
       case "contemporary":
-        return { eyebrow: "DESIGN SYSTEMS", title: "PICK YOUR VIBE", subtitle: "5 unique design worlds. Each one tells a different story." }
+        return { eyebrow: "DESIGN SYSTEMS", title: "PICK YOUR VIBE", subtitle: "6 unique design worlds. Each one tells a different story." }
       case "neon":
         return { eyebrow: "// AVAILABLE_THEMES", title: "Design Modules", subtitle: "Select your preferred visual interface. Each module runs independently." }
       case "gold":
-        return { eyebrow: "Kollektion", title: "Unsere Design-Welten", subtitle: "Fünf einzigartige Ästhetiken. Welche erzählt eure Geschichte?" }
+        return { eyebrow: "Kollektion", title: "Unsere Design-Welten", subtitle: "Sechs einzigartige Ästhetiken. Welche erzählt eure Geschichte?" }
       case "botanical":
-        return { eyebrow: "Inspirationen", title: "Unsere Themes", subtitle: "Entdeckt fünf verschiedene Design-Welten für eure Hochzeit." }
+        return { eyebrow: "Inspirationen", title: "Unsere Themes", subtitle: "Entdeckt sechs verschiedene Design-Welten für eure Hochzeit." }
       case "luxe":
-        return { eyebrow: "La Collection", title: "Design Ateliers", subtitle: "Cinq univers uniques pour votre célébration." }
+        return { eyebrow: "La Collection", title: "Design Ateliers", subtitle: "Six univers uniques pour votre célébration." }
       default:
-        return { eyebrow: "Portfolio", title: "Unsere Design-Welten", subtitle: "Fünf einzigartige Themes – jedes eine eigene Welt." }
+        return { eyebrow: "Portfolio", title: "Unsere Design-Welten", subtitle: "Sechs einzigartige Themes – jedes eine eigene Welt." }
     }
   }
 
@@ -952,7 +906,6 @@ function ExamplesShowcase() {
           <Title $themeId={currentTheme}>{titles.title}</Title>
           <Subtitle $themeId={currentTheme}>{titles.subtitle}</Subtitle>
         </Header>
-
         {renderCards()}
       </Container>
     </Section>
