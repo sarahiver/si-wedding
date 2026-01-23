@@ -14,6 +14,11 @@ const neonPulse = keyframes`
   50% { box-shadow: 0 0 20px rgba(0,255,255,0.5), inset 0 0 10px rgba(0,255,255,0.2); }
 `;
 
+const scrollTrack = keyframes`
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+`;
+
 // Components Data
 const components = [
   { icon: '🏠', name: 'Hero', desc: 'Der erste Eindruck', included: true },
@@ -194,7 +199,7 @@ const NeonLayout = ({ components, isVisible }) => (
   </NeonContainer>
 );
 
-// VIDEO LAYOUT - Elegant Grid (kein Filmstreifen)
+// VIDEO LAYOUT - Auto-Scroll Carousel mit eleganten Karten
 const VideoLayout = ({ components, isVisible }) => (
   <VideoContainer>
     <VideoHeader $visible={isVisible}>
@@ -202,16 +207,20 @@ const VideoLayout = ({ components, isVisible }) => (
       <VideoTitle>Alles was ihr braucht</VideoTitle>
       <VideoSubtitle>Wählt aus 18 liebevoll gestalteten Komponenten – 4 davon immer inklusive.</VideoSubtitle>
     </VideoHeader>
-    <VideoGrid>
-      {components.map((comp, i) => (
-        <VideoCard key={comp.name} $visible={isVisible} $delay={0.1 + i * 0.04}>
-          <VideoCardIcon>{comp.icon}</VideoCardIcon>
-          <VideoCardName>{comp.name}</VideoCardName>
-          <VideoCardDesc>{comp.desc}</VideoCardDesc>
-          {comp.included && <VideoCardBadge>Inklusive</VideoCardBadge>}
-        </VideoCard>
-      ))}
-    </VideoGrid>
+    <VideoCarouselWrapper>
+      <VideoCarouselTrack $visible={isVisible}>
+        {/* Dupliziere für seamless loop */}
+        {[...components, ...components].map((comp, i) => (
+          <VideoCard key={`${comp.name}-${i}`}>
+            <VideoCardIcon>{comp.icon}</VideoCardIcon>
+            <VideoCardName>{comp.name}</VideoCardName>
+            <VideoCardDesc>{comp.desc}</VideoCardDesc>
+            {comp.included && <VideoCardBadge>Inklusive</VideoCardBadge>}
+          </VideoCard>
+        ))}
+      </VideoCarouselTrack>
+    </VideoCarouselWrapper>
+    <VideoGoldLine $visible={isVisible} />
   </VideoContainer>
 );
 
@@ -251,7 +260,7 @@ const Section = styled.section`
   padding: 140px 5%;
   position: relative;
   overflow: hidden;
-  ${p => p.$themeId === 'video' && css`background: #FFFFFF;`}
+  ${p => p.$themeId === 'video' && css`background: #FFFFFF; overflow: hidden;`}
   ${p => p.$themeId === 'editorial' && css`background: #FFFFFF;`}
   ${p => p.$themeId === 'botanical' && css`background: linear-gradient(180deg, #FAF9F6 0%, #F0EDE5 100%);`}
   ${p => p.$themeId === 'contemporary' && css`background: #FAFAFA;`}
@@ -326,31 +335,61 @@ const NeonCardLine = styled.div`height: 1px; background: linear-gradient(90deg, 
 const NeonFloatingSquare = styled.div`position: absolute; width: 50px; height: 50px; border: 2px solid rgba(0, 255, 255, 0.3); top: ${p => p.$top || 'auto'}; bottom: ${p => p.$bottom || 'auto'}; left: ${p => p.$left || 'auto'}; right: ${p => p.$right || 'auto'}; animation: ${neonPulse} 3s ease-in-out infinite; animation-delay: ${p => p.$delay};`;
 const NeonFloatingCircle = styled.div`position: absolute; width: 60px; height: 60px; border: 2px solid rgba(255, 0, 255, 0.3); border-radius: 50%; top: ${p => p.$top || 'auto'}; bottom: ${p => p.$bottom || 'auto'}; left: ${p => p.$left || 'auto'}; right: ${p => p.$right || 'auto'}; animation: ${neonPulse} 4s ease-in-out infinite; animation-delay: ${p => p.$delay};`;
 
-// VIDEO STYLES - Elegant Grid
-const VideoContainer = styled.div`max-width: 1200px; margin: 0 auto;`;
-const VideoHeader = styled.div`text-align: center; margin-bottom: 80px; opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease;`;
+// VIDEO STYLES - Auto-Scroll Carousel
+const VideoContainer = styled.div`max-width: 100%; margin: 0 auto;`;
+const VideoHeader = styled.div`text-align: center; margin-bottom: 60px; padding: 0 5%; opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease;`;
 const VideoEyebrow = styled.span`display: block; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em; color: #B8976A; margin-bottom: 20px;`;
 const VideoTitle = styled.h2`font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; font-style: italic; color: #1A1A1A; margin-bottom: 20px;`;
 const VideoSubtitle = styled.p`font-family: 'Montserrat', sans-serif; font-size: 0.95rem; color: rgba(26, 26, 26, 0.6); max-width: 550px; margin: 0 auto; line-height: 1.8;`;
-const VideoGrid = styled.div`display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px;`;
+
+const VideoCarouselWrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+`;
+
+const VideoCarouselTrack = styled.div`
+  display: flex;
+  gap: 25px;
+  width: fit-content;
+  animation: ${scrollTrack} 40s linear infinite;
+  opacity: ${p => p.$visible ? 1 : 0};
+  transition: opacity 0.8s ease;
+  
+  &:hover {
+    animation-play-state: paused;
+  }
+`;
+
 const VideoCard = styled.div`
+  flex-shrink: 0;
+  width: 200px;
   text-align: center; 
   padding: 35px 20px; 
   background: #FFFFFF;
   border: 1px solid rgba(184, 151, 106, 0.15);
-  opacity: ${p => p.$visible ? 1 : 0}; 
-  transform: translateY(${p => p.$visible ? 0 : '20px'}); 
-  transition: all 0.6s ease; 
-  transition-delay: ${p => p.$delay}s;
+  transition: all 0.3s ease;
+  
   &:hover { 
     border-color: #B8976A; 
-    box-shadow: 0 15px 40px rgba(184, 151, 106, 0.1);
+    box-shadow: 0 15px 40px rgba(184, 151, 106, 0.15);
+    transform: translateY(-5px);
   }
 `;
+
 const VideoCardIcon = styled.div`font-size: 2.2rem; margin-bottom: 15px;`;
 const VideoCardName = styled.h3`font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 500; font-style: italic; color: #1A1A1A; margin-bottom: 8px;`;
 const VideoCardDesc = styled.p`font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: rgba(26, 26, 26, 0.5); margin: 0;`;
 const VideoCardBadge = styled.span`display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B8976A; border: 1px solid rgba(184, 151, 106, 0.3); padding: 5px 12px; margin-top: 15px;`;
+
+const VideoGoldLine = styled.div`
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 151, 106, 0.4), transparent);
+  margin: 40px 5% 0;
+  opacity: ${p => p.$visible ? 1 : 0};
+  transition: opacity 1s ease;
+  transition-delay: 0.5s;
+`;
 
 // LUXE STYLES
 const LuxeContainer = styled.div`max-width: 800px; margin: 0 auto; text-align: center;`;
