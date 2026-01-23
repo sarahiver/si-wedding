@@ -1,12 +1,11 @@
 // src/components/marketing/MarketingNav.js
 import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
 
 const bounce = keyframes`
   0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
 `
 
 const Nav = styled.nav`
@@ -67,7 +66,7 @@ const NavLink = styled.a`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
 `
 
 const ThemeSwitcherContainer = styled.div`
@@ -80,60 +79,102 @@ const ThemeSwitcherContainer = styled.div`
   }
 `
 
-const ThemeSwitcherWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-`
-
-const ThemeButton = styled.button`
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 2px solid ${p => p.$active ? '#B8976A' : 'rgba(255,255,255,0.15)'};
-  background: ${p => p.$color};
-  cursor: pointer;
-  transition: all 0.3s ease;
-  transform: scale(${p => p.$active ? 1.15 : 1});
-  
-  &:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.2);
-  }
-`
-
-const DemoLink = styled.button`
+const ArrowHint = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 0.6rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #B8976A;
-  background: none;
-  border: 1px solid rgba(184, 151, 106, 0.3);
+  
+  span {
+    font-size: 1rem;
+    animation: ${bounce} 1s ease infinite;
+  }
+`
+
+const ThemeDropdown = styled.div`
+  position: relative;
+`
+
+const DropdownButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   
   &:hover {
-    background: rgba(184, 151, 106, 0.1);
-    border-color: #B8976A;
-    
-    span {
-      animation: ${bounce} 0.6s ease infinite;
-    }
+    border-color: rgba(184, 151, 106, 0.4);
   }
+`
+
+const ThemeDot = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: ${p => p.$color};
+  border: 1px solid rgba(255, 255, 255, 0.2);
+`
+
+const ThemeName = styled.span`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+`
+
+const DropdownArrow = styled.span`
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease;
+  transform: rotate(${p => p.$open ? '180deg' : '0deg'});
+`
+
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(10, 10, 10, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  min-width: 180px;
+  opacity: ${p => p.$open ? 1 : 0};
+  visibility: ${p => p.$open ? 'visible' : 'hidden'};
+  transform: translateY(${p => p.$open ? '0' : '-10px'});
+  transition: all 0.3s ease;
+`
+
+const DropdownItem = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  background: ${p => p.$active ? 'rgba(184, 151, 106, 0.1)' : 'transparent'};
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
   
-  span {
-    font-size: 0.9rem;
-    transition: transform 0.3s ease;
+  &:hover {
+    background: rgba(184, 151, 106, 0.15);
   }
+`
+
+const ItemName = styled.span`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: ${p => p.$active ? '#B8976A' : '#ffffff'};
 `
 
 const CTAButton = styled.a`
@@ -210,20 +251,20 @@ const MobileNavLink = styled.a`
   }
 `
 
-const MobileThemeSwitcher = styled.div`
-  display: flex;
-  gap: 12px;
+const MobileThemeSelect = styled.select`
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(184, 151, 106, 0.3);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 15px 30px;
   margin-top: 20px;
-`
-
-const MobileThemeButton = styled.button`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid ${p => p.$active ? '#B8976A' : 'rgba(255,255,255,0.2)'};
-  background: ${p => p.$color};
   cursor: pointer;
-  transition: all 0.3s ease;
+  
+  option {
+    background: #0a0a0a;
+    color: #ffffff;
+  }
 `
 
 const themes = [
@@ -237,9 +278,11 @@ const themes = [
 
 function MarketingNav() {
   const { currentTheme, switchTheme } = useTheme()
-  const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+
+  const currentThemeData = themes.find(t => t.id === currentTheme) || themes[0]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -249,8 +292,20 @@ function MarketingNav() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleDemoClick = () => {
-    navigate(`/demo?theme=${currentTheme}`)
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.theme-dropdown')) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [])
+
+  const handleThemeSelect = (themeId) => {
+    switchTheme(themeId)
+    setDropdownOpen(false)
   }
 
   return (
@@ -269,21 +324,31 @@ function MarketingNav() {
         
         <RightSection>
           <ThemeSwitcherContainer>
-            <ThemeSwitcherWrapper>
-              {themes.map(theme => (
-                <ThemeButton
-                  key={theme.id}
-                  $color={theme.color}
-                  $active={currentTheme === theme.id}
-                  onClick={() => switchTheme(theme.id)}
-                  title={theme.name}
-                />
-              ))}
-            </ThemeSwitcherWrapper>
+            <ArrowHint>
+              <span>←</span>
+              Design umschalten
+            </ArrowHint>
             
-            <DemoLink onClick={handleDemoClick}>
-              Ausprobieren <span>→</span>
-            </DemoLink>
+            <ThemeDropdown className="theme-dropdown">
+              <DropdownButton onClick={() => setDropdownOpen(!dropdownOpen)}>
+                <ThemeDot $color={currentThemeData.color} />
+                <ThemeName>{currentThemeData.name}</ThemeName>
+                <DropdownArrow $open={dropdownOpen}>▼</DropdownArrow>
+              </DropdownButton>
+              
+              <DropdownMenu $open={dropdownOpen}>
+                {themes.map(theme => (
+                  <DropdownItem
+                    key={theme.id}
+                    $active={currentTheme === theme.id}
+                    onClick={() => handleThemeSelect(theme.id)}
+                  >
+                    <ThemeDot $color={theme.color} />
+                    <ItemName $active={currentTheme === theme.id}>{theme.name}</ItemName>
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </ThemeDropdown>
           </ThemeSwitcherContainer>
           
           <CTAButton href="#contact">Kontakt</CTAButton>
@@ -303,16 +368,14 @@ function MarketingNav() {
         <MobileNavLink href="#about" onClick={() => setMobileOpen(false)}>Über uns</MobileNavLink>
         <MobileNavLink href="#contact" onClick={() => setMobileOpen(false)}>Kontakt</MobileNavLink>
         
-        <MobileThemeSwitcher>
+        <MobileThemeSelect 
+          value={currentTheme} 
+          onChange={(e) => switchTheme(e.target.value)}
+        >
           {themes.map(theme => (
-            <MobileThemeButton
-              key={theme.id}
-              $color={theme.color}
-              $active={currentTheme === theme.id}
-              onClick={() => switchTheme(theme.id)}
-            />
+            <option key={theme.id} value={theme.id}>{theme.name}</option>
           ))}
-        </MobileThemeSwitcher>
+        </MobileThemeSelect>
       </MobileMenu>
     </>
   )

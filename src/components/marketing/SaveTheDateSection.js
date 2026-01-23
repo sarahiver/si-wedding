@@ -1,6 +1,11 @@
 // src/components/marketing/SaveTheDateSection.js
 import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const shimmer = keyframes`
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+`
 
 const Section = styled.section`
   padding: 140px 5%;
@@ -87,16 +92,128 @@ const Preview = styled.div`
 
 const PreviewWrapper = styled.div`
   position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
-const PreviewImage = styled.img`
+const PhoneMockup = styled.div`
+  width: 180px;
+  height: 360px;
+  background: #0a0a0a;
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 30px 80px rgba(26, 26, 26, 0.25);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 3px;
+  }
+  
+  &:nth-child(2) {
+    margin-top: 40px;
+  }
+`
+
+const PhoneScreen = styled.div`
   width: 100%;
-  height: auto;
-  box-shadow: 0 30px 80px rgba(26, 26, 26, 0.15);
+  height: 100%;
+  background: ${p => p.$dark ? '#0a0a0a' : '#FAF8F5'};
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 15px;
+  text-align: center;
 `
 
-// Unsplash - Hochzeitseinladung / Save the Date Style
-const SAVE_THE_DATE_IMAGE = "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80"
+const ScreenEyebrow = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.4rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #B8976A;
+  margin-bottom: 10px;
+`
+
+const ScreenTitle = styled.div`
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: ${p => p.$dark ? '#ffffff' : '#1A1A1A'};
+  margin-bottom: 8px;
+  
+  span {
+    background: linear-gradient(135deg, #B8976A, #D4AF37, #B8976A);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: ${shimmer} 4s linear infinite;
+  }
+`
+
+const ScreenDate = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  color: ${p => p.$dark ? 'rgba(255,255,255,0.5)' : 'rgba(26,26,26,0.5)'};
+  margin-bottom: 15px;
+`
+
+const ScreenDivider = styled.div`
+  width: 40px;
+  height: 1px;
+  background: rgba(184, 151, 106, 0.4);
+  margin-bottom: 15px;
+`
+
+const ScreenText = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.4rem;
+  color: ${p => p.$dark ? 'rgba(255,255,255,0.4)' : 'rgba(26,26,26,0.4)'};
+  line-height: 1.6;
+`
+
+const Arrow = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: #B8976A;
+  
+  @media (max-width: 500px) {
+    transform: rotate(90deg);
+    position: relative;
+    top: auto;
+    left: auto;
+  }
+`
+
+const Label = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 26, 0.4);
+  text-align: center;
+  margin-top: 15px;
+`
 
 function SaveTheDateSection() {
   const sectionRef = useRef(null)
@@ -116,25 +233,55 @@ function SaveTheDateSection() {
       <Container>
         <Content $visible={isVisible}>
           <Eyebrow>— Save the Date —</Eyebrow>
-          <Title>Digitale Save-the-Dates die begeistern</Title>
+          <Title>Eine URL, zwei Erlebnisse</Title>
           <Description>
-            Vergesst Papier. Überrascht eure Gäste mit einer eleganten 
-            digitalen Ankündigung, die direkt zu eurer Hochzeitswebsite führt.
+            Eure Gäste besuchen die gleiche Website – zuerst sehen sie die 
+            elegante Save-the-Date Ankündigung. Zur Hochzeit schaltet ihr 
+            einfach auf die vollständige Wedding-Page um.
           </Description>
           <Features>
-            <Feature>QR-Code für einfachen Zugang</Feature>
-            <Feature>Automatische Kalender-Integration</Feature>
-            <Feature>Animierte Vorschau-Karten</Feature>
-            <Feature>Perfekt für WhatsApp & E-Mail</Feature>
+            <Feature>Gleiche URL für Save-the-Date & Wedding</Feature>
+            <Feature>Nahtloser Übergang per Klick im Admin</Feature>
+            <Feature>Countdown bis zur Hochzeit</Feature>
+            <Feature>Frühzeitige Vorfreude bei euren Gästen</Feature>
           </Features>
         </Content>
         
         <Preview $visible={isVisible}>
           <PreviewWrapper>
-            <PreviewImage 
-              src={SAVE_THE_DATE_IMAGE}
-              alt="Save the Date Beispiel"
-            />
+            <div>
+              <PhoneMockup>
+                <PhoneScreen $dark>
+                  <ScreenEyebrow>— Save the Date —</ScreenEyebrow>
+                  <ScreenTitle $dark><span>Sarah & Iver</span></ScreenTitle>
+                  <ScreenDate $dark>15. August 2026</ScreenDate>
+                  <ScreenDivider />
+                  <ScreenText $dark>
+                    Wir heiraten!<br/>
+                    Einladung folgt
+                  </ScreenText>
+                </PhoneScreen>
+              </PhoneMockup>
+              <Label>Save the Date</Label>
+            </div>
+            
+            <Arrow>→</Arrow>
+            
+            <div>
+              <PhoneMockup>
+                <PhoneScreen>
+                  <ScreenEyebrow>— Willkommen —</ScreenEyebrow>
+                  <ScreenTitle><span>Sarah & Iver</span></ScreenTitle>
+                  <ScreenDate>15. August 2026 • Hamburg</ScreenDate>
+                  <ScreenDivider />
+                  <ScreenText>
+                    Ablauf • Location<br/>
+                    RSVP • Galerie
+                  </ScreenText>
+                </PhoneScreen>
+              </PhoneMockup>
+              <Label>Wedding Page</Label>
+            </div>
           </PreviewWrapper>
         </Preview>
       </Container>
