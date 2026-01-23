@@ -931,14 +931,6 @@ function MarketingNav() {
                 </ThemeDropdownMenu>
               </ThemeDropdownWrapper>
               
-              <ArrowHint $themeId={currentTheme}>
-                Design umschalten <span>→</span>
-              </ArrowHint>
-              
-              <CTAButton href="#contact" $themeId={currentTheme}>
-                Kontakt
-              </CTAButton>
-              
               <MobileMenuButton 
                 $themeId={currentTheme}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
