@@ -14,11 +14,6 @@ const neonPulse = keyframes`
   50% { box-shadow: 0 0 20px rgba(0,255,255,0.5), inset 0 0 10px rgba(0,255,255,0.2); }
 `;
 
-const filmScroll = keyframes`
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-`;
-
 // Components Data
 const components = [
   { icon: '🏠', name: 'Hero', desc: 'Der erste Eindruck', included: true },
@@ -199,30 +194,24 @@ const NeonLayout = ({ components, isVisible }) => (
   </NeonContainer>
 );
 
-// VIDEO LAYOUT
+// VIDEO LAYOUT - Elegant Grid (kein Filmstreifen)
 const VideoLayout = ({ components, isVisible }) => (
   <VideoContainer>
     <VideoHeader $visible={isVisible}>
       <VideoEyebrow>— 18 Komponenten —</VideoEyebrow>
-      <VideoTitle>Jede Komponente erzählt eure Geschichte</VideoTitle>
+      <VideoTitle>Alles was ihr braucht</VideoTitle>
       <VideoSubtitle>Wählt aus 18 liebevoll gestalteten Komponenten – 4 davon immer inklusive.</VideoSubtitle>
     </VideoHeader>
-    <FilmstripWrapper>
-      <FilmstripTrack $visible={isVisible}>
-        {[...components, ...components].map((comp, i) => (
-          <FilmstripCard key={i}>
-            <FilmstripHoles><FilmstripHole /><FilmstripHole /><FilmstripHole /></FilmstripHoles>
-            <FilmstripContent>
-              <FilmstripIcon>{comp.icon}</FilmstripIcon>
-              <FilmstripName>{comp.name}</FilmstripName>
-              <FilmstripDesc>{comp.desc}</FilmstripDesc>
-              {comp.included && <FilmstripBadge>Inklusive</FilmstripBadge>}
-            </FilmstripContent>
-            <FilmstripHoles><FilmstripHole /><FilmstripHole /><FilmstripHole /></FilmstripHoles>
-          </FilmstripCard>
-        ))}
-      </FilmstripTrack>
-    </FilmstripWrapper>
+    <VideoGrid>
+      {components.map((comp, i) => (
+        <VideoCard key={comp.name} $visible={isVisible} $delay={0.1 + i * 0.04}>
+          <VideoCardIcon>{comp.icon}</VideoCardIcon>
+          <VideoCardName>{comp.name}</VideoCardName>
+          <VideoCardDesc>{comp.desc}</VideoCardDesc>
+          {comp.included && <VideoCardBadge>Inklusive</VideoCardBadge>}
+        </VideoCard>
+      ))}
+    </VideoGrid>
   </VideoContainer>
 );
 
@@ -262,7 +251,7 @@ const Section = styled.section`
   padding: 140px 5%;
   position: relative;
   overflow: hidden;
-  ${p => p.$themeId === 'video' && css`background: #FAF8F5;`}
+  ${p => p.$themeId === 'video' && css`background: #FFFFFF;`}
   ${p => p.$themeId === 'editorial' && css`background: #FFFFFF;`}
   ${p => p.$themeId === 'botanical' && css`background: linear-gradient(180deg, #FAF9F6 0%, #F0EDE5 100%);`}
   ${p => p.$themeId === 'contemporary' && css`background: #FAFAFA;`}
@@ -337,22 +326,31 @@ const NeonCardLine = styled.div`height: 1px; background: linear-gradient(90deg, 
 const NeonFloatingSquare = styled.div`position: absolute; width: 50px; height: 50px; border: 2px solid rgba(0, 255, 255, 0.3); top: ${p => p.$top || 'auto'}; bottom: ${p => p.$bottom || 'auto'}; left: ${p => p.$left || 'auto'}; right: ${p => p.$right || 'auto'}; animation: ${neonPulse} 3s ease-in-out infinite; animation-delay: ${p => p.$delay};`;
 const NeonFloatingCircle = styled.div`position: absolute; width: 60px; height: 60px; border: 2px solid rgba(255, 0, 255, 0.3); border-radius: 50%; top: ${p => p.$top || 'auto'}; bottom: ${p => p.$bottom || 'auto'}; left: ${p => p.$left || 'auto'}; right: ${p => p.$right || 'auto'}; animation: ${neonPulse} 4s ease-in-out infinite; animation-delay: ${p => p.$delay};`;
 
-// VIDEO STYLES
-const VideoContainer = styled.div`max-width: 1400px; margin: 0 auto;`;
-const VideoHeader = styled.div`text-align: center; margin-bottom: 60px; opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease;`;
+// VIDEO STYLES - Elegant Grid
+const VideoContainer = styled.div`max-width: 1200px; margin: 0 auto;`;
+const VideoHeader = styled.div`text-align: center; margin-bottom: 80px; opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease;`;
 const VideoEyebrow = styled.span`display: block; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em; color: #B8976A; margin-bottom: 20px;`;
-const VideoTitle = styled.h2`font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; font-style: italic; color: #1A1A1A; margin-bottom: 20px;`;
-const VideoSubtitle = styled.p`font-family: 'Montserrat', sans-serif; font-size: 0.95rem; color: rgba(26, 26, 26, 0.6); max-width: 500px; margin: 0 auto; line-height: 1.8;`;
-const FilmstripWrapper = styled.div`overflow: hidden; margin: 0 -5%; padding: 20px 0;`;
-const FilmstripTrack = styled.div`display: flex; gap: 20px; animation: ${p => p.$visible ? filmScroll : 'none'} 40s linear infinite; width: fit-content; &:hover { animation-play-state: paused; }`;
-const FilmstripCard = styled.div`flex-shrink: 0; width: 180px; background: #1A1A1A; border: 2px solid #333; transition: all 0.3s ease; &:hover { border-color: #B8976A; transform: scale(1.05); }`;
-const FilmstripHoles = styled.div`display: flex; justify-content: space-around; padding: 8px 15px; background: #0D0D0D;`;
-const FilmstripHole = styled.div`width: 12px; height: 8px; background: #1A1A1A; border-radius: 2px;`;
-const FilmstripContent = styled.div`padding: 25px 20px; text-align: center;`;
-const FilmstripIcon = styled.div`font-size: 2rem; margin-bottom: 12px;`;
-const FilmstripName = styled.h3`font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 500; color: #FFFFFF; margin-bottom: 6px;`;
-const FilmstripDesc = styled.p`font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: rgba(255, 255, 255, 0.5); margin: 0;`;
-const FilmstripBadge = styled.span`display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 0.5rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #B8976A; background: rgba(184, 151, 106, 0.15); padding: 4px 10px; margin-top: 12px;`;
+const VideoTitle = styled.h2`font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; font-style: italic; color: #1A1A1A; margin-bottom: 20px;`;
+const VideoSubtitle = styled.p`font-family: 'Montserrat', sans-serif; font-size: 0.95rem; color: rgba(26, 26, 26, 0.6); max-width: 550px; margin: 0 auto; line-height: 1.8;`;
+const VideoGrid = styled.div`display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px;`;
+const VideoCard = styled.div`
+  text-align: center; 
+  padding: 35px 20px; 
+  background: #FFFFFF;
+  border: 1px solid rgba(184, 151, 106, 0.15);
+  opacity: ${p => p.$visible ? 1 : 0}; 
+  transform: translateY(${p => p.$visible ? 0 : '20px'}); 
+  transition: all 0.6s ease; 
+  transition-delay: ${p => p.$delay}s;
+  &:hover { 
+    border-color: #B8976A; 
+    box-shadow: 0 15px 40px rgba(184, 151, 106, 0.1);
+  }
+`;
+const VideoCardIcon = styled.div`font-size: 2.2rem; margin-bottom: 15px;`;
+const VideoCardName = styled.h3`font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 500; font-style: italic; color: #1A1A1A; margin-bottom: 8px;`;
+const VideoCardDesc = styled.p`font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: rgba(26, 26, 26, 0.5); margin: 0;`;
+const VideoCardBadge = styled.span`display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #B8976A; border: 1px solid rgba(184, 151, 106, 0.3); padding: 5px 12px; margin-top: 15px;`;
 
 // LUXE STYLES
 const LuxeContainer = styled.div`max-width: 800px; margin: 0 auto; text-align: center;`;
