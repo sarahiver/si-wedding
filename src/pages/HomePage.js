@@ -10,12 +10,11 @@ import MarketingHero from "../components/marketing/MarketingHero"
 import MarketingNav from "../components/marketing/MarketingNav"
 import PricingSection from "../components/marketing/PricingSection"
 import SaveTheDateSection from "../components/marketing/SaveTheDateSection"
-import ThemeShowcase from "../components/marketing/ThemeShowcase"
 import USPSection from "../components/marketing/USPSection"
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background: #ffffff;
+  background: #0a0a0a;
 `
 
 function HomePage() {
@@ -32,9 +31,6 @@ function HomePage() {
 
       {/* So funktioniert's - 4 Schritte */}
       <HowItWorksSection />
-
-      {/* Theme Showcase - 7 verschiedene Designs */}
-      <ThemeShowcase />
 
       <ExamplesShowcase />
 
