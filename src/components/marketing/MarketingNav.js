@@ -8,6 +8,11 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
+const floatNav = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+`;
+
 const Nav = styled.nav`
   position: fixed;
   top: 0;
@@ -21,12 +26,49 @@ const Nav = styled.nav`
   justify-content: space-between;
   transition: all 0.4s ease;
   
+  /* Contemporary - Rahmen-Style */
+  ${p => p.$themeId === 'contemporary' && css`
+    top: 20px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 80px);
+    max-width: 1200px;
+    background: #FFFFFF;
+    border: 2px solid #1A1A1A;
+    height: 70px;
+    padding: 0 30px;
+  `}
+  
+  /* Botanical - Schwebend, organisch */
+  ${p => p.$themeId === 'botanical' && css`
+    top: 20px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 60px);
+    max-width: 1100px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    border-radius: 50px;
+    height: 65px;
+    padding: 0 35px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    animation: ${floatNav} 4s ease-in-out infinite;
+  `}
+  
   ${p => p.$scrolled && css`
     backdrop-filter: blur(20px);
     ${p.$themeId === 'video' && css`background: rgba(10,10,10,0.95); border-bottom: 1px solid rgba(184,151,106,0.1);`}
     ${p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98); border-bottom: 1px solid #E0E0E0;`}
-    ${p.$themeId === 'botanical' && css`background: rgba(245,241,235,0.98); border-bottom: 1px solid rgba(139,157,131,0.2);`}
-    ${p.$themeId === 'contemporary' && css`background: rgba(250,250,250,0.98); border-bottom: 3px solid #0D0D0D;`}
+    ${p.$themeId === 'botanical' && css`
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    `}
+    ${p.$themeId === 'contemporary' && css`
+      background: #FFFFFF;
+      box-shadow: 4px 4px 0 #1A1A1A;
+    `}
     ${p.$themeId === 'luxe' && css`background: rgba(10,10,10,0.98); border-bottom: 1px solid rgba(212,175,55,0.1);`}
     ${p.$themeId === 'neon' && css`background: rgba(10,10,15,0.95); border-bottom: 1px solid rgba(0,255,255,0.2);`}
   `}
