@@ -2,114 +2,106 @@
 import styled from "styled-components"
 import { THEMES, THEME_PREVIEWS } from "../../utils/constants"
 
-const Container = styled.div`
-  margin-bottom: 2rem;
-`
-
-const Title = styled.h2`
-  font-family: ${(props) => props.theme.fontHeading};
-  font-size: 1.5rem;
-  color: ${(props) => props.theme.primary};
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
-`
-
-const Subtitle = styled.p`
-  color: ${(props) => props.theme.textSecondary};
-  margin-bottom: 1.5rem;
-  font-size: 0.85rem;
-`
+const Container = styled.div``
 
 const ThemeGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 1rem;
 `
 
 const ThemeCard = styled.div`
-  padding: 0.75rem;
-  border: 2px solid
-    ${(props) => (props.selected ? props.theme.primary : props.theme.border)};
+  background: ${props => props.preview?.background || '#F5F5F5'};
+  border: 3px solid ${props => props.selected ? props.preview?.color || '#1A1A1A' : 'transparent'};
+  padding: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 8px;
-  background: ${(props) =>
-    props.selected ? props.theme.surface : props.theme.background};
+  text-align: center;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
+  overflow: hidden;
 
   &:hover {
-    border-color: ${(props) => props.theme.primary};
     transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
+
+  ${props => props.selected && `
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      background: ${props.preview?.color || '#1A1A1A'};
+      color: ${props.preview?.background?.includes('#0') || props.preview?.background?.includes('#1') ? '#FFFFFF' : '#FFFFFF'};
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+  `}
 `
 
-const CheckMark = styled.div`
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  width: 20px;
-  height: 20px;
-  background: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.background};
-  border-radius: 50%;
-  display: ${(props) => (props.show ? "flex" : "none")};
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.7rem;
-`
-
-const ThemePreview = styled.div`
-  width: 100%;
-  height: 60px;
-  margin-bottom: 0.6rem;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: ${(props) => props.background};
-  color: ${(props) => props.color};
-  border: ${(props) => (props.border ? `1px solid ${props.border}` : "none")};
-  font-family: ${(props) => props.fontFamily || "inherit"};
+const ThemePreviewText = styled.div`
+  font-family: ${props => props.fontFamily || "'Cormorant Garamond', serif"};
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: ${props => props.color || '#1A1A1A'};
+  margin-bottom: 0.5rem;
 `
 
 const ThemeName = styled.div`
-  font-size: 0.8rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: ${(props) => props.theme.text};
-  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: ${props => props.color || '#1A1A1A'};
+  opacity: 0.8;
+`
+
+const ThemeDescription = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: ${props => props.color || '#666'};
+  opacity: 0.6;
+  margin-top: 0.3rem;
 `
 
 function ThemeSelector({ selectedTheme, onThemeChange }) {
   return (
     <Container>
-      <Title>Design-Theme</Title>
-      <Subtitle>Wähle das Theme für die Hochzeitswebsite des Kunden.</Subtitle>
-
       <ThemeGrid>
-        {Object.values(THEMES).map((theme) => {
-          const preview = THEME_PREVIEWS[theme.id] || THEME_PREVIEWS.editorial
+        {Object.values(THEMES).map(theme => {
+          const preview = THEME_PREVIEWS[theme.id] || {}
+          const isSelected = selectedTheme === theme.id
 
           return (
             <ThemeCard
               key={theme.id}
-              selected={selectedTheme === theme.id}
+              selected={isSelected}
+              preview={preview}
               onClick={() => onThemeChange(theme.id)}
             >
-              <CheckMark show={selectedTheme === theme.id}>✓</CheckMark>
-
-              <ThemePreview
-                background={preview.background}
+              <ThemePreviewText 
+                fontFamily={preview.fontFamily} 
                 color={preview.color}
-                border={preview.border}
-                fontFamily={preview.fontFamily}
               >
-                {preview.text}
-              </ThemePreview>
-
-              <ThemeName>{theme.name}</ThemeName>
+                {preview.text || 'S & I'}
+              </ThemePreviewText>
+              <ThemeName color={preview.color}>{theme.name}</ThemeName>
+              <ThemeDescription color={preview.color}>
+                {theme.description}
+              </ThemeDescription>
             </ThemeCard>
           )
         })}

@@ -2,105 +2,86 @@
 import styled from "styled-components"
 import {
   OPTIONAL_COMPONENTS,
+  CORE_COMPONENTS,
   PACKAGES,
-  STANDARD_COMPONENTS,
 } from "../../utils/constants"
 
-const Container = styled.div`
-  margin-bottom: 3rem;
-`
+const Container = styled.div``
 
-const Title = styled.h2`
-  font-family: ${(props) => props.theme.fontHeading};
-  font-size: 1.8rem;
-  color: ${(props) => props.theme.primary};
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
-`
-
-const Subtitle = styled.p`
-  color: ${(props) => props.theme.textSecondary};
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
+const SectionLabel = styled.div`
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 1rem;
+  font-family: 'Inter', sans-serif;
 `
 
 const ComponentsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 `
 
 const ComponentCard = styled.div`
-  background: ${(props) =>
-    props.disabled ? props.theme.surface : props.theme.background};
-  border: 2px solid
-    ${(props) => (props.selected ? props.theme.primary : props.theme.border)};
-  padding: 1.5rem;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  transition: all 0.3s ease;
+  background: ${props => props.disabled ? '#F5F5F5' : props.selected ? '#F0F7FF' : '#FFFFFF'};
+  border: 2px solid ${props => props.selected ? '#2196F3' : props.locked ? '#4CAF50' : '#E0E0E0'};
+  padding: 1rem 1.25rem;
+  cursor: ${props => props.disabled || props.locked ? 'default' : 'pointer'};
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  opacity: ${props => props.disabled ? 0.6 : 1};
   position: relative;
-  border-radius: ${(props) => props.theme.cardRadius};
-  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 
   &:hover {
-    ${(props) =>
-      !props.disabled &&
-      `
-      border-color: ${props.theme.primary};
-      transform: translateY(-5px);
+    ${props => !props.disabled && !props.locked && `
+      border-color: #2196F3;
     `}
   }
 `
 
-const ComponentBadge = styled.div`
+const LockedBadge = styled.div`
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.background};
-  padding: 0.3rem 0.8rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  top: -8px;
+  right: 10px;
+  background: #4CAF50;
+  color: #FFFFFF;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  border-radius: calc(${(props) => props.theme.buttonRadius} / 2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
 `
 
-const CheckboxLabel = styled.label`
+const CheckboxRow = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  align-items: flex-start;
+  gap: 0.8rem;
 `
 
-const CheckboxCustom = styled.div`
-  width: 24px;
-  height: 24px;
-  border: 2px solid ${(props) => props.theme.primary};
-  background: ${(props) =>
-    props.checked ? props.theme.primary : "transparent"};
+const Checkbox = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 2px solid ${props => props.checked ? '#2196F3' : props.locked ? '#4CAF50' : '#CCC'};
+  background: ${props => props.checked || props.locked ? (props.locked ? '#4CAF50' : '#2196F3') : 'transparent'};
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
   flex-shrink: 0;
-  border-radius: ${(props) => (props.theme.name === "botanical" ? "50%" : "0")};
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-top: 2px;
 
   &::after {
-    content: "✓";
-    color: ${(props) => props.theme.background};
-    font-size: 1rem;
+    content: "${props => props.locked ? '🔒' : '✓'}";
+    color: #FFFFFF;
+    font-size: ${props => props.locked ? '0.6rem' : '0.75rem'};
     font-weight: 700;
-    opacity: ${(props) => (props.checked ? 1 : 0)};
-    transition: opacity 0.3s ease;
+    opacity: ${props => props.checked || props.locked ? 1 : 0};
   }
 `
 
@@ -109,100 +90,101 @@ const ComponentInfo = styled.div`
 `
 
 const ComponentName = styled.div`
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
-  color: ${(props) => props.theme.text};
-  margin-bottom: ${(props) => (props.hasDescription ? "0.3rem" : "0")};
+  color: #1A1A1A;
+  margin-bottom: 0.2rem;
+  font-family: 'Inter', sans-serif;
 `
 
 const ComponentDescription = styled.div`
-  font-size: 0.8rem;
-  color: ${(props) => props.theme.textSecondary};
+  font-size: 0.75rem;
+  color: #666;
   line-height: 1.4;
+  font-family: 'Inter', sans-serif;
 `
 
-const SectionDivider = styled.div`
-  margin: 2rem 0;
-  border-top: 1px solid ${(props) => props.theme.border};
+const Divider = styled.div`
+  height: 1px;
+  background: #E0E0E0;
+  margin: 1.5rem 0;
 `
 
-const LimitWarning = styled.div`
-  margin-top: 1rem;
+const LimitInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 1.5rem;
-  background: rgba(255, 152, 0, 0.1);
-  border: 1px solid rgba(255, 152, 0, 0.3);
-  border-radius: calc(${(props) => props.theme.buttonRadius} / 2);
-  color: #ff9800;
-  font-size: 0.9rem;
-  display: ${(props) => (props.show ? "block" : "none")};
+  background: ${props => props.warning ? '#FFF3E0' : '#F5F5F5'};
+  border: 1px solid ${props => props.warning ? '#FFB74D' : '#E0E0E0'};
+  border-radius: 8px;
+  margin-top: 1rem;
 `
 
-function ComponentCheckboxes({
-  selectedComponents,
-  onComponentsChange,
-  selectedPackage,
-}) {
+const LimitText = styled.div`
+  font-size: 0.85rem;
+  color: ${props => props.warning ? '#E65100' : '#666'};
+  font-family: 'Inter', sans-serif;
+`
+
+const LimitCount = styled.div`
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: ${props => props.warning ? '#E65100' : '#1A1A1A'};
+  font-family: 'Inter', sans-serif;
+`
+
+function ComponentCheckboxes({ selectedComponents, onComponentsChange, selectedPackage }) {
   const pkg = PACKAGES[selectedPackage]
-  const maxComponents = pkg ? pkg.maxComponents : 999
+  const maxOptional = pkg ? pkg.maxOptionalComponents : 999
 
   // Count selected optional components
   const selectedOptionalCount = OPTIONAL_COMPONENTS.filter(
-    (comp) => selectedComponents[comp.id]
+    comp => selectedComponents[comp.id]
   ).length
 
-  const isLimitReached =
-    selectedOptionalCount >= maxComponents && maxComponents !== 999
+  const isLimitReached = selectedOptionalCount >= maxOptional && maxOptional !== 999
 
   const handleToggle = (componentId) => {
-    // Don't allow toggling if component is always enabled
-    const component = [...STANDARD_COMPONENTS, ...OPTIONAL_COMPONENTS].find(
-      (c) => c.id === componentId
-    )
-
-    if (component && component.alwaysEnabled) {
-      return
-    }
-
-    // Check if limit is reached and trying to enable
+    // Check if trying to enable when limit is reached
     if (!selectedComponents[componentId] && isLimitReached) {
       return
     }
 
     onComponentsChange({
       ...selectedComponents,
-      [componentId]: !selectedComponents[componentId],
+      [componentId]: !selectedComponents[componentId]
     })
   }
 
   return (
     <Container>
-      <Title>Gebuchte Komponenten</Title>
-      <Subtitle>
-        Standard-Komponenten sind automatisch aktiviert.
-        {pkg &&
-          pkg.maxComponents !== 999 &&
-          ` Aktuelles Paket erlaubt ${pkg.maxComponents} zusätzliche Komponenten.`}
-      </Subtitle>
-
+      {/* Core Components - Always Included */}
+      <SectionLabel>✨ Immer inklusive (Basis-Komponenten)</SectionLabel>
       <ComponentsGrid>
-        {STANDARD_COMPONENTS.map((component) => (
-          <ComponentCard key={component.id} selected={true} disabled={true}>
-            <ComponentBadge>Standard</ComponentBadge>
-            <CheckboxLabel disabled={true}>
-              <CheckboxCustom checked={true} />
+        {CORE_COMPONENTS.map(component => (
+          <ComponentCard key={component.id} locked>
+            <LockedBadge>Inklusive</LockedBadge>
+            <CheckboxRow>
+              <Checkbox checked locked />
               <ComponentInfo>
                 <ComponentName>{component.name}</ComponentName>
+                <ComponentDescription>{component.description}</ComponentDescription>
               </ComponentInfo>
-            </CheckboxLabel>
+            </CheckboxRow>
           </ComponentCard>
         ))}
       </ComponentsGrid>
 
-      <SectionDivider />
+      <Divider />
 
+      {/* Optional Components */}
+      <SectionLabel>
+        🎨 Optionale Komponenten
+        {maxOptional !== 999 && ` (max. ${maxOptional} im ${pkg?.name}-Paket)`}
+      </SectionLabel>
       <ComponentsGrid>
-        {OPTIONAL_COMPONENTS.map((component) => {
+        {OPTIONAL_COMPONENTS.map(component => {
           const isSelected = selectedComponents[component.id]
           const isDisabled = !isSelected && isLimitReached
 
@@ -213,29 +195,32 @@ function ComponentCheckboxes({
               disabled={isDisabled}
               onClick={() => !isDisabled && handleToggle(component.id)}
             >
-              <CheckboxLabel disabled={isDisabled}>
-                <CheckboxCustom checked={isSelected} />
+              <CheckboxRow>
+                <Checkbox checked={isSelected} />
                 <ComponentInfo>
-                  <ComponentName hasDescription={!!component.description}>
-                    {component.name}
-                  </ComponentName>
-                  {component.description && (
-                    <ComponentDescription>
-                      {component.description}
-                    </ComponentDescription>
-                  )}
+                  <ComponentName>{component.name}</ComponentName>
+                  <ComponentDescription>{component.description}</ComponentDescription>
                 </ComponentInfo>
-              </CheckboxLabel>
+              </CheckboxRow>
             </ComponentCard>
           )
         })}
       </ComponentsGrid>
 
-      <LimitWarning show={isLimitReached}>
-        ⚠️ Limit erreicht! Das {pkg?.name}-Paket erlaubt maximal {maxComponents}{" "}
-        optionale Komponenten. Deaktiviere eine Komponente, um eine andere zu
-        aktivieren.
-      </LimitWarning>
+      {/* Limit Info */}
+      {maxOptional !== 999 && (
+        <LimitInfo warning={isLimitReached}>
+          <LimitText warning={isLimitReached}>
+            {isLimitReached 
+              ? `⚠️ Limit erreicht! Deaktiviere eine Komponente um eine andere zu aktivieren.`
+              : `Optionale Komponenten ausgewählt:`
+            }
+          </LimitText>
+          <LimitCount warning={isLimitReached}>
+            {selectedOptionalCount} / {maxOptional}
+          </LimitCount>
+        </LimitInfo>
+      )}
     </Container>
   )
 }

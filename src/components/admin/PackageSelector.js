@@ -2,175 +2,190 @@
 import styled from "styled-components"
 import { PACKAGES } from "../../utils/constants"
 
-const Container = styled.div`
-  margin-bottom: 3rem;
-`
-
-const Title = styled.h2`
-  font-family: ${(props) => props.theme.fontHeading};
-  font-size: 1.8rem;
-  color: ${(props) => props.theme.primary};
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
-`
-
-const Subtitle = styled.p`
-  color: ${(props) => props.theme.textSecondary};
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
-`
+const Container = styled.div``
 
 const PackageGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-  }
 `
 
 const PackageCard = styled.div`
+  background: #FFFFFF;
+  border: 2px solid ${props => props.selected ? '#1A1A1A' : '#E0E0E0'};
   padding: 2rem;
-  border: 2px solid
-    ${(props) => (props.selected ? props.theme.primary : props.theme.border)};
   cursor: pointer;
   transition: all 0.3s ease;
-  border-radius: ${(props) => props.theme.cardRadius};
-  background: ${(props) =>
-    props.selected ? props.theme.surface : props.theme.background};
+  border-radius: 8px;
   position: relative;
+  text-align: center;
+
+  ${props => props.popular && `
+    border-color: #FF6B6B;
+  `}
+
+  ${props => props.selected && `
+    background: #FAFAFA;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  `}
 
   &:hover {
-    border-color: ${(props) => props.theme.primary};
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: ${props => props.selected ? '#1A1A1A' : '#999'};
+    transform: translateY(-3px);
   }
 `
 
 const PopularBadge = styled.div`
   position: absolute;
   top: -12px;
-  right: 1rem;
-  background: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.background};
-  padding: 0.3rem 0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FF6B6B;
+  color: #FFFFFF;
+  padding: 0.4rem 1rem;
   font-size: 0.65rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
-  border-radius: calc(${(props) => props.theme.buttonRadius} / 2);
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
 `
 
-const PackageName = styled.div`
-  font-family: ${(props) => props.theme.fontHeading};
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: ${(props) => props.theme.text};
+const SelectedBadge = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 28px;
+  height: 28px;
+  background: #1A1A1A;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+`
+
+const PackageName = styled.h3`
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #1A1A1A;
+  margin-bottom: 0.3rem;
+`
+
+const PackageDescription = styled.p`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 1rem;
 `
 
 const PackagePrice = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  color: ${(props) => props.theme.primary};
-  margin-bottom: 0.5rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #1A1A1A;
+  margin-bottom: 0.3rem;
 
   span {
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: ${(props) => props.theme.textSecondary};
+    font-size: 1rem;
+    color: #666;
   }
 `
 
-const PackageDescription = styled.div`
-  font-size: 0.9rem;
-  color: ${(props) => props.theme.textSecondary};
+const PriceNote = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: #999;
   margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid ${(props) => props.theme.border};
 `
 
 const FeatureList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: left;
 `
 
 const Feature = styled.li`
-  font-size: 0.85rem;
-  color: ${(props) => props.theme.text};
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #333;
   padding: 0.5rem 0;
+  border-bottom: 1px solid #F0F0F0;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
 
+  &:last-child {
+    border-bottom: none;
+  }
+
   &::before {
-    content: "✓";
-    color: ${(props) => props.theme.primary};
+    content: '✓';
+    color: #4CAF50;
     font-weight: 700;
-    flex-shrink: 0;
   }
 `
 
-const RadioButton = styled.div`
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 20px;
-  height: 20px;
-  border: 2px solid
-    ${(props) => (props.selected ? props.theme.primary : props.theme.border)};
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+const ComponentLimit = styled.div`
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: #F5F5F5;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #666;
 
-  &::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: ${(props) => props.theme.primary};
-    opacity: ${(props) => (props.selected ? 1 : 0)};
-    transition: opacity 0.3s ease;
+  strong {
+    color: #1A1A1A;
   }
 `
 
 function PackageSelector({ selectedPackage, onPackageChange }) {
   return (
     <Container>
-      <Title>Paket auswählen</Title>
-      <Subtitle>Wähle das gebuchte Paket für dieses Projekt.</Subtitle>
-
       <PackageGrid>
-        {Object.values(PACKAGES).map((pkg) => (
-          <PackageCard
-            key={pkg.id}
-            selected={selectedPackage === pkg.id}
-            onClick={() => onPackageChange(pkg.id)}
-          >
-            {pkg.popular && <PopularBadge>Beliebt</PopularBadge>}
-            <RadioButton selected={selectedPackage === pkg.id} />
+        {Object.values(PACKAGES).map(pkg => {
+          const isSelected = selectedPackage === pkg.id
 
-            <PackageName>{pkg.name}</PackageName>
-            <PackagePrice>
-              {pkg.price}€ <span>netto</span>
-            </PackagePrice>
-            <PackageDescription>{pkg.description}</PackageDescription>
+          return (
+            <PackageCard
+              key={pkg.id}
+              selected={isSelected}
+              popular={pkg.popular}
+              onClick={() => onPackageChange(pkg.id)}
+            >
+              {pkg.popular && <PopularBadge>Bestseller</PopularBadge>}
+              {isSelected && <SelectedBadge>✓</SelectedBadge>}
 
-            <FeatureList>
-              {pkg.features.map((feature, index) => (
-                <Feature key={index}>{feature}</Feature>
-              ))}
-            </FeatureList>
-          </PackageCard>
-        ))}
+              <PackageName>{pkg.name}</PackageName>
+              <PackageDescription>{pkg.description}</PackageDescription>
+
+              <PackagePrice>
+                {pkg.price.toLocaleString('de-DE')} <span>€</span>
+              </PackagePrice>
+              <PriceNote>zzgl. MwSt.</PriceNote>
+
+              <FeatureList>
+                {pkg.features.map((feature, idx) => (
+                  <Feature key={idx}>{feature}</Feature>
+                ))}
+              </FeatureList>
+
+              <ComponentLimit>
+                <strong>
+                  {pkg.maxOptionalComponents === 999 
+                    ? 'Unbegrenzte' 
+                    : pkg.maxOptionalComponents
+                  }
+                </strong> optionale Komponenten
+              </ComponentLimit>
+            </PackageCard>
+          )
+        })}
       </PackageGrid>
     </Container>
   )
