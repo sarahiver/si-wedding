@@ -296,7 +296,7 @@ function CustomerFormPage() {
   }
 
   // Determine theme
-  const currentTheme = project?.theme || "gold"
+  const currentTheme = project?.theme || "video"
 
   // Render loading state
   if (loading) {

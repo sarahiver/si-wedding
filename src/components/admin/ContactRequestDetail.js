@@ -225,7 +225,7 @@ const ActionSection = styled.div`
   margin-top: 2rem;
   padding: 2rem;
   background: ${(props) =>
-    props.theme.name === "gold"
+    props.theme.name === "video"
       ? "rgba(212, 175, 55, 0.1)"
       : "rgba(139, 115, 85, 0.1)"};
   border-radius: calc(${(props) => props.theme.cardRadius} / 2);
@@ -373,7 +373,7 @@ function ContactRequestDetail({
 
   const formatTheme = (theme) => {
     const themes = {
-      gold: "Gold & Schwarz",
+      video: "Video & Cinematic",
       botanical: "Botanical",
       editorial: "Editorial",
     }

@@ -35,7 +35,7 @@ const Section = styled.section`
       background: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: linear-gradient(180deg, #0d0b08 0%, #1a1510 100%);
     `}
@@ -86,7 +86,7 @@ const Eyebrow = styled.div`
       font-family: "Inter", sans-serif;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       color: #d4af37;
       font-family: "Montserrat", sans-serif;
@@ -129,7 +129,7 @@ const Title = styled.h2`
       color: #000;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", serif;
       color: #f5f0e6;
@@ -175,7 +175,7 @@ const Description = styled.p`
       font-family: "Inter", sans-serif;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       color: rgba(245, 240, 230, 0.7);
       font-family: "Montserrat", sans-serif;
@@ -218,7 +218,7 @@ const FormCard = styled.div`
       border: 2px solid #000;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: rgba(212, 175, 55, 0.05);
       border: 1px solid rgba(212, 175, 55, 0.3);
@@ -289,7 +289,7 @@ const Label = styled.label`
       font-family: "Inter", sans-serif;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       color: #d4af37;
       font-family: "Montserrat", sans-serif;
@@ -343,7 +343,7 @@ const Input = styled.input`
       }
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(212, 175, 55, 0.3);
@@ -421,7 +421,7 @@ const Select = styled.select`
       }
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(212, 175, 55, 0.3);
@@ -504,7 +504,7 @@ const TextArea = styled.textarea`
       }
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(212, 175, 55, 0.3);
@@ -588,7 +588,7 @@ const SubmitButton = styled.button`
       }
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: linear-gradient(
         135deg,
@@ -663,7 +663,7 @@ const SuccessMessage = styled.div`
       color: #000;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       color: #d4af37;
     `}
@@ -705,7 +705,7 @@ const SuccessTitle = styled.h3`
       font-family: "Instrument Serif", serif;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", serif;
     `}
@@ -827,7 +827,7 @@ function ContactSection() {
           </Eyebrow>
           <Title $themeId={currentTheme}>
             {currentTheme === "editorial" && "Erzählt uns von eurer Hochzeit."}
-            {currentTheme === "gold" && "Wir freuen uns auf eure Geschichte"}
+            {currentTheme === "video" && "Euer Hauptfilm beginnt hier"}
             {currentTheme === "botanical" && "Erzählt uns von eurer Hochzeit"}
             {currentTheme === "contemporary" &&
               "LET'S CREATE SOMETHING SPECIAL"}
@@ -947,7 +947,7 @@ function ContactSection() {
                     <option value='editorial'>
                       Editorial – Minimalistisch
                     </option>
-                    <option value='gold'>Gold – Klassisch Elegant</option>
+                    <option value='video'>Video – Cineastisch Dramatisch</option>
                     <option value='botanical'>Botanical – Natürlich</option>
                     <option value='contemporary'>
                       Contemporary – Modern Bold

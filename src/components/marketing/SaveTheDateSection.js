@@ -17,7 +17,7 @@ const pulse = keyframes`
   50% { transform: scale(1.1); opacity: 1; }
 `
 
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `
@@ -53,7 +53,7 @@ const Section = styled.section`
       background: #f5f5f5;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: linear-gradient(180deg, #0d0b08 0%, #0a0a0a 100%);
     `}
@@ -149,7 +149,7 @@ const Eyebrow = styled.span`
       color: #999;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.75rem;
@@ -210,7 +210,7 @@ const Title = styled.h2`
       color: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(2.5rem, 5vw, 4rem);
@@ -267,7 +267,7 @@ const Subtitle = styled.p`
       color: #666;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 1rem;
@@ -409,7 +409,7 @@ const EditorialPreviewContent = styled.div`
 `
 
 // Gold Preview
-const GoldPreview = styled.div`
+const VideoPreview = styled.div`
   background: linear-gradient(
     135deg,
     rgba(212, 175, 55, 0.05) 0%,
@@ -440,7 +440,7 @@ const GoldPreview = styled.div`
   }
 `
 
-const GoldPreviewContent = styled.div`
+const VideoPreviewContent = styled.div`
   .monogram {
     font-family: "Cormorant Garamond", Georgia, serif;
     font-size: 4rem;
@@ -450,7 +450,7 @@ const GoldPreviewContent = styled.div`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: ${goldShimmer} 3s linear infinite;
+    animation: ${videoShimmer} 3s linear infinite;
     margin-bottom: 20px;
   }
 
@@ -787,7 +787,7 @@ const FeaturesContainer = styled.div`
       padding: 50px;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: rgba(212, 175, 55, 0.03);
       border: 1px solid rgba(212, 175, 55, 0.2);
@@ -834,7 +834,7 @@ const FeatureTitle = styled.h3`
       color: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 1.8rem;
@@ -902,7 +902,7 @@ const FeatureItem = styled.li`
         line-height: 1.6;
       `}
     ${(p) =>
-      p.$themeId === "gold" &&
+      p.$themeId === "video" &&
       css`
         font-family: "Montserrat", sans-serif;
         font-size: 0.9rem;
@@ -995,7 +995,7 @@ const PricingBox = styled.div`
     `}
 
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: ${p.$included
         ? "linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05))"
@@ -1173,7 +1173,7 @@ const IncludedBadge = styled.div`
       color: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: #d4af37;
       color: #0a0a0a;
@@ -1277,18 +1277,18 @@ function SaveTheDateSection() {
           </EditorialPreview>
         )
 
-      case "gold":
+      case "video":
         return (
-          <GoldPreview>
-            <GoldPreviewContent>
+          <VideoPreview>
+            <VideoPreviewContent>
               <div className='monogram'>S & T</div>
               <div className='save-the-date'>Save the Date</div>
               <div className='date'>15. August 2026</div>
               <div className='location'>Schloss Heidelberg · Deutschland</div>
               <div className='divider' />
               <div className='message'>Einladung folgt</div>
-            </GoldPreviewContent>
-          </GoldPreview>
+            </VideoPreviewContent>
+          </VideoPreview>
         )
 
       case "botanical":
@@ -1361,7 +1361,7 @@ function SaveTheDateSection() {
 
   const renderParallax = () => {
     switch (currentTheme) {
-      case "gold":
+      case "video":
         return (
           <ParallaxBg>
             <GlowOrb

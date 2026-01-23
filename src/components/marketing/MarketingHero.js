@@ -24,17 +24,17 @@ const editorialScroll = keyframes`
 `;
 
 // Gold - Shimmer effect
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `;
 
-const goldFloat = keyframes`
+const videoFloat = keyframes`
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(3deg); }
 `;
 
-const goldSparkle = keyframes`
+const videoSparkle = keyframes`
   0%, 100% { opacity: 0; transform: scale(0); }
   50% { opacity: 1; transform: scale(1); }
 `;
@@ -119,7 +119,7 @@ const Section = styled.section`
     background: #FFFFFF;
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     background: linear-gradient(135deg, #0A0A0A 0%, #1A1510 50%, #0A0A0A 100%);
   `}
   
@@ -173,34 +173,34 @@ const EditorialTextLine = styled.div`
 // GOLD BACKGROUND - Sparkles and particles
 // ============================================
 
-const GoldBackground = styled.div`
+const VideoBackground = styled.div`
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
 `;
 
-const GoldGradientOverlay = styled.div`
+const VideoGradientOverlay = styled.div`
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.15) 0%, transparent 50%),
               radial-gradient(ellipse at 70% 80%, rgba(212,175,55,0.1) 0%, transparent 50%);
 `;
 
-const GoldSparkle = styled.div`
+const VideoSparkle = styled.div`
   position: absolute;
   width: ${p => p.$size || '4px'};
   height: ${p => p.$size || '4px'};
   background: #D4AF37;
   border-radius: 50%;
-  animation: ${goldSparkle} ${p => p.$duration || '3s'} ease-in-out infinite;
+  animation: ${videoSparkle} ${p => p.$duration || '3s'} ease-in-out infinite;
   animation-delay: ${p => p.$delay || '0s'};
   top: ${p => p.$top};
   left: ${p => p.$left};
   box-shadow: 0 0 10px #D4AF37, 0 0 20px rgba(212,175,55,0.5);
 `;
 
-const GoldLine = styled.div`
+const VideoLine = styled.div`
   position: absolute;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
@@ -208,7 +208,7 @@ const GoldLine = styled.div`
   top: ${p => p.$top};
   left: ${p => p.$left};
   transform: rotate(${p => p.$rotate || '0deg'});
-  animation: ${goldFloat} ${p => p.$duration || '8s'} ease-in-out infinite;
+  animation: ${videoFloat} ${p => p.$duration || '8s'} ease-in-out infinite;
   animation-delay: ${p => p.$delay || '0s'};
 `;
 
@@ -381,7 +381,7 @@ const Container = styled.div`
     justify-content: space-between;
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     justify-content: center;
     text-align: center;
     flex-direction: column;
@@ -471,7 +471,7 @@ const Eyebrow = styled.span`
     color: #999;
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
     letter-spacing: 0.4em;
@@ -481,7 +481,7 @@ const Eyebrow = styled.span`
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: ${goldShimmer} 3s linear infinite;
+    animation: ${videoShimmer} 3s linear infinite;
   `}
   
   ${p => p.$themeId === 'botanical' && css`
@@ -554,7 +554,7 @@ const Title = styled.h1`
     line-height: 1.1;
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: clamp(3.5rem, 8vw, 7rem);
     font-weight: 300;
@@ -567,7 +567,7 @@ const Title = styled.h1`
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: ${goldShimmer} 4s linear infinite;
+      animation: ${videoShimmer} 4s linear infinite;
     }
   `}
   
@@ -623,7 +623,7 @@ const Subtitle = styled.p`
     max-width: 450px;
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     line-height: 1.8;
@@ -708,7 +708,7 @@ const PrimaryButton = styled.a`
     &:hover { background: #333; transform: translateY(-3px); }
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
     font-weight: 500;
@@ -798,7 +798,7 @@ const SecondaryButton = styled.a`
     &:hover { border-color: #1A1A1A; }
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
     font-weight: 400;
@@ -885,7 +885,7 @@ const ScrollIndicator = styled.div`
     letter-spacing: 0.1em;
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     color: #D4AF37;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.65rem;
@@ -985,12 +985,12 @@ function MarketingHero() {
           </EditorialBackground>
         );
         
-      case 'gold':
+      case 'video':
         return (
-          <GoldBackground>
-            <GoldGradientOverlay />
+          <VideoBackground>
+            <VideoGradientOverlay />
             {[...Array(15)].map((_, i) => (
-              <GoldSparkle 
+              <VideoSparkle 
                 key={i}
                 $size={`${3 + Math.random() * 4}px`}
                 $top={`${Math.random() * 100}%`}
@@ -999,10 +999,10 @@ function MarketingHero() {
                 $delay={`${Math.random() * 3}s`}
               />
             ))}
-            <GoldLine $top="20%" $left="10%" $rotate="-15deg" $duration="10s" />
-            <GoldLine $top="40%" $left="70%" $rotate="20deg" $duration="12s" $delay="2s" />
-            <GoldLine $top="70%" $left="30%" $rotate="-10deg" $duration="8s" $delay="1s" />
-          </GoldBackground>
+            <VideoLine $top="20%" $left="10%" $rotate="-15deg" $duration="10s" />
+            <VideoLine $top="40%" $left="70%" $rotate="20deg" $duration="12s" $delay="2s" />
+            <VideoLine $top="70%" $left="30%" $rotate="-10deg" $duration="8s" $delay="1s" />
+          </VideoBackground>
         );
         
       case 'botanical':
@@ -1065,7 +1065,7 @@ function MarketingHero() {
         <Content $themeId={currentTheme}>
           <Eyebrow $themeId={currentTheme}>
             {currentTheme === 'editorial' && 'Premium Wedding Websites'}
-            {currentTheme === 'gold' && '✦ Exklusiv & Elegant ✦'}
+            {currentTheme === 'video' && '— PREMIERE —'}
             {currentTheme === 'botanical' && 'Natürlich Schön'}
             {currentTheme === 'contemporary' && 'Bold & Beautiful'}
             {currentTheme === 'luxe' && 'Maßgeschneidert'}
@@ -1074,7 +1074,7 @@ function MarketingHero() {
           
           <Title $themeId={currentTheme}>
             {currentTheme === 'editorial' && 'Eure Geschichte, digital erzählt.'}
-            {currentTheme === 'gold' && <><span>Zeitlose</span> Eleganz</>}
+            {currentTheme === 'video' && <><span>Euer Film</span> beginnt hier</>}
             {currentTheme === 'botanical' && 'Wo Liebe erblüht'}
             {currentTheme === 'contemporary' && 'MAKE IT COUNT'}
             {currentTheme === 'luxe' && 'Die Kunst der Einfachheit'}
@@ -1083,7 +1083,7 @@ function MarketingHero() {
           
           <Subtitle $themeId={currentTheme}>
             {currentTheme === 'editorial' && 'Wir gestalten einzigartige Hochzeitswebsites, die eure Liebe feiern und eure Gäste begeistern.'}
-            {currentTheme === 'gold' && 'Luxuriöse Hochzeitswebsites für Paare mit Anspruch. Jedes Detail, perfekt inszeniert.'}
+            {currentTheme === 'video' && 'Cineastische Hochzeitswebsites mit Video-Hintergründen. Eure Liebesgeschichte, filmreif inszeniert.'}
             {currentTheme === 'botanical' && 'Organisch schön, liebevoll gestaltet. Hochzeitswebsites, die sich anfühlen wie ein Spaziergang durch einen blühenden Garten.'}
             {currentTheme === 'contemporary' && 'Keine langweiligen Templates. Keine Kompromisse. Nur pure Kreativität für euren großen Tag.'}
             {currentTheme === 'luxe' && 'Weniger ist mehr. Entdeckt die Schönheit des Wesentlichen in einer Hochzeitswebsite, die Bände spricht.'}

@@ -147,7 +147,7 @@ const Section = styled.section`
     `}
 
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: linear-gradient(180deg, #0a0a0a 0%, #151510 100%);
     `}
@@ -236,7 +236,7 @@ const Eyebrow = styled.span`
       color: rgba(255, 255, 255, 0.5);
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.75rem;
@@ -300,7 +300,7 @@ const Title = styled.h2`
       color: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(2.5rem, 5vw, 4rem);
@@ -358,7 +358,7 @@ const Subtitle = styled.p`
       color: rgba(255, 255, 255, 0.6);
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 1rem;
@@ -469,7 +469,7 @@ const EditorialBadge = styled.span`
 // GOLD - Elegant Horizontal Scroll Cards
 // ============================================
 
-const GoldScrollContainer = styled.div`
+const VideoScrollContainer = styled.div`
   overflow-x: auto;
   padding-bottom: 20px;
   margin: 0 -5%;
@@ -488,13 +488,13 @@ const GoldScrollContainer = styled.div`
   }
 `
 
-const GoldCardsRow = styled.div`
+const VideoCardsRow = styled.div`
   display: flex;
   gap: 25px;
   padding: 10px 0;
 `
 
-const GoldCard = styled.div`
+const VideoCard = styled.div`
   flex: 0 0 280px;
   background: linear-gradient(
     135deg,
@@ -515,13 +515,13 @@ const GoldCard = styled.div`
   }
 `
 
-const GoldIcon = styled.div`
+const VideoIcon = styled.div`
   font-size: 2.5rem;
   margin-bottom: 20px;
   filter: grayscale(100%) sepia(100%) hue-rotate(5deg) saturate(300%);
 `
 
-const GoldTitle = styled.h3`
+const VideoTitle = styled.h3`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.3rem;
   font-weight: 500;
@@ -529,7 +529,7 @@ const GoldTitle = styled.h3`
   margin: 0 0 10px 0;
 `
 
-const GoldDesc = styled.p`
+const VideoDesc = styled.p`
   font-family: "Montserrat", sans-serif;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.5);
@@ -537,7 +537,7 @@ const GoldDesc = styled.p`
   line-height: 1.6;
 `
 
-const GoldBadge = styled.span`
+const VideoBadge = styled.span`
   display: inline-block;
   font-family: "Montserrat", sans-serif;
   font-size: 0.55rem;
@@ -1008,23 +1008,23 @@ function ComponentsShowcase() {
     </EditorialGrid>
   )
 
-  const renderGold = () => (
-    <GoldScrollContainer>
-      <GoldCardsRow>
+  const renderVideo = () => (
+    <VideoScrollContainer>
+      <VideoCardsRow>
         {allComponents.map((comp, i) => (
-          <GoldCard
+          <VideoCard
             key={comp.title}
             $visible={isVisible}
             $delay={0.05 + i * 0.05}
           >
-            {comp.included && <GoldBadge>Inklusive</GoldBadge>}
-            <GoldIcon>{comp.icon}</GoldIcon>
-            <GoldTitle>{comp.title}</GoldTitle>
-            <GoldDesc>{comp.description}</GoldDesc>
-          </GoldCard>
+            {comp.included && <VideoBadge>Inklusive</VideoBadge>}
+            <VideoIcon>{comp.icon}</VideoIcon>
+            <VideoTitle>{comp.title}</VideoTitle>
+            <VideoDesc>{comp.description}</VideoDesc>
+          </VideoCard>
         ))}
-      </GoldCardsRow>
-    </GoldScrollContainer>
+      </VideoCardsRow>
+    </VideoScrollContainer>
   )
 
   const renderBotanical = () => (
@@ -1138,8 +1138,8 @@ function ComponentsShowcase() {
     switch (currentTheme) {
       case "editorial":
         return renderEditorial()
-      case "gold":
-        return renderGold()
+      case "video":
+        return renderVideo()
       case "botanical":
         return renderBotanical()
       case "contemporary":
@@ -1163,7 +1163,7 @@ function ComponentsShowcase() {
             </Eyebrow>
             <Title $themeId={currentTheme}>
               {currentTheme === "editorial" && "Alles was ihr braucht"}
-              {currentTheme === "gold" && "Exquisite Bausteine"}
+              {currentTheme === "video" && "Cineastische Module"}
               {currentTheme === "botanical" && "Natürlich vielfältig"}
               {currentTheme === "contemporary" && "ALL-IN-ONE"}
               {currentTheme === "luxe" && "Sorgfältig kuratiert"}

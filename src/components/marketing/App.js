@@ -14,7 +14,7 @@ import CustomerFormPage from "./pages/form/CustomerFormPage"
 import DemoPage from "./pages/DemoPage"  // NEU
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState("gold")
+  const [currentTheme, setCurrentTheme] = useState("video")
 
   return (
     <MarketingThemeProvider>

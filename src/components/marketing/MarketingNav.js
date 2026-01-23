@@ -27,7 +27,7 @@ const NavWrapper = styled.div`
   z-index: 1000;
   
   /* Full width themes - no padding on wrapper */
-  ${p => (p.$themeId === 'editorial' || p.$themeId === 'gold' || p.$themeId === 'luxe' || p.$themeId === 'neon') && css`
+  ${p => (p.$themeId === 'editorial' || p.$themeId === 'video' || p.$themeId === 'luxe' || p.$themeId === 'neon') && css`
     padding: 0;
   `}
   
@@ -56,7 +56,7 @@ const Nav = styled.nav`
   `}
   
   /* Gold - Full Width Luxury */
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     width: 100%;
     background: ${p.$scrolled ? 'rgba(10,10,10,0.95)' : 'transparent'};
     border-bottom: ${p.$scrolled ? '1px solid rgba(212,175,55,0.2)' : 'none'};
@@ -149,7 +149,7 @@ const Logo = styled.a`
     &:hover { opacity: 0.7; }
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.6rem;
     font-weight: 300;
@@ -235,7 +235,7 @@ const NavLink = styled.a`
     &:hover::after { width: 100%; }
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.75rem;
     font-weight: 400;
@@ -319,7 +319,7 @@ const ThemeDropdownTrigger = styled.button`
     border-radius: 4px;
     &:hover { border-color: #1A1A1A; color: #1A1A1A; }
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.7rem;
     letter-spacing: 0.1em;
@@ -398,7 +398,7 @@ const ThemeDropdownMenu = styled.div`
     border: 1px solid #E0E0E0;
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     background: #0A0A0A;
     border: 1px solid rgba(212,175,55,0.2);
     box-shadow: 0 10px 40px rgba(0,0,0,0.4);
@@ -446,7 +446,7 @@ const ThemeDropdownItem = styled.button`
     &:hover { background: #F5F5F5; color: #1A1A1A; }
     ${p.$active && css`background: #F5F5F5; color: #1A1A1A; font-weight: 600;`}
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
     color: rgba(255,255,255,0.6);
@@ -514,7 +514,7 @@ const CTAButton = styled.a`
     }
   `}
   
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.75rem;
     font-weight: 500;
@@ -608,7 +608,7 @@ const MobileMenuButton = styled.button`
     transition: all 0.3s ease;
     
     ${p => p.$themeId === 'editorial' && css`background: #1A1A1A;`}
-    ${p => p.$themeId === 'gold' && css`background: #D4AF37;`}
+    ${p => p.$themeId === 'video' && css`background: #D4AF37;`}
     ${p => p.$themeId === 'botanical' && css`background: #2D3B2D;`}
     ${p => p.$themeId === 'contemporary' && css`background: #0D0D0D;`}
     ${p => p.$themeId === 'luxe' && css`background: #E8DDD4;`}
@@ -639,7 +639,7 @@ const MobileMenu = styled.div`
       background: rgba(255,255,255,0.98);
       border-bottom: 1px solid #E0E0E0;
     `}
-    ${p => p.$themeId === 'gold' && css`
+    ${p => p.$themeId === 'video' && css`
       background: rgba(10,10,10,0.98);
       border-bottom: 1px solid rgba(212,175,55,0.2);
     `}
@@ -686,7 +686,7 @@ const MobileThemeLabel = styled.span`
   margin-right: 10px;
   
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #999;`}
-  ${p => p.$themeId === 'gold' && css`font-family: 'Montserrat', sans-serif; color: #D4AF37;`}
+  ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: #D4AF37;`}
   ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #8B9D83;`}
   ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: #0D0D0D;`}
   ${p => p.$themeId === 'luxe' && css`font-family: 'Montserrat', sans-serif; color: rgba(212,175,55,0.6);`}
@@ -708,7 +708,7 @@ const MobileThemeButton = styled.button`
   
   ${p => p.$active && css`
     border-color: ${p.$themeId === 'neon' ? '#00ffff' : 
-                    p.$themeId === 'gold' || p.$themeId === 'luxe' ? '#D4AF37' : 
+                    p.$themeId === 'video' || p.$themeId === 'luxe' ? '#D4AF37' : 
                     p.$themeId === 'botanical' ? '#2D3B2D' :
                     p.$themeId === 'contemporary' ? '#0D0D0D' : '#1A1A1A'};
   `}
@@ -729,7 +729,7 @@ const MobileCTAButton = styled.a`
     background: #1A1A1A;
     padding: 15px 30px;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
     font-weight: 500;
@@ -787,7 +787,7 @@ const navLinks = [
 
 const themes = [
   { id: 'editorial', name: 'Editorial', color: '#FFFFFF', border: '#E0E0E0' },
-  { id: 'gold', name: 'Gold', color: '#D4AF37', border: '#D4AF37' },
+  { id: 'video', name: 'Video', color: '#B8976A', border: '#B8976A' },
   { id: 'botanical', name: 'Botanical', color: '#8B9D83', border: '#8B9D83' },
   { id: 'contemporary', name: 'Contemporary', color: '#FF6B6B', border: '#FF6B6B' },
   { id: 'luxe', name: 'Luxe', color: '#1A1520', border: '#D4AF37' },

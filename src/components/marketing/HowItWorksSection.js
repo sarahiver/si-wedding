@@ -9,7 +9,7 @@ const Section = styled.section`
   overflow: hidden;
   
   ${p => p.$themeId === 'editorial' && css`background: #FFFFFF;`}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     background: #0A0A0A;
     &::before {
       content: '';
@@ -50,7 +50,7 @@ const Header = styled.div`
   transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   
   ${p => p.$themeId === 'editorial' && css`text-align: left; max-width: 600px;`}
-  ${p => p.$themeId === 'gold' && css`text-align: center;`}
+  ${p => p.$themeId === 'video' && css`text-align: center;`}
   ${p => p.$themeId === 'botanical' && css`text-align: center;`}
   ${p => p.$themeId === 'contemporary' && css`text-align: center;`}
   ${p => p.$themeId === 'luxe' && css`text-align: center;`}
@@ -69,7 +69,7 @@ const Eyebrow = styled.span`
     text-transform: uppercase;
     color: #999;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.75rem;
     letter-spacing: 0.3em;
@@ -121,7 +121,7 @@ const Title = styled.h2`
     color: #1A1A1A;
     line-height: 1.1;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 300;
@@ -168,7 +168,7 @@ const Subtitle = styled.p`
     color: #666;
     margin: 0;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     color: rgba(255,255,255,0.6);
@@ -220,7 +220,7 @@ const StepsContainer = styled.div`
       background: #E0E0E0;
     }
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
@@ -272,7 +272,7 @@ const Step = styled.div`
     flex: 1;
     text-align: left;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     text-align: center;
     padding: 30px 20px;
     &:hover {
@@ -330,7 +330,7 @@ const StepNumber = styled.div`
       border-radius: 50%;
     }
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -391,7 +391,7 @@ const StepTitle = styled.h3`
     color: #1A1A1A;
     margin: 0 0 10px 0;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.3rem;
     font-weight: 500;
@@ -439,7 +439,7 @@ const StepDescription = styled.p`
     font-size: 0.9rem;
     color: #666;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.85rem;
     color: rgba(255,255,255,0.5);

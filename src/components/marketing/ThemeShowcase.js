@@ -14,12 +14,12 @@ const editorialScroll = keyframes`
 `
 
 // Gold - Shimmer effect
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `
 
-const goldSparkle = keyframes`
+const videoSparkle = keyframes`
   0%, 100% { opacity: 0; transform: scale(0); }
   50% { opacity: 1; transform: scale(1); }
 `
@@ -85,7 +85,7 @@ const Section = styled.section`
       background: #fafafa;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: #0a0a0a;
       &::before {
@@ -151,7 +151,7 @@ const Header = styled.div`
       max-width: 600px;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       text-align: center;
     `}
@@ -192,7 +192,7 @@ const Eyebrow = styled.span`
       color: #999;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.75rem;
@@ -252,7 +252,7 @@ const Title = styled.h2`
       color: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(2.5rem, 5vw, 4rem);
@@ -307,7 +307,7 @@ const Subtitle = styled.p`
       margin: 0;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 1rem;
@@ -395,7 +395,7 @@ const ThemeCard = styled.div`
       }
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: rgba(212, 175, 55, 0.02);
       border: 1px solid ${p.$active ? "#D4AF37" : "rgba(212,175,55,0.15)"};
@@ -474,7 +474,7 @@ const ActiveBadge = styled.div`
       color: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       background: linear-gradient(135deg, #d4af37, #f4d03f);
@@ -651,7 +651,7 @@ const EditorialImage = styled.div`
 // MINI HERO - GOLD
 // ============================================
 
-const GoldHero = styled.div`
+const VideoHero = styled.div`
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1510 50%, #0a0a0a 100%);
@@ -663,7 +663,7 @@ const GoldHero = styled.div`
   overflow: hidden;
 `
 
-const GoldGlow = styled.div`
+const VideoGlow = styled.div`
   position: absolute;
   inset: 0;
   background:
@@ -679,20 +679,20 @@ const GoldGlow = styled.div`
     );
 `
 
-const GoldSparkle = styled.div`
+const VideoSparkle = styled.div`
   position: absolute;
   width: 4px;
   height: 4px;
   background: #d4af37;
   border-radius: 50%;
   box-shadow: 0 0 10px #d4af37;
-  animation: ${goldSparkle} 3s ease-in-out infinite;
+  animation: ${videoSparkle} 3s ease-in-out infinite;
   animation-delay: ${(p) => p.$delay || "0s"};
   top: ${(p) => p.$top};
   left: ${(p) => p.$left};
 `
 
-const GoldEyebrow = styled.div`
+const VideoEyebrow = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   letter-spacing: 0.4em;
@@ -702,13 +702,13 @@ const GoldEyebrow = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: ${goldShimmer} 3s linear infinite;
+  animation: ${videoShimmer} 3s linear infinite;
   margin-bottom: 25px;
   position: relative;
   z-index: 2;
 `
 
-const GoldTitle = styled.h1`
+const VideoTitle = styled.h1`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 100px;
   font-weight: 300;
@@ -725,11 +725,11 @@ const GoldTitle = styled.h1`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: ${goldShimmer} 4s linear infinite;
+    animation: ${videoShimmer} 4s linear infinite;
   }
 `
 
-const GoldSubtitle = styled.p`
+const VideoSubtitle = styled.p`
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.5);
@@ -738,7 +738,7 @@ const GoldSubtitle = styled.p`
   z-index: 2;
 `
 
-const GoldButton = styled.div`
+const VideoButton = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -1171,7 +1171,7 @@ const ThemeName = styled.h3`
       color: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 1.2rem;
@@ -1221,7 +1221,7 @@ const ThemeDescription = styled.p`
       color: #999;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.75rem;
@@ -1268,7 +1268,7 @@ const themeConfigs = [
     name: "Editorial",
     description: "Minimalistisch & Modern",
   },
-  { id: "gold", name: "Gold", description: "Luxuriös & Opulent" },
+  { id: "video", name: "Video", description: "Cineastisch & Dramatisch" },
   { id: "botanical", name: "Botanical", description: "Natürlich & Organisch" },
   { id: "contemporary", name: "Contemporary", description: "Bold & Playful" },
   { id: "luxe", name: "Luxe", description: "Raffiniert & Zeitlos" },
@@ -1313,24 +1313,24 @@ const MiniHeroPreview = ({ themeId }) => {
         </EditorialHero>
       )
 
-    case "gold":
+    case "video":
       return (
-        <GoldHero>
-          <GoldGlow />
-          <GoldSparkle $top='15%' $left='20%' $delay='0s' />
-          <GoldSparkle $top='25%' $left='75%' $delay='1s' />
-          <GoldSparkle $top='70%' $left='30%' $delay='2s' />
-          <GoldSparkle $top='60%' $left='80%' $delay='0.5s' />
-          <GoldSparkle $top='40%' $left='10%' $delay='1.5s' />
-          <GoldEyebrow>✦ Exklusiv & Elegant ✦</GoldEyebrow>
-          <GoldTitle>
+        <VideoHero>
+          <VideoGlow />
+          <VideoSparkle $top='15%' $left='20%' $delay='0s' />
+          <VideoSparkle $top='25%' $left='75%' $delay='1s' />
+          <VideoSparkle $top='70%' $left='30%' $delay='2s' />
+          <VideoSparkle $top='60%' $left='80%' $delay='0.5s' />
+          <VideoSparkle $top='40%' $left='10%' $delay='1.5s' />
+          <VideoEyebrow>✦ Exklusiv & Elegant ✦</VideoEyebrow>
+          <VideoTitle>
             <span>Zeitlose</span> Eleganz
-          </GoldTitle>
-          <GoldSubtitle>
+          </VideoTitle>
+          <VideoSubtitle>
             Luxuriöse Hochzeitswebsites für Paare mit Anspruch.
-          </GoldSubtitle>
-          <GoldButton>Jetzt starten</GoldButton>
-        </GoldHero>
+          </VideoSubtitle>
+          <VideoButton>Jetzt starten</VideoButton>
+        </VideoHero>
       )
 
     case "botanical":

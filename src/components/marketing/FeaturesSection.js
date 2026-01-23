@@ -9,7 +9,7 @@ const Section = styled.section`
   overflow: hidden;
   
   ${p => p.$themeId === 'editorial' && css`background: #FFFFFF;`}
-  ${p => p.$themeId === 'gold' && css`background: #0A0A0A;`}
+  ${p => p.$themeId === 'video' && css`background: #0A0A0A;`}
   ${p => p.$themeId === 'botanical' && css`background: #F5F1EB;`}
   ${p => p.$themeId === 'contemporary' && css`background: #FFFFFF;`}
   ${p => p.$themeId === 'luxe' && css`background: #0A0A0A;`}
@@ -51,7 +51,7 @@ const Eyebrow = styled.span`
     text-transform: uppercase;
     color: #999;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Montserrat', sans-serif;
     font-size: 0.75rem;
     letter-spacing: 0.3em;
@@ -100,7 +100,7 @@ const Title = styled.h2`
     font-style: italic;
     color: #1A1A1A;
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 300;
@@ -156,7 +156,7 @@ const FeatureCard = styled.div`
     text-align: center;
     &:hover { border-color: #1A1A1A; }
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     padding: 40px 30px;
     border: 1px solid rgba(212,175,55,0.15);
     background: rgba(212,175,55,0.02);
@@ -202,7 +202,7 @@ const FeatureTitle = styled.h3`
   margin: 0 0 12px 0;
   
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: #1A1A1A;`}
-  ${p => p.$themeId === 'gold' && css`font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 500; color: #FFFFFF;`}
+  ${p => p.$themeId === 'video' && css`font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 500; color: #FFFFFF;`}
   ${p => p.$themeId === 'botanical' && css`font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 500; color: #2D3B2D;`}
   ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: #0D0D0D; text-transform: uppercase;
     ${FeatureCard}:hover & { color: #FFFFFF; }
@@ -216,7 +216,7 @@ const FeatureDescription = styled.p`
   line-height: 1.6;
   
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #666;`}
-  ${p => p.$themeId === 'gold' && css`font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.5);`}
+  ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.5);`}
   ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; font-size: 0.9rem; color: #5A6B5A;`}
   ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; color: #666;
     ${FeatureCard}:hover & { color: rgba(255,255,255,0.7); }

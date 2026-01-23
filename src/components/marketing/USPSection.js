@@ -114,7 +114,7 @@ const pulse = keyframes`
   50% { transform: scale(1.1); opacity: 0.8; }
 `
 
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `
@@ -149,7 +149,7 @@ const Section = styled.section`
       background: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: #0a0a0a;
     `}
@@ -209,7 +209,7 @@ const EditorialParallaxNumber = styled.div`
 `
 
 // Gold Parallax - Glowing Orbs
-const GoldParallaxOrb = styled.div`
+const VideoParallaxOrb = styled.div`
   position: absolute;
   width: ${(p) => p.$size || "300px"};
   height: ${(p) => p.$size || "300px"};
@@ -326,7 +326,7 @@ const Header = styled.div`
       max-width: 600px;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       text-align: center;
     `}
@@ -367,7 +367,7 @@ const Eyebrow = styled.span`
       color: #999;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.75rem;
@@ -429,7 +429,7 @@ const Title = styled.h2`
       color: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(2.5rem, 5vw, 4rem);
@@ -485,7 +485,7 @@ const Subtitle = styled.p`
       margin: 0;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 1rem;
@@ -627,7 +627,7 @@ const EditorialDescription = styled.p`
 // GOLD THEME - Staggered Elegant Cards
 // ============================================
 
-const GoldGrid = styled.div`
+const VideoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
@@ -645,7 +645,7 @@ const GoldGrid = styled.div`
   }
 `
 
-const GoldCard = styled.div`
+const VideoCard = styled.div`
   background: rgba(212, 175, 55, 0.03);
   border: 1px solid rgba(212, 175, 55, 0.15);
   padding: 35px 25px;
@@ -677,13 +677,13 @@ const GoldCard = styled.div`
   }
 `
 
-const GoldIcon = styled.div`
+const VideoIcon = styled.div`
   font-size: 2rem;
   margin-bottom: 20px;
   filter: grayscale(100%) sepia(100%) hue-rotate(0deg) saturate(300%);
 `
 
-const GoldCardTitle = styled.h3`
+const VideoCardTitle = styled.h3`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.1rem;
   font-weight: 400;
@@ -691,7 +691,7 @@ const GoldCardTitle = styled.h3`
   margin: 0 0 8px 0;
 `
 
-const GoldHighlight = styled.div`
+const VideoHighlight = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 0.6rem;
   letter-spacing: 0.2em;
@@ -701,7 +701,7 @@ const GoldHighlight = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: ${goldShimmer} 3s linear infinite;
+  animation: ${videoShimmer} 3s linear infinite;
 `
 
 // ============================================
@@ -1093,7 +1093,7 @@ const DomainHighlight = styled.div`
       color: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: linear-gradient(
         135deg,
@@ -1163,7 +1163,7 @@ const DomainTitle = styled.h3`
       color: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 2rem;
@@ -1222,7 +1222,7 @@ const DomainExample = styled.div`
       }
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 1.8rem;
@@ -1299,7 +1299,7 @@ const DomainSubtext = styled.p`
       color: rgba(255, 255, 255, 0.5);
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.8rem;
@@ -1392,17 +1392,17 @@ function USPSection() {
             </EditorialParallaxNumber>
           </ParallaxContainer>
         )
-      case "gold":
+      case "video":
         return (
           <ParallaxContainer>
-            <GoldParallaxOrb
+            <VideoParallaxOrb
               $top='-10%'
               $left='10%'
               $size='400px'
               $offset={parallaxOffset * 0.4}
               $duration='10s'
             />
-            <GoldParallaxOrb
+            <VideoParallaxOrb
               $top='30%'
               $right='5%'
               $size='300px'
@@ -1410,7 +1410,7 @@ function USPSection() {
               $duration='12s'
               $delay='2s'
             />
-            <GoldParallaxOrb
+            <VideoParallaxOrb
               $top='60%'
               $left='30%'
               $size='350px'
@@ -1418,7 +1418,7 @@ function USPSection() {
               $duration='8s'
               $delay='1s'
             />
-            <GoldParallaxOrb
+            <VideoParallaxOrb
               $top='80%'
               $right='20%'
               $size='250px'
@@ -1628,17 +1628,17 @@ function USPSection() {
           </EditorialGrid>
         )
 
-      case "gold":
+      case "video":
         return (
-          <GoldGrid>
+          <VideoGrid>
             {usps.map((usp, index) => (
-              <GoldCard key={usp.id} $index={index}>
-                <GoldIcon>{usp.icon}</GoldIcon>
-                <GoldCardTitle>{usp.title}</GoldCardTitle>
-                <GoldHighlight>{usp.highlight}</GoldHighlight>
-              </GoldCard>
+              <VideoCard key={usp.id} $index={index}>
+                <VideoIcon>{usp.icon}</VideoIcon>
+                <VideoCardTitle>{usp.title}</VideoCardTitle>
+                <VideoHighlight>{usp.highlight}</VideoHighlight>
+              </VideoCard>
             ))}
-          </GoldGrid>
+          </VideoGrid>
         )
 
       case "botanical":

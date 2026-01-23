@@ -11,7 +11,7 @@ const float = keyframes`
   50% { transform: translateY(-20px) rotate(2deg); }
 `
 
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `
@@ -33,7 +33,7 @@ const Section = styled.section`
       background: #ffffff;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: #0a0a0a;
     `}
@@ -253,7 +253,7 @@ const EditorialSignature = styled.div`
 // ============================================
 // GOLD THEME
 // ============================================
-const GoldWrapper = styled.div`
+const VideoWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -264,7 +264,7 @@ const GoldWrapper = styled.div`
   position: relative;
 `
 
-const GoldDecorTop = styled.div`
+const VideoDecorTop = styled.div`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.5rem;
   background: linear-gradient(90deg, #d4af37, #f4d03f, #d4af37);
@@ -272,12 +272,12 @@ const GoldDecorTop = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: ${goldShimmer} 3s linear infinite;
+  animation: ${videoShimmer} 3s linear infinite;
   margin-bottom: 40px;
   letter-spacing: 0.5em;
 `
 
-const GoldTitle = styled.h2`
+const VideoTitle = styled.h2`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 300;
@@ -286,7 +286,7 @@ const GoldTitle = styled.h2`
   line-height: 1.1;
 `
 
-const GoldSubtitle = styled.div`
+const VideoSubtitle = styled.div`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-style: italic;
@@ -294,19 +294,19 @@ const GoldSubtitle = styled.div`
   margin-bottom: 60px;
 `
 
-const GoldDivider = styled.div`
+const VideoDivider = styled.div`
   width: 100px;
   height: 1px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 0 auto 60px;
 `
 
-const GoldTextBlock = styled.div`
+const VideoTextBlock = styled.div`
   max-width: 700px;
   margin: 0 auto;
 `
 
-const GoldText = styled.p`
+const VideoText = styled.p`
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.7);
@@ -318,7 +318,7 @@ const GoldText = styled.p`
   }
 `
 
-const GoldQuote = styled.blockquote`
+const VideoQuote = styled.blockquote`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.8rem;
   font-style: italic;
@@ -345,7 +345,7 @@ const GoldQuote = styled.blockquote`
   }
 `
 
-const GoldSignature = styled.div`
+const VideoSignature = styled.div`
   margin-top: 60px;
   .names {
     font-family: "Cormorant Garamond", Georgia, serif;
@@ -991,9 +991,9 @@ function AboutSection() {
           </EditorialWrapper>
         )
 
-      case "gold":
+      case "video":
         return (
-          <GoldWrapper>
+          <VideoWrapper>
             <ParallaxContainer>
               <GlowOrb
                 $top='10%'
@@ -1010,37 +1010,37 @@ function AboutSection() {
                 $color='rgba(212,175,55,0.08)'
               />
             </ParallaxContainer>
-            <GoldDecorTop>✦ ✦ ✦</GoldDecorTop>
-            <GoldTitle>Sarah & Iver</GoldTitle>
-            <GoldSubtitle>Die Menschen hinter S&I</GoldSubtitle>
-            <GoldDivider />
-            <GoldTextBlock>
-              <GoldText>
+            <VideoDecorTop>✦ ✦ ✦</VideoDecorTop>
+            <VideoTitle>Sarah & Iver</VideoTitle>
+            <VideoSubtitle>Die Menschen hinter S&I</VideoSubtitle>
+            <VideoDivider />
+            <VideoTextBlock>
+              <VideoText>
                 Was als Suche nach unserer eigenen perfekten Hochzeitswebsite
                 begann, wurde zu einer <strong>Leidenschaft</strong>. Wir haben
                 erlebt, wie frustrierend es ist, zwischen unpersönlichen
                 Templates wählen zu müssen.
-              </GoldText>
-              <GoldQuote>
+              </VideoText>
+              <VideoQuote>
                 „Eure Liebe ist einzigartig. Eure Website sollte es auch sein."
-              </GoldQuote>
-              <GoldText>
+              </VideoQuote>
+              <VideoText>
                 Bei S&I steht <strong>persönliche Betreuung</strong> an erster
                 Stelle. Kein Callcenter, kein Chatbot – nur wir. Wir lernen euch
                 und eure Geschichte kennen und kreieren eine Website, die
                 wirklich zu euch passt.
-              </GoldText>
-              <GoldText>
+              </VideoText>
+              <VideoText>
                 Jedes Projekt ist für uns <strong>Herzensangelegenheit</strong>.
                 Wir arbeiten erst dann weiter, wenn ihr vollkommen zufrieden
                 seid. Das ist unser Versprechen.
-              </GoldText>
-            </GoldTextBlock>
-            <GoldSignature>
+              </VideoText>
+            </VideoTextBlock>
+            <VideoSignature>
               <div className='names'>S & I</div>
               <div className='tagline'>Mit Liebe zum Detail</div>
-            </GoldSignature>
-          </GoldWrapper>
+            </VideoSignature>
+          </VideoWrapper>
         )
 
       case "botanical":

@@ -46,48 +46,50 @@ export const marketingThemes = {
   },
 
   // ═══════════════════════════════════════════════════════════
-  // GOLD - Schwarz/Gold - Klassisch luxuriös
+  // VIDEO - Cineastisch & Dramatisch
   // ═══════════════════════════════════════════════════════════
-  gold: {
-    id: "gold",
-    name: "Gold",
-    description: "Klassisch luxuriös",
+  video: {
+    id: "video",
+    name: "Video",
+    description: "Cineastisch & Dramatisch",
     colors: {
-      primary: "#D4AF37",
-      secondary: "#B8960C",
-      accent: "#F5E6C8",
+      primary: "#B8976A",
+      secondary: "#8B7355",
+      accent: "#D4AF37",
       background: "#0A0A0A",
       backgroundAlt: "#111111",
+      backgroundLight: "#FAF8F5",
       surface: "#1A1A1A",
       text: "#FFFFFF",
       textSecondary: "rgba(255, 255, 255, 0.7)",
       textMuted: "rgba(255, 255, 255, 0.5)",
-      border: "rgba(212, 175, 55, 0.3)",
-      borderHover: "#D4AF37",
+      textDark: "#1A1A1A",
+      border: "rgba(184, 151, 106, 0.3)",
+      borderHover: "#B8976A",
       gradient:
-        "linear-gradient(135deg, #D4AF37 0%, #F5E6C8 50%, #D4AF37 100%)",
+        "linear-gradient(135deg, #B8976A 0%, #D4AF37 50%, #B8976A 100%)",
       shimmer:
-        "linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.3) 50%, transparent 100%)",
+        "linear-gradient(90deg, transparent 0%, rgba(184, 151, 106, 0.3) 50%, transparent 100%)",
     },
     fonts: {
-      heading: "'Playfair Display', serif",
+      heading: "'Cormorant Garamond', serif",
       body: "'Inter', sans-serif",
     },
-    // Gold Style: Opulent, luxurious, dramatic
+    // Video Style: Cinematic, dramatic, elegant
     style: {
-      headingWeight: "400",
+      headingWeight: "300",
       headingLetterSpacing: "0.05em",
       headingTextTransform: "none",
       bodyLetterSpacing: "0.02em",
       borderRadius: "0",
       borderWidth: "1px",
-      dividerStyle: "double", // double lines for elegance
-      dividerWidth: "3px",
-      buttonStyle: "gradient",
+      dividerStyle: "single",
+      dividerWidth: "1px",
+      buttonStyle: "outline",
       decorativeElements: true,
-      ornaments: true, // ✦ ◆ ❖ decorative symbols
+      ornaments: false,
       shadowStyle: "dramatic",
-      animationStyle: "elegant",
+      animationStyle: "cinematic",
       sectionSpacing: "10rem",
       cardStyle: "elevated",
     },
@@ -312,7 +314,7 @@ export const marketingThemes = {
 // Theme order for switcher
 export const themeOrder = [
   "editorial",
-  "gold",
+  "video",
   "timeless",
   "botanical",
   "luxe",
@@ -327,7 +329,7 @@ export const getTheme = (themeId) => {
 
 // Helper: Check if theme is dark
 export const isDarkTheme = (themeId) => {
-  const darkThemes = ["gold", "luxe"]
+  const darkThemes = ["video", "luxe"]
   return darkThemes.includes(themeId)
 }
 

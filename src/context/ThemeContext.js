@@ -27,29 +27,31 @@ const themes = {
     boxShadow: 'none',
     buttonStyle: 'solid',
   },
-  gold: {
-    id: 'gold',
-    name: 'Gold',
-    description: 'Luxuriös & Opulent',
-    // Fonts - wie gold-wedding
+  video: {
+    id: 'video',
+    name: 'Video',
+    description: 'Cineastisch & Dramatisch',
+    // Fonts - wie video-wedding
     fontHeading: "'Cormorant Garamond', Georgia, serif",
-    fontBody: "'Montserrat', -apple-system, sans-serif",
-    // Colors
+    fontBody: "'Inter', -apple-system, sans-serif",
+    // Colors - Video Theme Palette
     background: '#0A0A0A',
     backgroundAlt: '#111111',
     backgroundDark: '#000000',
+    backgroundLight: '#FAF8F5',
     text: '#FFFFFF',
     textMuted: 'rgba(255,255,255,0.6)',
     textLight: 'rgba(255,255,255,0.4)',
-    primary: '#D4AF37',
-    accent: '#D4AF37',
-    accentLight: '#F4D03F',
-    accentDark: '#B8960C',
-    border: 'rgba(212,175,55,0.3)',
-    borderLight: 'rgba(212,175,55,0.15)',
+    textDark: '#1A1A1A',
+    primary: '#B8976A',
+    accent: '#B8976A',
+    accentLight: '#D4AF37',
+    accentDark: '#8B7355',
+    border: 'rgba(184,151,106,0.3)',
+    borderLight: 'rgba(184,151,106,0.15)',
     // Styles
     borderRadius: '0px',
-    boxShadow: '0 0 60px rgba(212,175,55,0.15)',
+    boxShadow: '0 0 60px rgba(184,151,106,0.15)',
     buttonStyle: 'outline',
     shimmer: true,
   },
@@ -112,7 +114,7 @@ const themes = {
   luxe: {
     id: 'luxe',
     name: 'Luxe',
-    description: 'Cinematisch & Dramatisch',
+    description: 'Opulent & Glamourös',
     // Fonts - wie luxe-wedding
     fontHeading: "'Cormorant Garamond', Georgia, serif",
     fontBody: "'Montserrat', -apple-system, sans-serif",
@@ -175,7 +177,7 @@ const themes = {
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [currentTheme, setCurrentTheme] = useState('editorial');
+  const [currentTheme, setCurrentTheme] = useState('video');
 
   const switchTheme = (themeId) => {
     if (themes[themeId]) {

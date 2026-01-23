@@ -19,7 +19,7 @@ const SwitcherContainer = styled.div`
     border: 1px solid #E0E0E0;
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
   `}
-  ${p => p.$themeId === 'gold' && css`
+  ${p => p.$themeId === 'video' && css`
     background: rgba(10,10,10,0.95);
     border: 1px solid rgba(212,175,55,0.2);
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
@@ -62,7 +62,7 @@ const Label = styled.span`
   margin-bottom: 5px;
   
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #999;`}
-  ${p => p.$themeId === 'gold' && css`font-family: 'Montserrat', sans-serif; color: #D4AF37;`}
+  ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: #D4AF37;`}
   ${p => p.$themeId === 'botanical' && css`font-family: 'Lato', sans-serif; color: #8B9D83;`}
   ${p => p.$themeId === 'contemporary' && css`font-family: 'Space Grotesk', sans-serif; color: #0D0D0D;`}
   ${p => p.$themeId === 'luxe' && css`font-family: 'Montserrat', sans-serif; color: rgba(212,175,55,0.6);`}
@@ -91,7 +91,7 @@ const ThemeButton = styled.button`
   
   ${p => p.$active && css`
     border-color: ${p.$themeId === 'neon' ? '#00ffff' : 
-                    p.$themeId === 'gold' || p.$themeId === 'luxe' ? '#D4AF37' : 
+                    p.$themeId === 'video' || p.$themeId === 'luxe' ? '#D4AF37' : 
                     p.$themeId === 'botanical' ? '#8B9D83' :
                     p.$themeId === 'contemporary' ? '#FF6B6B' : '#1A1A1A'};
     &::after {
@@ -102,14 +102,14 @@ const ThemeButton = styled.button`
       align-items: center;
       justify-content: center;
       font-size: 0.7rem;
-      color: ${p.$buttonTheme === 'gold' || p.$buttonTheme === 'neon' || p.$buttonTheme === 'luxe' ? '#FFF' : '#FFF'};
+      color: ${p.$buttonTheme === 'video' || p.$buttonTheme === 'neon' || p.$buttonTheme === 'luxe' ? '#FFF' : '#FFF'};
     }
   `}
 `;
 
 const themes = [
   { id: 'editorial', color: '#FFFFFF', border: '#E0E0E0' },
-  { id: 'gold', color: '#D4AF37', border: '#D4AF37' },
+  { id: 'video', color: '#B8976A', border: '#B8976A' },
   { id: 'botanical', color: '#8B9D83', border: '#8B9D83' },
   { id: 'contemporary', color: '#FF6B6B', border: '#FF6B6B' },
   { id: 'luxe', color: '#1A1520', border: '#D4AF37' },

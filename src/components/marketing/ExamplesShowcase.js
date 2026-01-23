@@ -7,7 +7,7 @@ import { useTheme } from "../../context/ThemeContext"
 // ============================================
 // KEYFRAME ANIMATIONS
 // ============================================
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `
@@ -109,7 +109,7 @@ const Section = styled.section`
   position: relative;
   overflow: hidden;
   ${(p) => p.$themeId === "editorial" && css`background: #ffffff;`}
-  ${(p) => p.$themeId === "gold" && css`background: #0a0a0a;`}
+  ${(p) => p.$themeId === "video" && css`background: #0a0a0a;`}
   ${(p) => p.$themeId === "botanical" && css`background: #f8f6f0;`}
   ${(p) => p.$themeId === "contemporary" && css`background: #f5f5f5;`}
   ${(p) => p.$themeId === "luxe" && css`background: #faf9f7;`}
@@ -129,7 +129,7 @@ const Header = styled.div`
   transform: translateY(${(p) => (p.$visible ? 0 : "40px")});
   transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   ${(p) => p.$themeId === "editorial" && css`text-align: left; max-width: 600px;`}
-  ${(p) => p.$themeId === "gold" && css`text-align: center;`}
+  ${(p) => p.$themeId === "video" && css`text-align: center;`}
   ${(p) => p.$themeId === "botanical" && css`text-align: center;`}
   ${(p) => p.$themeId === "contemporary" && css`text-align: left;`}
   ${(p) => p.$themeId === "luxe" && css`text-align: center;`}
@@ -147,12 +147,12 @@ const Eyebrow = styled.span`
     text-transform: uppercase;
     color: #999;
   `}
-  ${(p) => p.$themeId === "gold" && css`
-    font-family: "Montserrat", sans-serif;
+  ${(p) => p.$themeId === "video" && css`
+    font-family: "Inter", sans-serif;
     font-size: 0.75rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: #d4af37;
+    color: #B8976A;
   `}
   ${(p) => p.$themeId === "botanical" && css`
     font-family: "Lato", sans-serif;
@@ -193,7 +193,7 @@ const Title = styled.h2`
     font-style: italic;
     color: #1a1a1a;
   `}
-  ${(p) => p.$themeId === "gold" && css`
+  ${(p) => p.$themeId === "video" && css`
     font-family: "Cormorant Garamond", Georgia, serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 300;
@@ -231,7 +231,7 @@ const Title = styled.h2`
 const Subtitle = styled.p`
   line-height: 1.7;
   ${(p) => p.$themeId === "editorial" && css`font-family: "Inter", sans-serif; font-size: 1rem; color: #666; margin: 0;`}
-  ${(p) => p.$themeId === "gold" && css`font-family: "Montserrat", sans-serif; font-size: 1rem; color: rgba(255, 255, 255, 0.5); max-width: 500px; margin: 0 auto;`}
+  ${(p) => p.$themeId === "video" && css`font-family: "Inter", sans-serif; font-size: 1rem; color: rgba(255, 255, 255, 0.5); max-width: 500px; margin: 0 auto;`}
   ${(p) => p.$themeId === "botanical" && css`font-family: "Lato", sans-serif; font-size: 1.05rem; color: #5a6b5a; max-width: 500px; margin: 0 auto;`}
   ${(p) => p.$themeId === "contemporary" && css`font-family: "Space Grotesk", sans-serif; font-size: 1rem; color: #666; margin: 0;`}
   ${(p) => p.$themeId === "luxe" && css`font-family: "Montserrat", sans-serif; font-size: 0.9rem; color: #888; max-width: 500px; margin: 0 auto;`}
@@ -327,9 +327,9 @@ const EditorialCTA = styled.div`
 `
 
 // ============================================
-// GOLD THEME LAYOUT
+// VIDEO THEME LAYOUT - Cinematic Cards
 // ============================================
-const GoldGrid = styled.div`
+const VideoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
@@ -338,9 +338,9 @@ const GoldGrid = styled.div`
   @media (max-width: 600px) { grid-template-columns: 1fr; }
 `
 
-const GoldCard = styled.div`
-  background: rgba(212, 175, 55, 0.03);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+const VideoCard = styled.div`
+  background: rgba(184, 151, 106, 0.03);
+  border: 1px solid rgba(184, 151, 106, 0.2);
   padding: 45px 30px;
   text-align: center;
   cursor: pointer;
@@ -355,32 +355,32 @@ const GoldCard = styled.div`
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+    background: linear-gradient(90deg, transparent, rgba(184, 151, 106, 0.05), transparent);
     transition: left 0.6s ease;
   }
   
   &:hover {
-    border-color: rgba(212, 175, 55, 0.5);
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+    border-color: rgba(184, 151, 106, 0.5);
+    box-shadow: 0 0 40px rgba(184, 151, 106, 0.15);
     &::before { left: 100%; }
   }
 `
 
-const GoldInitials = styled.div`
+const VideoInitials = styled.div`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 2.5rem;
   font-weight: 300;
-  background: linear-gradient(135deg, #d4af37, #f4d03f, #d4af37);
+  background: linear-gradient(135deg, #B8976A, #D4AF37, #B8976A);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: ${goldShimmer} 4s linear infinite;
+  animation: ${videoShimmer} 4s linear infinite;
   margin-bottom: 20px;
   letter-spacing: 0.1em;
 `
 
-const GoldName = styled.div`
+const VideoName = styled.div`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.4rem;
   color: #ffffff;
@@ -391,8 +391,8 @@ const GoldName = styled.div`
   gap: 8px;
 `
 
-const GoldTagline = styled.div`
-  font-family: "Montserrat", sans-serif;
+const VideoTagline = styled.div`
+  font-family: "Inter", sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   color: rgba(255, 255, 255, 0.4);
@@ -400,14 +400,14 @@ const GoldTagline = styled.div`
   margin-bottom: 20px;
 `
 
-const GoldCTA = styled.div`
-  font-family: "Montserrat", sans-serif;
+const VideoCTA = styled.div`
+  font-family: "Inter", sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #d4af37;
+  color: #B8976A;
   padding-top: 20px;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 1px solid rgba(184, 151, 106, 0.2);
 `
 
 // ============================================
@@ -747,9 +747,7 @@ function ExamplesShowcase() {
           <EditorialGrid>
             {themeExamples.map((theme) => (
               <EditorialCard key={theme.id} onClick={() => handleCardClick(theme)}>
-                <EditorialName>
-                  {theme.name}
-                </EditorialName>
+                <EditorialName>{theme.name}</EditorialName>
                 <EditorialTagline>{theme.tagline}</EditorialTagline>
                 <EditorialCTA>Demo ansehen</EditorialCTA>
               </EditorialCard>
@@ -757,23 +755,21 @@ function ExamplesShowcase() {
           </EditorialGrid>
         )
 
-      case "gold":
+      case "video":
         return (
-          <GoldGrid>
+          <VideoGrid>
             {themeExamples.map((theme) => (
-              <GoldCard key={theme.id} onClick={() => handleCardClick(theme)}>
-                <GoldInitials>{theme.name.substring(0, 2).toUpperCase()}</GoldInitials>
-                <GoldName>
-                  {theme.name}
-                </GoldName>
-                <GoldTagline>{theme.tagline}</GoldTagline>
+              <VideoCard key={theme.id} onClick={() => handleCardClick(theme)}>
+                <VideoInitials>{theme.name.substring(0, 2).toUpperCase()}</VideoInitials>
+                <VideoName>{theme.name}</VideoName>
+                <VideoTagline>{theme.tagline}</VideoTagline>
                 <ColorSwatches style={{ justifyContent: 'center' }}>
                   {theme.colors.map((color, i) => (<Swatch key={i} $color={color} />))}
                 </ColorSwatches>
-                <GoldCTA>Entdecken →</GoldCTA>
-              </GoldCard>
+                <VideoCTA>Entdecken →</VideoCTA>
+              </VideoCard>
             ))}
-          </GoldGrid>
+          </VideoGrid>
         )
 
       case "botanical":
@@ -782,9 +778,7 @@ function ExamplesShowcase() {
             {themeExamples.map((theme, i) => (
               <BotanicalCard key={theme.id} onClick={() => handleCardClick(theme)}>
                 <BotanicalEmoji $delay={`${i * 0.2}s`}>{themeEmojis[theme.id]}</BotanicalEmoji>
-                <BotanicalName>
-                  {theme.name}
-                </BotanicalName>
+                <BotanicalName>{theme.name}</BotanicalName>
                 <BotanicalTagline>{theme.tagline}</BotanicalTagline>
                 <BotanicalCTA>Ansehen</BotanicalCTA>
               </BotanicalCard>
@@ -798,9 +792,7 @@ function ExamplesShowcase() {
             {themeExamples.map((theme, i) => (
               <ContemporaryCard key={theme.id} $index={i} onClick={() => handleCardClick(theme)}>
                 <ContemporaryNumber>{String(i + 1).padStart(2, "0")}</ContemporaryNumber>
-                <ContemporaryName>
-                  {theme.name}
-                </ContemporaryName>
+                <ContemporaryName>{theme.name}</ContemporaryName>
                 <ContemporaryTagline>{theme.tagline}</ContemporaryTagline>
                 <ContemporaryCTA>View Demo →</ContemporaryCTA>
               </ContemporaryCard>
@@ -813,9 +805,7 @@ function ExamplesShowcase() {
           <LuxeGrid>
             {themeExamples.map((theme, i) => (
               <LuxeCard key={theme.id} onClick={() => handleCardClick(theme)}>
-                <LuxeName $delay={`${i * 0.1}s`}>
-                  {theme.name}
-                </LuxeName>
+                <LuxeName $delay={`${i * 0.1}s`}>{theme.name}</LuxeName>
                 <LuxeCenter><LuxeTagline>{theme.tagline}</LuxeTagline></LuxeCenter>
                 <LuxeRight><LuxeCTA>Ansehen</LuxeCTA></LuxeRight>
               </LuxeCard>
@@ -829,9 +819,7 @@ function ExamplesShowcase() {
             {themeExamples.map((theme, i) => (
               <NeonCard key={theme.id} onClick={() => handleCardClick(theme)}>
                 <NeonIndex>{"// "}{String(i + 1).padStart(2, "0")}</NeonIndex>
-                <NeonName>
-                  {theme.name}
-                </NeonName>
+                <NeonName>{theme.name}</NeonName>
                 <NeonTagline>{theme.tagline}</NeonTagline>
                 <NeonCTA>LAUNCH_DEMO()</NeonCTA>
               </NeonCard>
@@ -850,8 +838,8 @@ function ExamplesShowcase() {
         return { eyebrow: "DESIGN SYSTEMS", title: "PICK YOUR VIBE", subtitle: "6 unique design worlds. Each one tells a different story." }
       case "neon":
         return { eyebrow: "// AVAILABLE_THEMES", title: "Design Modules", subtitle: "Select your preferred visual interface. Each module runs independently." }
-      case "gold":
-        return { eyebrow: "Kollektion", title: "Unsere Design-Welten", subtitle: "Sechs einzigartige Ästhetiken. Welche erzählt eure Geschichte?" }
+      case "video":
+        return { eyebrow: "— PREMIERE —", title: "Unsere Design-Welten", subtitle: "Sechs einzigartige Ästhetiken. Welche erzählt eure Geschichte?" }
       case "botanical":
         return { eyebrow: "Inspirationen", title: "Unsere Themes", subtitle: "Entdeckt sechs verschiedene Design-Welten für eure Hochzeit." }
       case "luxe":

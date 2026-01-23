@@ -120,7 +120,7 @@ const float = keyframes`
   50% { transform: translateY(-15px); }
 `
 
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `
@@ -150,7 +150,7 @@ const Section = styled.section`
       background: #fafafa;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: linear-gradient(180deg, #0a0a0a 0%, #0d0b08 100%);
     `}
@@ -213,7 +213,7 @@ const EditorialParallaxText = styled(ParallaxElement)`
   white-space: nowrap;
 `
 
-const GoldParallaxOrb = styled(ParallaxElement)`
+const VideoParallaxOrb = styled(ParallaxElement)`
   width: ${(p) => p.$size || "300px"};
   height: ${(p) => p.$size || "300px"};
   border-radius: 50%;
@@ -270,7 +270,7 @@ const Eyebrow = styled.span`
       color: #999;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.75rem;
@@ -331,7 +331,7 @@ const Title = styled.h2`
       color: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(2.5rem, 5vw, 4rem);
@@ -388,7 +388,7 @@ const Subtitle = styled.p`
       color: #666;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 1rem;
@@ -566,7 +566,7 @@ const EditorialCTA = styled.button`
 // GOLD PRICING CARDS
 // ============================================
 
-const GoldCard = styled.div`
+const VideoCard = styled.div`
   background: ${(p) =>
     p.$popular
       ? "linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.02) 100%)"
@@ -599,14 +599,14 @@ const GoldCard = styled.div`
   }
 `
 
-const GoldPopularBadge = styled.div`
+const VideoPopularBadge = styled.div`
   position: absolute;
   top: -1px;
   left: -1px;
   right: -1px;
   background: linear-gradient(90deg, #d4af37, #f4d03f, #d4af37);
   background-size: 200% auto;
-  animation: ${goldShimmer} 3s linear infinite;
+  animation: ${videoShimmer} 3s linear infinite;
   color: #0a0a0a;
   font-family: "Montserrat", sans-serif;
   font-size: 0.6rem;
@@ -617,7 +617,7 @@ const GoldPopularBadge = styled.div`
   text-align: center;
 `
 
-const GoldTierName = styled.h3`
+const VideoTierName = styled.h3`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 2rem;
   font-weight: 300;
@@ -625,7 +625,7 @@ const GoldTierName = styled.h3`
   margin: ${(p) => (p.$popular ? "20px 0 8px 0" : "0 0 8px 0")};
 `
 
-const GoldTierSubtitle = styled.div`
+const VideoTierSubtitle = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.15em;
@@ -633,7 +633,7 @@ const GoldTierSubtitle = styled.div`
   margin-bottom: 25px;
 `
 
-const GoldPrice = styled.div`
+const VideoPrice = styled.div`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 3.5rem;
   font-weight: 300;
@@ -650,7 +650,7 @@ const GoldPrice = styled.div`
   }
 `
 
-const GoldPriceNote = styled.div`
+const VideoPriceNote = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 0.6rem;
   color: rgba(255, 255, 255, 0.3);
@@ -658,13 +658,13 @@ const GoldPriceNote = styled.div`
   margin-bottom: 30px;
 `
 
-const GoldFeatures = styled.ul`
+const VideoFeatures = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0 0 35px 0;
 `
 
-const GoldFeature = styled.li`
+const VideoFeature = styled.li`
   font-family: "Montserrat", sans-serif;
   font-size: 0.8rem;
   color: ${(p) => (p.$highlight ? "#D4AF37" : "rgba(255,255,255,0.6)")};
@@ -680,7 +680,7 @@ const GoldFeature = styled.li`
   }
 `
 
-const GoldCTA = styled.button`
+const VideoCTA = styled.button`
   width: 100%;
   padding: 18px;
   background: ${(p) =>
@@ -1222,7 +1222,7 @@ const UpsellSection = styled.div`
       border: 1px solid #e0e0e0;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: rgba(212, 175, 55, 0.03);
       border: 1px solid rgba(212, 175, 55, 0.2);
@@ -1267,7 +1267,7 @@ const UpsellTitle = styled.h3`
       color: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 2rem;
@@ -1320,7 +1320,7 @@ const UpsellSubtitle = styled.p`
       color: #666;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       font-family: "Montserrat", sans-serif;
       font-size: 0.85rem;
@@ -1393,7 +1393,7 @@ const UpsellItem = styled.div`
       }
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       .icon {
         font-size: 2.5rem;
@@ -1545,22 +1545,22 @@ function PricingSection() {
             </EditorialParallaxText>
           </ParallaxContainer>
         )
-      case "gold":
+      case "video":
         return (
           <ParallaxContainer>
-            <GoldParallaxOrb
+            <VideoParallaxOrb
               $top='5%'
               $left='10%'
               $size='400px'
               $offset={parallaxOffset * 0.4}
             />
-            <GoldParallaxOrb
+            <VideoParallaxOrb
               $top='40%'
               $right='5%'
               $size='300px'
               $offset={parallaxOffset * 0.6}
             />
-            <GoldParallaxOrb
+            <VideoParallaxOrb
               $top='70%'
               $left='30%'
               $size='350px'
@@ -1658,28 +1658,28 @@ function PricingSection() {
           </EditorialCard>
         )
 
-      case "gold":
+      case "video":
         return (
-          <GoldCard key={tier.id} $popular={tier.popular}>
+          <VideoCard key={tier.id} $popular={tier.popular}>
             {tier.popular && (
-              <GoldPopularBadge>✦ Bestseller ✦</GoldPopularBadge>
+              <VideoPopularBadge>✦ Bestseller ✦</VideoPopularBadge>
             )}
-            <GoldTierName $popular={tier.popular}>{tier.name}</GoldTierName>
-            <GoldTierSubtitle>{tier.subtitle}</GoldTierSubtitle>
-            <GoldPrice>
+            <VideoTierName $popular={tier.popular}>{tier.name}</VideoTierName>
+            <VideoTierSubtitle>{tier.subtitle}</VideoTierSubtitle>
+            <VideoPrice>
               {priceDisplay}
               {tier.price !== "Auf Anfrage" && <span> einmalig</span>}
-            </GoldPrice>
-            <GoldPriceNote>zzgl. MwSt.</GoldPriceNote>
-            <GoldFeatures>
+            </VideoPrice>
+            <VideoPriceNote>zzgl. MwSt.</VideoPriceNote>
+            <VideoFeatures>
               {tier.features.map((f, i) => (
-                <GoldFeature key={i} $highlight={f.highlight}>
+                <VideoFeature key={i} $highlight={f.highlight}>
                   {f.text}
-                </GoldFeature>
+                </VideoFeature>
               ))}
-            </GoldFeatures>
-            <GoldCTA $popular={tier.popular}>{tier.cta}</GoldCTA>
-          </GoldCard>
+            </VideoFeatures>
+            <VideoCTA $popular={tier.popular}>{tier.cta}</VideoCTA>
+          </VideoCard>
         )
 
       case "botanical":

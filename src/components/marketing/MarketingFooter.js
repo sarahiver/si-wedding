@@ -17,7 +17,7 @@ const pulse = keyframes`
   50% { transform: scale(1.2); opacity: 1; }
 `
 
-const goldShimmer = keyframes`
+const videoShimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 `
@@ -53,7 +53,7 @@ const FooterWrapper = styled.footer`
       background: #1a1a1a;
     `}
   ${(p) =>
-    p.$themeId === "gold" &&
+    p.$themeId === "video" &&
     css`
       background: #050505;
     `}
@@ -246,13 +246,13 @@ const EditorialMadeWith = styled.div`
 // GOLD FOOTER
 // ============================================
 
-const GoldFooter = styled.div`
+const VideoFooter = styled.div`
   padding: 120px 5% 50px;
   text-align: center;
   position: relative;
 `
 
-const GoldOrb = styled(FloatingElement)`
+const VideoOrb = styled(FloatingElement)`
   width: ${(p) => p.$size || "200px"};
   height: ${(p) => p.$size || "200px"};
   border-radius: 50%;
@@ -264,7 +264,7 @@ const GoldOrb = styled(FloatingElement)`
   filter: blur(60px);
 `
 
-const GoldLogo = styled.div`
+const VideoLogo = styled.div`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 5rem;
   font-weight: 300;
@@ -273,11 +273,11 @@ const GoldLogo = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: ${goldShimmer} 4s linear infinite;
+  animation: ${videoShimmer} 4s linear infinite;
   margin-bottom: 20px;
 `
 
-const GoldTagline = styled.div`
+const VideoTagline = styled.div`
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.5rem;
   font-style: italic;
@@ -285,14 +285,14 @@ const GoldTagline = styled.div`
   margin-bottom: 50px;
 `
 
-const GoldDivider = styled.div`
+const VideoDivider = styled.div`
   width: 80px;
   height: 1px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 0 auto 50px;
 `
 
-const GoldNav = styled.nav`
+const VideoNav = styled.nav`
   display: flex;
   justify-content: center;
   gap: 50px;
@@ -314,7 +314,7 @@ const GoldNav = styled.nav`
   }
 `
 
-const GoldCTA = styled.a`
+const VideoCTA = styled.a`
   display: inline-block;
   font-family: "Montserrat", sans-serif;
   font-size: 0.7rem;
@@ -333,7 +333,7 @@ const GoldCTA = styled.a`
   }
 `
 
-const GoldBottom = styled.div`
+const VideoBottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -346,14 +346,14 @@ const GoldBottom = styled.div`
   }
 `
 
-const GoldCopyright = styled.div`
+const VideoCopyright = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   color: rgba(255, 255, 255, 0.3);
 `
 
-const GoldMadeWith = styled.div`
+const VideoMadeWith = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.3);
@@ -1226,17 +1226,17 @@ function MarketingFooter() {
           </EditorialFooter>
         )
 
-      case "gold":
+      case "video":
         return (
-          <GoldFooter>
+          <VideoFooter>
             <ParallaxBg>
-              <GoldOrb
+              <VideoOrb
                 $top='10%'
                 $left='5%'
                 $size='300px'
                 $offset={parallaxOffset * 0.3}
               />
-              <GoldOrb
+              <VideoOrb
                 $top='50%'
                 $right='10%'
                 $size='250px'
@@ -1244,11 +1244,11 @@ function MarketingFooter() {
               />
             </ParallaxBg>
 
-            <GoldLogo>S & I</GoldLogo>
-            <GoldTagline>Wo Liebe auf Luxus trifft</GoldTagline>
-            <GoldDivider />
+            <VideoLogo>S & I</VideoLogo>
+            <VideoTagline>Wo Liebe auf Luxus trifft</VideoTagline>
+            <VideoDivider />
 
-            <GoldNav>
+            <VideoNav>
               {navLinks.map((link) => (
                 <a key={link.href} href={link.href}>
                   {link.label}
@@ -1259,17 +1259,17 @@ function MarketingFooter() {
                   {link.label}
                 </a>
               ))}
-            </GoldNav>
+            </VideoNav>
 
-            <GoldCTA href='#contact'>Jetzt Beratung anfragen</GoldCTA>
+            <VideoCTA href='#contact'>Jetzt Beratung anfragen</VideoCTA>
 
-            <GoldBottom>
-              <GoldCopyright>© {currentYear} S&I</GoldCopyright>
-              <GoldMadeWith>
+            <VideoBottom>
+              <VideoCopyright>© {currentYear} S&I</VideoCopyright>
+              <VideoMadeWith>
                 Crafted with <span>✦</span> love
-              </GoldMadeWith>
-            </GoldBottom>
-          </GoldFooter>
+              </VideoMadeWith>
+            </VideoBottom>
+          </VideoFooter>
         )
 
       case "botanical":
