@@ -4,7 +4,9 @@ import styled, { css } from 'styled-components';
 import { useTheme } from '../../context/ThemeContext';
 
 const Footer = styled.footer`
-  padding: 80px 5% 40px;
+  padding: 60px 20px 40px;
+  overflow: hidden;
+  @media (min-width: 600px) { padding: 80px 5% 40px; }
   ${p => p.$themeId === 'video' && css`background: #0A0A0A; border-top: 1px solid rgba(184,151,106,0.1);`}
   ${p => p.$themeId === 'editorial' && css`background: #1A1A1A; border-top: 1px solid #333;`}
   ${p => p.$themeId === 'botanical' && css`background: #2D3B2D; border-top: 1px solid rgba(139,157,131,0.2);`}
@@ -13,12 +15,15 @@ const Footer = styled.footer`
   ${p => p.$themeId === 'neon' && css`background: #0a0a0f; border-top: 1px solid rgba(0,255,255,0.2);`}
 `;
 
-const Container = styled.div`max-width: 1200px; margin: 0 auto;`;
+const Container = styled.div`max-width: 1200px; margin: 0 auto; width: 100%;`;
 
 const TopSection = styled.div`
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px;
-  @media (max-width: 900px) { grid-template-columns: 1fr 1fr; gap: 40px; }
-  @media (max-width: 500px) { grid-template-columns: 1fr; }
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 30px; 
+  margin-bottom: 40px;
+  @media (min-width: 500px) { grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (min-width: 900px) { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
 `;
 
 const BrandCol = styled.div``;

@@ -292,7 +292,8 @@ export default USPSection;
 // STYLES
 // ============================================
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
+  @media (min-width: 600px) { padding: 140px 5%; }
   position: relative;
   overflow: hidden;
   ${p => p.$themeId === 'editorial' && css`background: #1A1A1A;`}
@@ -392,17 +393,20 @@ const ContemporaryTitle = styled.h2`
   font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; color: #FFFFFF;
 `;
 const ContemporaryGrid = styled.div`
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 20px;
   position: relative; z-index: 1;
-  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 600px) { grid-template-columns: 1fr; }
+  @media (min-width: 600px) { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+  @media (min-width: 900px) { grid-template-columns: repeat(3, 1fr); }
 `;
 const ContemporaryCard = styled.div`
-  background: #FFFFFF; border: 3px solid #FFFFFF; padding: 35px 25px;
+  background: #FFFFFF; border: 3px solid #FFFFFF; padding: 30px 20px;
   opacity: ${p => p.$visible ? 1 : 0};
   animation: ${p => p.$visible ? css`${bounce} 0.6s ease forwards` : 'none'};
   animation-delay: ${p => p.$delay}s;
   transition: all 0.3s ease;
+  @media (min-width: 600px) { padding: 35px 25px; }
   &:hover {
     transform: translate(-4px, -4px);
     box-shadow: 8px 8px 0 ${p => p.$color};

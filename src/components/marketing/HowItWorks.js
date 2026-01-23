@@ -236,7 +236,8 @@ export default HowItWorks;
 
 // STYLES
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
+  @media (min-width: 600px) { padding: 140px 5%; }
   position: relative;
   overflow: hidden;
   ${p => p.$themeId === 'editorial' && css`background: #FAFAFA;`}
@@ -248,15 +249,15 @@ const Section = styled.section`
 `;
 
 // EDITORIAL STYLES
-const EditorialContainer = styled.div`max-width: 800px; margin: 0 auto;`;
-const EditorialHeader = styled.div`text-align: center; margin-bottom: 80px; opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease;`;
+const EditorialContainer = styled.div`max-width: 800px; margin: 0 auto; width: 100%;`;
+const EditorialHeader = styled.div`text-align: center; margin-bottom: 60px; opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}); transition: all 0.8s ease; @media (min-width: 600px) { margin-bottom: 80px; }`;
 const EditorialEyebrow = styled.span`display: block; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em; color: #999; margin-bottom: 20px;`;
 const EditorialTitle = styled.h2`font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; font-style: italic; color: #1A1A1A;`;
-const EditorialTimeline = styled.div`position: relative; padding-left: 100px; @media (max-width: 600px) { padding-left: 60px; }`;
-const EditorialTimelineLine = styled.div`position: absolute; left: 35px; top: 0; bottom: 0; width: 1px; background: #E0E0E0; &::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: ${p => p.$visible ? '100%' : '0'}; background: #1A1A1A; transition: height 1.5s ease; } @media (max-width: 600px) { left: 20px; }`;
-const EditorialStep = styled.div`position: relative; padding: 30px 0; opacity: ${p => p.$visible ? 1 : 0}; transform: translateX(${p => p.$visible ? 0 : '30px'}); transition: all 0.6s ease; transition-delay: ${p => p.$delay}s;`;
-const EditorialStepNumber = styled.div`position: absolute; left: -100px; top: 30px; font-family: 'Instrument Serif', Georgia, serif; font-size: 2.5rem; font-style: italic; color: #1A1A1A; @media (max-width: 600px) { left: -60px; font-size: 1.8rem; }`;
-const EditorialStepLine = styled.div`position: absolute; left: -65px; top: 50px; width: 30px; height: 1px; background: #CCC; @media (max-width: 600px) { left: -40px; width: 20px; }`;
+const EditorialTimeline = styled.div`position: relative; padding-left: 50px; @media (min-width: 600px) { padding-left: 100px; }`;
+const EditorialTimelineLine = styled.div`position: absolute; left: 18px; top: 0; bottom: 0; width: 1px; background: #E0E0E0; &::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: ${p => p.$visible ? '100%' : '0'}; background: #1A1A1A; transition: height 1.5s ease; } @media (min-width: 600px) { left: 35px; }`;
+const EditorialStep = styled.div`position: relative; padding: 25px 0; opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '20px'}); transition: all 0.6s ease; transition-delay: ${p => p.$delay}s; @media (min-width: 600px) { padding: 30px 0; }`;
+const EditorialStepNumber = styled.div`position: absolute; left: -50px; top: 25px; font-family: 'Instrument Serif', Georgia, serif; font-size: 1.6rem; font-style: italic; color: #1A1A1A; @media (min-width: 600px) { left: -100px; top: 30px; font-size: 2.5rem; }`;
+const EditorialStepLine = styled.div`position: absolute; left: -32px; top: 38px; width: 15px; height: 1px; background: #CCC; @media (min-width: 600px) { left: -65px; top: 50px; width: 30px; }`;
 const EditorialStepContent = styled.div``;
 const EditorialStepTitle = styled.h3`font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 500; color: #1A1A1A; margin-bottom: 8px;`;
 const EditorialStepDesc = styled.p`font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; line-height: 1.7; margin: 0;`;
@@ -271,8 +272,16 @@ const ContemporaryCircle = styled.div`position: absolute; width: ${p => p.$size}
 const ContemporaryDiamond = styled.div`position: absolute; width: ${p => p.$size}; height: ${p => p.$size}; background: ${p => p.$color}; transform: rotate(45deg); top: ${p => p.$top || 'auto'}; bottom: ${p => p.$bottom || 'auto'}; left: ${p => p.$left || 'auto'}; right: ${p => p.$right || 'auto'}; animation: ${float} 7s ease-in-out infinite reverse;`;
 const ContemporarySquare = styled.div`position: absolute; width: ${p => p.$size}; height: ${p => p.$size}; border: 3px solid #0D0D0D; top: ${p => p.$top || 'auto'}; bottom: ${p => p.$bottom || 'auto'}; left: ${p => p.$left || 'auto'}; right: ${p => p.$right || 'auto'}; animation: ${float} 8s ease-in-out infinite;`;
 const ContemporarySteps = styled.div`position: relative; z-index: 1; display: flex; flex-direction: column; gap: 30px;`;
-const ContemporaryStep = styled.div`display: flex; justify-content: ${p => p.$align === 'left' ? 'flex-start' : 'flex-end'}; opacity: ${p => p.$visible ? 1 : 0}; transform: translateX(${p => p.$visible ? 0 : p.$align === 'left' ? '-50px' : '50px'}); transition: all 0.6s ease; transition-delay: ${p => p.$delay}s; @media (max-width: 600px) { justify-content: center; }`;
-const ContemporaryCard = styled.div`background: #FFFFFF; border: 3px solid #0D0D0D; padding: 30px; max-width: 400px; transition: all 0.3s ease; box-shadow: 8px 8px 0 ${p => p.$shadowColor}; &:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0 ${p => p.$shadowColor}; }`;
+const ContemporaryStep = styled.div`
+  display: flex; 
+  justify-content: ${p => p.$align === 'left' ? 'flex-start' : 'flex-end'}; 
+  opacity: ${p => p.$visible ? 1 : 0}; 
+  transform: translateY(${p => p.$visible ? 0 : '30px'}); 
+  transition: all 0.6s ease; 
+  transition-delay: ${p => p.$delay}s; 
+  @media (max-width: 600px) { justify-content: center; }
+`;
+const ContemporaryCard = styled.div`background: #FFFFFF; border: 3px solid #0D0D0D; padding: 25px; max-width: 400px; width: 100%; transition: all 0.3s ease; box-shadow: 6px 6px 0 ${p => p.$shadowColor}; &:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0 ${p => p.$shadowColor}; } @media (max-width: 600px) { max-width: 100%; }`;
 const ContemporaryCardNumber = styled.div`font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 700; color: ${p => p.$color}; line-height: 1; margin-bottom: 15px;`;
 const ContemporaryCardTitle = styled.h3`font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: #0D0D0D; margin-bottom: 10px;`;
 const ContemporaryCardDesc = styled.p`font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; color: #666; line-height: 1.6; margin: 0;`;

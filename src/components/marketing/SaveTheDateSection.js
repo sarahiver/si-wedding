@@ -9,7 +9,8 @@ const shimmer = keyframes`
 `;
 
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
+  @media (min-width: 600px) { padding: 140px 5%; }
   ${p => p.$themeId === 'video' && css`background: #0A0A0A;`}
   ${p => p.$themeId === 'editorial' && css`background: #1A1A1A;`}
   ${p => p.$themeId === 'botanical' && css`background: #2D3B2D;`}
@@ -19,13 +20,15 @@ const Section = styled.section`
 `;
 
 const Container = styled.div`
-  max-width: 1100px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-  @media (max-width: 900px) { grid-template-columns: 1fr; gap: 60px; }
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr; gap: 50px; align-items: center;
+  @media (min-width: 900px) { grid-template-columns: 1fr 1fr; gap: 80px; }
 `;
 
 const Content = styled.div`
-  opacity: ${p => p.$visible ? 1 : 0}; transform: translateX(${p => p.$visible ? 0 : '-40px'}); transition: all 0.9s ease;
+  opacity: ${p => p.$visible ? 1 : 0}; 
+  transform: translateY(${p => p.$visible ? 0 : '30px'}); 
+  transition: all 0.9s ease;
 `;
 
 const Eyebrow = styled.span`

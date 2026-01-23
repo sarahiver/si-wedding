@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components';
 import { useTheme } from '../../context/ThemeContext';
 
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
+  @media (min-width: 600px) { padding: 140px 5%; }
   ${p => p.$themeId === 'video' && css`background: #FAF8F5;`}
   ${p => p.$themeId === 'editorial' && css`background: #FAFAFA;`}
   ${p => p.$themeId === 'botanical' && css`background: #F5F1EB;`}

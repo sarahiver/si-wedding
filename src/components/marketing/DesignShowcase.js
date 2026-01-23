@@ -196,9 +196,13 @@ const LuxePreview = () => (
 // STYLES
 // ============================================
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
   position: relative;
   overflow: hidden;
+  
+  @media (min-width: 600px) {
+    padding: 140px 5%;
+  }
   ${p => p.$themeId === 'video' && css`background: #FFFFFF;`}
   ${p => p.$themeId === 'editorial' && css`background: #FAFAFA;`}
   ${p => p.$themeId === 'botanical' && css`background: linear-gradient(180deg, #FAF9F6 0%, #F0EDE5 100%);`}
@@ -261,11 +265,16 @@ const Subtitle = styled.p`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: 1fr;
+  gap: 25px;
   
-  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 600px) { grid-template-columns: 1fr; }
+  @media (min-width: 600px) { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px;
+  }
+  @media (min-width: 1000px) { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
 `;
 
 const ThemeCard = styled.div`
@@ -281,9 +290,13 @@ const ThemeCard = styled.div`
 `;
 
 const PreviewWrapper = styled.div`
-  height: 280px;
+  height: 220px;
   overflow: hidden;
   border-radius: 4px 4px 0 0;
+  
+  @media (min-width: 600px) {
+    height: 280px;
+  }
 `;
 
 const CardInfo = styled.div`
@@ -355,9 +368,14 @@ const EditorialLineV = styled.div`
 
 const EditorialContent = styled.div`
   text-align: center;
-  .eyebrow { display: block; font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; color: #999; margin-bottom: 12px; }
-  .names { display: block; font-family: 'Instrument Serif', Georgia, serif; font-size: 2.8rem; font-style: italic; color: #1A1A1A; margin-bottom: 8px; }
-  .date { font-family: 'Inter', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; color: #666; }
+  .eyebrow { display: block; font-family: 'Inter', sans-serif; font-size: 0.5rem; letter-spacing: 0.25em; color: #999; margin-bottom: 10px; }
+  .names { display: block; font-family: 'Instrument Serif', Georgia, serif; font-size: 2rem; font-style: italic; color: #1A1A1A; margin-bottom: 6px; }
+  .date { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; color: #666; }
+  @media (min-width: 600px) {
+    .eyebrow { font-size: 0.6rem; margin-bottom: 12px; }
+    .names { font-size: 2.8rem; margin-bottom: 8px; }
+    .date { font-size: 0.75rem; }
+  }
 `;
 
 // ============================================
@@ -381,9 +399,14 @@ const BotanicalLeaf = styled.div`
 
 const BotanicalContent = styled.div`
   text-align: center;
-  .eyebrow { display: block; font-family: 'Lato', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; color: #7A9972; margin-bottom: 12px; }
-  .names { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 2.8rem; font-style: italic; color: #2C3E2D; margin-bottom: 8px; }
-  .date { font-family: 'Lato', sans-serif; font-size: 0.75rem; letter-spacing: 0.12em; color: #6B7B6C; }
+  .eyebrow { display: block; font-family: 'Lato', sans-serif; font-size: 0.55rem; letter-spacing: 0.25em; color: #7A9972; margin-bottom: 10px; }
+  .names { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-style: italic; color: #2C3E2D; margin-bottom: 6px; }
+  .date { font-family: 'Lato', sans-serif; font-size: 0.65rem; letter-spacing: 0.12em; color: #6B7B6C; }
+  @media (min-width: 600px) {
+    .eyebrow { font-size: 0.65rem; margin-bottom: 12px; }
+    .names { font-size: 2.8rem; margin-bottom: 8px; }
+    .date { font-size: 0.75rem; }
+  }
 `;
 
 // ============================================
@@ -419,12 +442,18 @@ const ContemporarySquare = styled.div`
 
 const ContemporaryContent = styled.div`
   position: relative; z-index: 1;
-  padding: 35px 25px;
+  padding: 25px 20px;
   display: flex; flex-direction: column; justify-content: center;
-  .date { font-family: 'Space Grotesk', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; color: #FFF; background: #0D0D0D; padding: 6px 12px; margin-bottom: 15px; align-self: flex-start; }
-  .name1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: #FF6B6B; line-height: 1; }
-  .amp { font-size: 1rem; font-style: italic; color: #999; margin: 3px 0; }
-  .name2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: #0D0D0D; line-height: 1; }
+  .date { font-family: 'Space Grotesk', sans-serif; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.1em; color: #FFF; background: #0D0D0D; padding: 5px 10px; margin-bottom: 12px; align-self: flex-start; }
+  .name1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: #FF6B6B; line-height: 1; }
+  .amp { font-size: 0.8rem; font-style: italic; color: #999; margin: 2px 0; }
+  .name2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: #0D0D0D; line-height: 1; }
+  @media (min-width: 600px) {
+    padding: 35px 25px;
+    .date { font-size: 0.6rem; padding: 6px 12px; margin-bottom: 15px; }
+    .name1, .name2 { font-size: 1.8rem; }
+    .amp { font-size: 1rem; margin: 3px 0; }
+  }
 `;
 
 // ============================================
@@ -455,9 +484,14 @@ const NeonFrame = styled.div`
 
 const NeonContent = styled.div`
   text-align: center; z-index: 1;
-  .eyebrow { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; color: #ff00ff; margin-bottom: 12px; }
-  .names { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; color: #FFFFFF; margin-bottom: 8px; animation: ${neonGlow} 2s ease-in-out infinite; }
-  .date { font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; color: #00ffff; }
+  .eyebrow { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 0.5rem; letter-spacing: 0.2em; color: #ff00ff; margin-bottom: 10px; }
+  .names { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700; color: #FFFFFF; margin-bottom: 6px; animation: ${neonGlow} 2s ease-in-out infinite; }
+  .date { font-family: 'Space Grotesk', sans-serif; font-size: 0.65rem; color: #00ffff; }
+  @media (min-width: 600px) {
+    .eyebrow { font-size: 0.6rem; margin-bottom: 12px; }
+    .names { font-size: 3.5rem; margin-bottom: 8px; }
+    .date { font-size: 0.8rem; }
+  }
 `;
 
 // ============================================
@@ -477,10 +511,16 @@ const VideoOverlay = styled.div`
 
 const VideoContent = styled.div`
   text-align: center; z-index: 1;
-  .eyebrow { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 0.35em; color: #B8976A; margin-bottom: 15px; }
-  .names { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 3rem; font-weight: 300; font-style: italic; color: #FFFFFF; margin-bottom: 12px; }
-  .line { display: block; width: 40px; height: 1px; background: #B8976A; margin: 0 auto 12px; }
-  .date { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.6); }
+  .eyebrow { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.45rem; letter-spacing: 0.35em; color: #B8976A; margin-bottom: 12px; }
+  .names { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; font-weight: 300; font-style: italic; color: #FFFFFF; margin-bottom: 10px; }
+  .line { display: block; width: 30px; height: 1px; background: #B8976A; margin: 0 auto 10px; }
+  .date { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.6); }
+  @media (min-width: 600px) {
+    .eyebrow { font-size: 0.55rem; margin-bottom: 15px; }
+    .names { font-size: 3rem; margin-bottom: 12px; }
+    .line { width: 40px; margin: 0 auto 12px; }
+    .date { font-size: 0.7rem; }
+  }
 `;
 
 // ============================================
@@ -500,8 +540,14 @@ const LuxePattern = styled.div`
 
 const LuxeContent = styled.div`
   text-align: center; z-index: 1;
-  .diamond { display: block; font-size: 1rem; color: #D4AF37; margin-bottom: 12px; }
-  .names { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 3rem; font-weight: 300; font-style: italic; color: #D4AF37; margin-bottom: 10px; }
-  .divider { display: block; width: 50px; height: 1px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); margin: 0 auto 12px; }
-  .date { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.8rem; font-style: italic; letter-spacing: 0.2em; color: rgba(212,175,55,0.6); }
+  .diamond { display: block; font-size: 0.8rem; color: #D4AF37; margin-bottom: 10px; }
+  .names { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; font-weight: 300; font-style: italic; color: #D4AF37; margin-bottom: 8px; }
+  .divider { display: block; width: 35px; height: 1px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); margin: 0 auto 10px; }
+  .date { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.65rem; font-style: italic; letter-spacing: 0.2em; color: rgba(212,175,55,0.6); }
+  @media (min-width: 600px) {
+    .diamond { font-size: 1rem; margin-bottom: 12px; }
+    .names { font-size: 3rem; margin-bottom: 10px; }
+    .divider { width: 50px; margin: 0 auto 12px; }
+    .date { font-size: 0.8rem; }
+  }
 `;

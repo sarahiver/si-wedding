@@ -257,10 +257,15 @@ export default ComponentsShowcase;
 
 // STYLES
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
   position: relative;
   overflow: hidden;
-  ${p => p.$themeId === 'video' && css`background: #FFFFFF; overflow: hidden;`}
+  
+  @media (min-width: 600px) {
+    padding: 140px 5%;
+  }
+  
+  ${p => p.$themeId === 'video' && css`background: #FFFFFF;`}
   ${p => p.$themeId === 'editorial' && css`background: #FFFFFF;`}
   ${p => p.$themeId === 'botanical' && css`background: linear-gradient(180deg, #FAF9F6 0%, #F0EDE5 100%);`}
   ${p => p.$themeId === 'contemporary' && css`background: #FAFAFA;`}

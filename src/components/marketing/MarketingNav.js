@@ -4,71 +4,71 @@ import styled, { css, keyframes } from 'styled-components';
 import { useTheme } from '../../context/ThemeContext';
 
 const floatNav = keyframes`
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-3px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 `;
 
+// Base Nav - always full width with padding
 const Nav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 0 5%;
-  height: 80px;
+  padding: 0 15px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: all 0.4s ease;
   
-  ${p => p.$themeId === 'contemporary' && css`
-    top: 20px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    width: calc(100% - 80px);
-    max-width: 1200px;
-    background: #FFFFFF;
-    border: 2px solid #1A1A1A;
-    height: 70px;
-    padding: 0 30px;
-    @media (max-width: 900px) {
-      width: calc(100% - 40px);
-      top: 10px;
-    }
-  `}
-  
-  ${p => p.$themeId === 'botanical' && css`
-    top: 20px;
-    left: 50%;
-    right: auto;
-    width: calc(100% - 60px);
-    max-width: 1100px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    border-radius: 50px;
-    height: 65px;
-    padding: 0 35px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-    animation: ${floatNav} 4s ease-in-out infinite;
-    justify-content: center;
-    @media (max-width: 900px) {
-      width: calc(100% - 30px);
-      top: 10px;
-      padding: 0 20px;
-      justify-content: space-between;
-      animation: none;
-    }
-  `}
+  @media (min-width: 600px) {
+    padding: 0 5%;
+    height: 80px;
+  }
   
   ${p => p.$scrolled && css`
     backdrop-filter: blur(20px);
     ${p.$themeId === 'video' && css`background: rgba(10,10,10,0.95); border-bottom: 1px solid rgba(184,151,106,0.1);`}
     ${p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98); border-bottom: 1px solid #E0E0E0;`}
-    ${p.$themeId === 'botanical' && css`background: rgba(255, 255, 255, 0.95); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);`}
-    ${p.$themeId === 'contemporary' && css`background: #FFFFFF; box-shadow: 4px 4px 0 #1A1A1A;`}
+    ${p.$themeId === 'botanical' && css`background: rgba(255,255,255,0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.1);`}
+    ${p.$themeId === 'contemporary' && css`background: rgba(255,255,255,0.98); border-bottom: 2px solid #1A1A1A;`}
     ${p.$themeId === 'luxe' && css`background: rgba(10,10,10,0.98); border-bottom: 1px solid rgba(212,175,55,0.1);`}
     ${p.$themeId === 'neon' && css`background: rgba(10,10,15,0.95); border-bottom: 1px solid rgba(0,255,255,0.2);`}
+  `}
+`;
+
+// Inner container for special themes that need centered/framed nav
+const NavInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  
+  ${p => p.$themeId === 'contemporary' && css`
+    @media (min-width: 600px) {
+      background: #FFFFFF;
+      border: 2px solid #1A1A1A;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 10px auto;
+      height: calc(100% - 20px);
+    }
+  `}
+  
+  ${p => p.$themeId === 'botanical' && css`
+    @media (min-width: 600px) {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(15px);
+      border-radius: 50px;
+      padding: 0 25px;
+      max-width: 1100px;
+      margin: 10px auto;
+      height: calc(100% - 20px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      animation: ${floatNav} 4s ease-in-out infinite;
+    }
   `}
 `;
 
@@ -76,71 +76,75 @@ const Logo = styled.a`
   text-decoration: none;
   transition: all 0.3s ease;
   z-index: 1001;
-  
-  ${p => p.$themeId === 'botanical' && css`
-    @media (min-width: 901px) {
-      position: absolute;
-      left: 35px;
-    }
-  `}
+  flex-shrink: 0;
   
   ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 300;
     color: ${p.$scrolled ? '#D4AF37' : '#FFFFFF'};
     letter-spacing: 0.1em;
+    @media (min-width: 600px) { font-size: 1.6rem; }
   `}
   ${p => p.$themeId === 'editorial' && css`
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-style: italic;
     color: #1A1A1A;
+    @media (min-width: 600px) { font-size: 1.5rem; }
   `}
   ${p => p.$themeId === 'botanical' && css`
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #2D3B2D;
+    @media (min-width: 600px) { font-size: 1.4rem; }
   `}
   ${p => p.$themeId === 'contemporary' && css`
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #0D0D0D;
     text-transform: uppercase;
+    @media (min-width: 600px) { font-size: 1.3rem; }
   `}
   ${p => p.$themeId === 'luxe' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 300;
     font-style: italic;
     color: ${p.$scrolled ? '#D4AF37' : '#E8DDD4'};
+    @media (min-width: 600px) { font-size: 1.5rem; }
   `}
   ${p => p.$themeId === 'neon' && css`
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #00ffff;
     text-shadow: 0 0 10px rgba(0,255,255,0.5);
+    @media (min-width: 600px) { font-size: 1.4rem; }
   `}
 `;
 
 const NavLinks = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
-  gap: 35px;
+  gap: 25px;
   
-  @media (max-width: 900px) {
-    display: none;
+  @media (min-width: 900px) {
+    display: flex;
+    gap: 35px;
   }
 `;
 
 const NavLink = styled.a`
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-decoration: none;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  
+  @media (min-width: 900px) { font-size: 0.8rem; }
   
   ${p => p.$themeId === 'video' && css`
     font-family: 'Inter', sans-serif;
@@ -166,7 +170,7 @@ const NavLink = styled.a`
   `}
   ${p => p.$themeId === 'luxe' && css`
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.4);
@@ -182,38 +186,42 @@ const NavLink = styled.a`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   z-index: 1001;
+  flex-shrink: 0;
   
-  ${p => p.$themeId === 'botanical' && css`
-    @media (min-width: 901px) {
-      position: absolute;
-      right: 35px;
-    }
-  `}
+  @media (min-width: 600px) { gap: 20px; }
 `;
 
 const ThemeDropdown = styled.div`
   position: relative;
+  display: none;
   
-  @media (max-width: 900px) {
-    display: none;
+  @media (min-width: 900px) {
+    display: block;
   }
 `;
 
 const ThemeButton = styled.button`
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
+  gap: 8px;
+  padding: 8px 12px;
   background: transparent;
   border: 1px solid;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  font-size: 0.65rem;
+  
+  @media (min-width: 900px) { 
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 0.7rem;
+  }
   
   ${p => p.$themeId === 'video' && css`
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: ${p.$scrolled ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.8)'};
@@ -222,14 +230,12 @@ const ThemeButton = styled.button`
   `}
   ${p => p.$themeId === 'editorial' && css`
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
     color: #666;
     border-color: #E0E0E0;
     &:hover { border-color: #1A1A1A; color: #1A1A1A; }
   `}
   ${p => p.$themeId === 'botanical' && css`
     font-family: 'Lato', sans-serif;
-    font-size: 0.85rem;
     color: #5A6B5A;
     border-color: rgba(139,157,131,0.3);
     border-radius: 20px;
@@ -237,7 +243,6 @@ const ThemeButton = styled.button`
   `}
   ${p => p.$themeId === 'contemporary' && css`
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.8rem;
     font-weight: 600;
     color: #0D0D0D;
     border-color: #0D0D0D;
@@ -246,7 +251,7 @@ const ThemeButton = styled.button`
   `}
   ${p => p.$themeId === 'luxe' && css`
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: rgba(212,175,55,0.6);
@@ -255,7 +260,6 @@ const ThemeButton = styled.button`
   `}
   ${p => p.$themeId === 'neon' && css`
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.8rem;
     color: #00ffff;
     border-color: rgba(0,255,255,0.3);
     &:hover { border-color: #00ffff; box-shadow: 0 0 15px rgba(0,255,255,0.3); }
@@ -263,15 +267,20 @@ const ThemeButton = styled.button`
 `;
 
 const ThemeDot = styled.span`
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: ${p => p.$color};
-  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  
+  @media (min-width: 900px) {
+    width: 12px;
+    height: 12px;
+  }
 `;
 
 const DropdownArrow = styled.span`
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   transition: transform 0.3s ease;
   ${p => p.$open && css`transform: rotate(180deg);`}
 `;
@@ -280,8 +289,8 @@ const DropdownMenu = styled.div`
   position: absolute;
   top: calc(100% + 10px);
   right: 0;
-  min-width: 200px;
-  padding: 10px 0;
+  min-width: 180px;
+  padding: 8px 0;
   border-radius: 8px;
   opacity: ${p => p.$open ? 1 : 0};
   visibility: ${p => p.$open ? 'visible' : 'hidden'};
@@ -301,77 +310,74 @@ const DropdownItem = styled.button`
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 10px;
+  padding: 10px 16px;
   background: transparent;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
+  font-size: 0.8rem;
   
   ${p => p.$themeId === 'video' && css`
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
     color: ${p.$active ? '#B8976A' : 'rgba(255,255,255,0.7)'};
     &:hover { background: rgba(184,151,106,0.1); }
   `}
   ${p => p.$themeId === 'editorial' && css`
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
     color: ${p.$active ? '#1A1A1A' : '#666'};
     &:hover { background: #F5F5F5; }
   `}
   ${p => p.$themeId === 'botanical' && css`
     font-family: 'Lato', sans-serif;
-    font-size: 0.9rem;
     color: ${p.$active ? '#2D3B2D' : '#5A6B5A'};
     &:hover { background: rgba(139,157,131,0.1); }
   `}
   ${p => p.$themeId === 'contemporary' && css`
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.85rem;
     font-weight: 500;
     color: ${p.$active ? '#FF6B6B' : '#0D0D0D'};
     &:hover { background: #F5F5F5; }
   `}
   ${p => p.$themeId === 'luxe' && css`
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: ${p.$active ? '#D4AF37' : 'rgba(255,255,255,0.5)'};
     &:hover { background: rgba(212,175,55,0.1); }
   `}
   ${p => p.$themeId === 'neon' && css`
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.85rem;
     color: ${p.$active ? '#00ffff' : 'rgba(255,255,255,0.6)'};
     &:hover { background: rgba(0,255,255,0.1); }
   `}
 `;
 
 const MobileMenuButton = styled.button`
-  display: none;
-  width: 44px;
-  height: 44px;
+  display: flex;
+  width: 40px;
+  height: 40px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
   z-index: 1002;
+  padding: 8px;
   
-  @media (max-width: 900px) {
-    display: flex;
+  @media (min-width: 900px) {
+    display: none;
   }
   
   span {
-    width: 24px;
+    width: 22px;
     height: 2px;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     transform-origin: center;
     
-    ${p => p.$themeId === 'video' && css`background: ${p.$menuOpen ? '#B8976A' : '#B8976A'};`}
+    ${p => p.$themeId === 'video' && css`background: #B8976A;`}
     ${p => p.$themeId === 'editorial' && css`background: #1A1A1A;`}
     ${p => p.$themeId === 'botanical' && css`background: #2D3B2D;`}
     ${p => p.$themeId === 'contemporary' && css`background: #0D0D0D;`}
@@ -379,37 +385,36 @@ const MobileMenuButton = styled.button`
     ${p => p.$themeId === 'neon' && css`background: #00ffff;`}
     
     &:nth-child(1) {
-      transform: ${p => p.$menuOpen ? 'rotate(45deg) translate(5.5px, 5.5px)' : 'none'};
+      transform: ${p => p.$menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none'};
     }
     &:nth-child(2) {
       opacity: ${p => p.$menuOpen ? 0 : 1};
       transform: ${p => p.$menuOpen ? 'scaleX(0)' : 'scaleX(1)'};
     }
     &:nth-child(3) {
-      transform: ${p => p.$menuOpen ? 'rotate(-45deg) translate(5.5px, -5.5px)' : 'none'};
+      transform: ${p => p.$menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none'};
     }
   }
 `;
 
 // Mobile Menu Overlay
 const MobileMenuOverlay = styled.div`
-  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  opacity: ${p => p.$open ? 1 : 0};
+  visibility: ${p => p.$open ? 'visible' : 'hidden'};
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   
-  @media (max-width: 900px) {
-    display: block;
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    opacity: ${p => p.$open ? 1 : 0};
-    visibility: ${p => p.$open ? 'visible' : 'hidden'};
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    
-    ${p => p.$themeId === 'video' && css`background: rgba(10,10,10,0.98);`}
-    ${p => p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98);`}
-    ${p => p.$themeId === 'botanical' && css`background: rgba(250,249,246,0.98);`}
-    ${p => p.$themeId === 'contemporary' && css`background: #FFFFFF;`}
-    ${p => p.$themeId === 'luxe' && css`background: rgba(10,10,10,0.98);`}
-    ${p => p.$themeId === 'neon' && css`background: rgba(10,10,15,0.98);`}
+  ${p => p.$themeId === 'video' && css`background: rgba(10,10,10,0.98);`}
+  ${p => p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98);`}
+  ${p => p.$themeId === 'botanical' && css`background: rgba(250,249,246,0.98);`}
+  ${p => p.$themeId === 'contemporary' && css`background: #FFFFFF;`}
+  ${p => p.$themeId === 'luxe' && css`background: rgba(10,10,10,0.98);`}
+  ${p => p.$themeId === 'neon' && css`background: rgba(10,10,15,0.98);`}
+  
+  @media (min-width: 900px) {
+    display: none;
   }
 `;
 
@@ -419,17 +424,20 @@ const MobileMenuContent = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  gap: 20px;
-  padding: 100px 30px 50px;
+  gap: 18px;
+  padding: 90px 20px 40px;
+  overflow-y: auto;
 `;
 
 const MobileNavLink = styled.a`
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   text-decoration: none;
   opacity: ${p => p.$open ? 1 : 0};
-  transform: translateY(${p => p.$open ? 0 : '30px'});
+  transform: translateY(${p => p.$open ? 0 : '20px'});
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: ${p => p.$open ? p.$delay : 0}s;
+  
+  @media (min-width: 400px) { font-size: 1.8rem; }
   
   ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -471,14 +479,14 @@ const MobileNavLink = styled.a`
 `;
 
 const MobileThemeSection = styled.div`
-  margin-top: 30px;
-  padding-top: 30px;
+  margin-top: 25px;
+  padding-top: 25px;
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   opacity: ${p => p.$open ? 1 : 0};
-  transform: translateY(${p => p.$open ? 0 : '30px'});
+  transform: translateY(${p => p.$open ? 0 : '20px'});
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: ${p => p.$open ? '0.35s' : '0s'};
+  transition-delay: ${p => p.$open ? '0.3s' : '0s'};
   
   ${p => p.$themeId === 'video' && css`border-top: 1px solid rgba(184,151,106,0.2);`}
   ${p => p.$themeId === 'editorial' && css`border-top: 1px solid #E0E0E0;`}
@@ -490,10 +498,10 @@ const MobileThemeSection = styled.div`
 
 const MobileThemeTitle = styled.p`
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   
   ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: #B8976A;`}
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #999;`}
@@ -506,15 +514,15 @@ const MobileThemeTitle = styled.p`
 const MobileThemeGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 8px;
 `;
 
 const MobileThemeButton = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 15px 8px;
+  gap: 6px;
+  padding: 10px 6px;
   background: transparent;
   border: 1px solid;
   cursor: pointer;
@@ -531,7 +539,7 @@ const MobileThemeButton = styled.button`
   ${p => p.$themeId === 'botanical' && css`
     border-color: ${p.$active ? '#7A9972' : 'rgba(139,157,131,0.2)'};
     background: ${p.$active ? 'rgba(139,157,131,0.1)' : 'transparent'};
-    border-radius: 12px;
+    border-radius: 10px;
   `}
   ${p => p.$themeId === 'contemporary' && css`
     border-color: #0D0D0D;
@@ -549,16 +557,15 @@ const MobileThemeButton = styled.button`
 `;
 
 const MobileThemeDot = styled.span`
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: ${p => p.$color};
-  transition: transform 0.3s ease;
 `;
 
 const MobileThemeName = styled.span`
-  font-size: 0.6rem;
-  letter-spacing: 0.05em;
+  font-size: 0.5rem;
+  letter-spacing: 0.03em;
   
   ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: rgba(255,255,255,0.6);`}
   ${p => p.$themeId === 'editorial' && css`font-family: 'Inter', sans-serif; color: #666;`}
@@ -585,11 +592,10 @@ const navLinks = [
   { label: 'Kontakt', href: '#contact' }
 ];
 
-// Smooth scroll function
 const smoothScrollTo = (elementId) => {
   const element = document.getElementById(elementId);
   if (element) {
-    const navHeight = 100; // Account for fixed nav
+    const navHeight = 90;
     const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
     const offsetPosition = elementPosition - navHeight;
     
@@ -623,7 +629,6 @@ function MarketingNav() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Prevent scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -640,7 +645,6 @@ function MarketingNav() {
 
   const handleMobileThemeSelect = (themeId) => {
     switchTheme(themeId);
-    // Close menu after theme change
     setTimeout(() => {
       setMobileMenuOpen(false);
     }, 300);
@@ -656,7 +660,6 @@ function MarketingNav() {
     e.preventDefault();
     setMobileMenuOpen(false);
     
-    // Wait for menu to close, then scroll
     setTimeout(() => {
       const elementId = href.replace('#', '');
       smoothScrollTo(elementId);
@@ -666,64 +669,65 @@ function MarketingNav() {
   return (
     <>
       <Nav $themeId={currentTheme} $scrolled={scrolled}>
-        <Logo href="#" $themeId={currentTheme} $scrolled={scrolled}>
-          S & I
-        </Logo>
-        
-        <NavLinks $themeId={currentTheme}>
-          {navLinks.map(link => (
-            <NavLink 
-              key={link.label} 
-              href={link.href} 
-              $themeId={currentTheme} 
-              $scrolled={scrolled}
-              onClick={(e) => handleNavLinkClick(e, link.href)}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </NavLinks>
-        
-        <RightSection $themeId={currentTheme}>
-          <ThemeDropdown ref={dropdownRef}>
-            <ThemeButton 
-              $themeId={currentTheme} 
-              $scrolled={scrolled}
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            >
-              <ThemeDot $color={themeColors[currentTheme]} />
-              {themes[currentTheme].name}
-              <DropdownArrow $open={dropdownOpen}>▼</DropdownArrow>
-            </ThemeButton>
-            
-            <DropdownMenu $themeId={currentTheme} $open={dropdownOpen}>
-              {Object.values(themes).map(theme => (
-                <DropdownItem
-                  key={theme.id}
-                  $themeId={currentTheme}
-                  $active={currentTheme === theme.id}
-                  onClick={() => handleThemeSelect(theme.id)}
-                >
-                  <ThemeDot $color={themeColors[theme.id]} />
-                  {theme.name}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </ThemeDropdown>
+        <NavInner $themeId={currentTheme}>
+          <Logo href="#" $themeId={currentTheme} $scrolled={scrolled}>
+            S & I
+          </Logo>
           
-          <MobileMenuButton 
-            $themeId={currentTheme} 
-            $menuOpen={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <span />
-            <span />
-            <span />
-          </MobileMenuButton>
-        </RightSection>
+          <NavLinks>
+            {navLinks.map(link => (
+              <NavLink 
+                key={link.label} 
+                href={link.href} 
+                $themeId={currentTheme} 
+                $scrolled={scrolled}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </NavLinks>
+          
+          <RightSection>
+            <ThemeDropdown ref={dropdownRef}>
+              <ThemeButton 
+                $themeId={currentTheme} 
+                $scrolled={scrolled}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                <ThemeDot $color={themeColors[currentTheme]} />
+                {themes[currentTheme].name}
+                <DropdownArrow $open={dropdownOpen}>▼</DropdownArrow>
+              </ThemeButton>
+              
+              <DropdownMenu $themeId={currentTheme} $open={dropdownOpen}>
+                {Object.values(themes).map(theme => (
+                  <DropdownItem
+                    key={theme.id}
+                    $themeId={currentTheme}
+                    $active={currentTheme === theme.id}
+                    onClick={() => handleThemeSelect(theme.id)}
+                  >
+                    <ThemeDot $color={themeColors[theme.id]} />
+                    {theme.name}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </ThemeDropdown>
+            
+            <MobileMenuButton 
+              $themeId={currentTheme} 
+              $menuOpen={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <span />
+              <span />
+              <span />
+            </MobileMenuButton>
+          </RightSection>
+        </NavInner>
       </Nav>
 
-      {/* Mobile Menu */}
       <MobileMenuOverlay $themeId={currentTheme} $open={mobileMenuOpen}>
         <MobileMenuContent>
           {navLinks.map((link, i) => (
@@ -732,7 +736,7 @@ function MarketingNav() {
               href={link.href} 
               $themeId={currentTheme}
               $open={mobileMenuOpen}
-              $delay={0.05 + i * 0.05}
+              $delay={0.05 + i * 0.04}
               onClick={(e) => handleMobileLinkClick(e, link.href)}
             >
               {link.label}

@@ -9,7 +9,8 @@ const shimmer = keyframes`
 `;
 
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
+  @media (min-width: 600px) { padding: 140px 5%; }
   ${p => p.$themeId === 'video' && css`background: #FAF8F5;`}
   ${p => p.$themeId === 'editorial' && css`background: #FAFAFA;`}
   ${p => p.$themeId === 'botanical' && css`background: #F5F1EB;`}
@@ -46,14 +47,26 @@ const Title = styled.h2`
 `;
 
 const PricingGrid = styled.div`
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 80px;
-  @media (max-width: 900px) { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto 80px; }
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 25px; 
+  margin-bottom: 60px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  @media (min-width: 768px) { 
+    grid-template-columns: repeat(3, 1fr); 
+    max-width: none;
+    gap: 30px; 
+    margin-bottom: 80px; 
+  }
 `;
 
 const PricingCard = styled.div`
-  padding: 50px 35px; text-align: center; position: relative;
+  padding: 40px 25px; text-align: center; position: relative;
   opacity: ${p => p.$visible ? 1 : 0}; transform: translateY(${p => p.$visible ? 0 : '30px'}) scale(${p => p.$popular && p.$visible ? 1.02 : 1});
   transition: all 0.6s ease ${p => p.$delay}s;
+  @media (min-width: 768px) { padding: 50px 35px; }
   ${p => p.$themeId === 'video' && css`
     background: ${p.$popular ? 'rgba(184,151,106,0.05)' : '#FFFFFF'};
     border: 1px solid ${p.$popular ? 'rgba(184,151,106,0.4)' : 'rgba(184,151,106,0.15)'};
@@ -183,9 +196,11 @@ const AddOnsTitle = styled.h3`
 `;
 
 const AddOnsGrid = styled.div`
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 500px) { grid-template-columns: 1fr; }
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 15px;
+  @media (min-width: 600px) { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (min-width: 900px) { grid-template-columns: repeat(4, 1fr); }
 `;
 
 const AddOn = styled.div`

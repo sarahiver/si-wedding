@@ -257,7 +257,8 @@ export default AboutSection;
 // STYLES
 // ============================================
 const Section = styled.section`
-  padding: 140px 5%;
+  padding: 100px 20px;
+  @media (min-width: 600px) { padding: 140px 5%; }
   position: relative;
   overflow: hidden;
   ${p => p.$themeId === 'editorial' && css`background: #FFFFFF;`}
@@ -336,16 +337,16 @@ const EditorialPageNumber = styled.div`
 // CONTEMPORARY STYLES - Split Gradient
 // ============================================
 const ContemporaryContainer = styled.div`
-  max-width: 100%; margin: 0; display: flex; min-height: 600px;
-  @media (max-width: 900px) { flex-direction: column; }
+  max-width: 100%; margin: 0; display: flex; min-height: 500px;
+  @media (max-width: 900px) { flex-direction: column; min-height: auto; }
 `;
 const ContemporaryLeft = styled.div`
-  flex: 1; padding: 80px 60px; position: relative;
+  flex: 1; padding: 60px 30px; position: relative;
   display: flex; flex-direction: column; justify-content: center;
   opacity: ${p => p.$visible ? 1 : 0};
   transform: translateX(${p => p.$visible ? 0 : '-40px'});
   transition: all 0.9s ease;
-  @media (max-width: 900px) { padding: 60px 30px; }
+  @media (min-width: 600px) { padding: 80px 60px; }
 `;
 const ContemporaryShapes = styled.div`position: absolute; inset: 0; pointer-events: none; z-index: 0;`;
 const ContemporaryCircle = styled.div`
@@ -380,11 +381,12 @@ const ContemporaryTextBox = styled.div`
   p { font-size: 0.95rem; color: #666; line-height: 1.8; margin-bottom: 15px; }
 `;
 const ContemporaryRight = styled.div`
-  flex: 1; position: relative; min-height: 500px;
+  flex: 1; position: relative; min-height: 350px;
   opacity: ${p => p.$visible ? 1 : 0};
   transform: translateX(${p => p.$visible ? 0 : '40px'});
   transition: all 0.9s ease 0.2s;
-  @media (max-width: 900px) { min-height: 400px; }
+  @media (min-width: 600px) { min-height: 400px; }
+  @media (min-width: 900px) { min-height: 500px; }
 `;
 const ContemporaryGradient = styled.div`
   position: absolute; inset: 0;
