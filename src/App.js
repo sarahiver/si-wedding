@@ -11,6 +11,7 @@ import { themes } from "./styles/themes"
 import HomePage from "./pages/HomePage"
 import AdminPage from "./pages/admin/AdminPage"
 import CustomerFormPage from "./pages/form/CustomerFormPage"
+import DemoPage from "./pages/DemoPage"  // ← NEU
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("gold")
@@ -33,6 +34,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<HomePage />} />
+            <Route path='/demo' element={<DemoPage />} />  {/* ← NEU */}
             <Route
               path='/admin'
               element={<AdminPage setTheme={setCurrentTheme} />}
