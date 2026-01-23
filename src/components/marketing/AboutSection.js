@@ -53,21 +53,6 @@ const Image = styled.img`
   }
 `
 
-const PlaceholderNote = styled.div`
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(184, 151, 106, 0.9);
-  color: #0a0a0a;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 8px 15px;
-  z-index: 2;
-`
-
 const Content = styled.div`
   opacity: ${p => p.$visible ? 1 : 0};
   transform: translateX(${p => p.$visible ? 0 : '40px'});
@@ -134,6 +119,9 @@ const Signature = styled.div`
   }
 `
 
+// Unsplash Paar-Bild - ersetzen mit eigenem Foto
+const COUPLE_IMAGE = "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80"
+
 function AboutSection() {
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -152,10 +140,9 @@ function AboutSection() {
       <Container>
         <ImageWrapper $visible={isVisible}>
           <Image 
-            src="https://placehold.co/600x750/1a1a1a/B8976A?text=Sarah+%26+Iver%0AFoto" 
+            src={COUPLE_IMAGE}
             alt="Sarah & Iver - Gründer von S&I Wedding"
           />
-          <PlaceholderNote>📷 Bild ersetzen</PlaceholderNote>
         </ImageWrapper>
         
         <Content $visible={isVisible}>

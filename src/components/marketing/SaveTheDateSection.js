@@ -1,11 +1,6 @@
 // src/components/marketing/SaveTheDateSection.js
 import React, { useEffect, useRef, useState } from 'react'
-import styled, { keyframes } from 'styled-components'
-
-const shimmer = keyframes`
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-`
+import styled from 'styled-components'
 
 const Section = styled.section`
   padding: 140px 5%;
@@ -100,85 +95,8 @@ const PreviewImage = styled.img`
   box-shadow: 0 30px 80px rgba(26, 26, 26, 0.15);
 `
 
-const PlaceholderNote = styled.div`
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(184, 151, 106, 0.9);
-  color: #0a0a0a;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 8px 15px;
-`
-
-const PreviewCard = styled.div`
-  background: #0a0a0a;
-  padding: 60px 50px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(184, 151, 106, 0.03), transparent);
-  }
-`
-
-const PreviewEyebrow = styled.div`
-  font-family: 'Inter', sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #B8976A;
-  margin-bottom: 20px;
-  position: relative;
-`
-
-const PreviewTitle = styled.div`
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 2.5rem;
-  font-weight: 300;
-  background: linear-gradient(135deg, #B8976A, #D4AF37, #B8976A);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: ${shimmer} 4s linear infinite;
-  margin-bottom: 15px;
-  position: relative;
-`
-
-const PreviewDate = styled.div`
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 30px;
-  position: relative;
-`
-
-const PreviewDivider = styled.div`
-  width: 60px;
-  height: 1px;
-  background: rgba(184, 151, 106, 0.4);
-  margin: 0 auto 30px;
-  position: relative;
-`
-
-const PreviewText = styled.div`
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.1em;
-  position: relative;
-`
+// Unsplash - Hochzeitseinladung / Save the Date Style
+const SAVE_THE_DATE_IMAGE = "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80"
 
 function SaveTheDateSection() {
   const sectionRef = useRef(null)
@@ -213,23 +131,10 @@ function SaveTheDateSection() {
         
         <Preview $visible={isVisible}>
           <PreviewWrapper>
-            {/* Option 1: Mit echtem Mockup-Bild */}
-            {/* 
             <PreviewImage 
-              src="https://placehold.co/500x700/0a0a0a/B8976A?text=Save+the+Date%0AMockup%0A(Handy+mit+Karte)"
+              src={SAVE_THE_DATE_IMAGE}
               alt="Save the Date Beispiel"
             />
-            <PlaceholderNote>📷 Mockup ersetzen</PlaceholderNote>
-            */}
-            
-            {/* Option 2: Live Preview Card */}
-            <PreviewCard>
-              <PreviewEyebrow>— Save the Date —</PreviewEyebrow>
-              <PreviewTitle>Sarah & Iver</PreviewTitle>
-              <PreviewDate>15. August 2026 • Hamburg</PreviewDate>
-              <PreviewDivider />
-              <PreviewText>Wir heiraten und ihr sollt dabei sein</PreviewText>
-            </PreviewCard>
           </PreviewWrapper>
         </Preview>
       </Container>

@@ -67,25 +67,31 @@ const NavLink = styled.a`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 `
 
-const ThemeSwitcherWrapper = styled.div`
+const ThemeSwitcherContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 15px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 12px;
   
   @media (max-width: 768px) {
     display: none;
   }
 `
 
+const ThemeSwitcherWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+`
+
 const ThemeButton = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 2px solid ${p => p.$active ? '#B8976A' : 'rgba(255,255,255,0.15)'};
   background: ${p => p.$color};
@@ -99,19 +105,20 @@ const ThemeButton = styled.button`
   }
 `
 
-const DemoLink = styled.a`
+const DemoLink = styled.button`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #B8976A;
-  text-decoration: none;
-  padding: 12px 20px;
+  background: none;
   border: 1px solid rgba(184, 151, 106, 0.3);
+  padding: 10px 16px;
+  cursor: pointer;
   transition: all 0.3s ease;
   
   &:hover {
@@ -124,19 +131,8 @@ const DemoLink = styled.a`
   }
   
   span {
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition: transform 0.3s ease;
-  }
-  
-  @media (max-width: 900px) {
-    span {
-      display: none;
-    }
-  }
-  
-  @media (max-width: 600px) {
-    padding: 10px 15px;
-    font-size: 0.6rem;
   }
 `
 
@@ -156,7 +152,7 @@ const CTAButton = styled.a`
     background: #D4AF37;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `
@@ -253,8 +249,7 @@ function MarketingNav() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleDemoClick = (e) => {
-    e.preventDefault()
+  const handleDemoClick = () => {
     navigate(`/demo?theme=${currentTheme}`)
   }
 
@@ -273,21 +268,23 @@ function MarketingNav() {
         </NavLinks>
         
         <RightSection>
-          <ThemeSwitcherWrapper>
-            {themes.map(theme => (
-              <ThemeButton
-                key={theme.id}
-                $color={theme.color}
-                $active={currentTheme === theme.id}
-                onClick={() => switchTheme(theme.id)}
-                title={theme.name}
-              />
-            ))}
-          </ThemeSwitcherWrapper>
-          
-          <DemoLink href="#" onClick={handleDemoClick}>
-            Designs ausprobieren <span>→</span>
-          </DemoLink>
+          <ThemeSwitcherContainer>
+            <ThemeSwitcherWrapper>
+              {themes.map(theme => (
+                <ThemeButton
+                  key={theme.id}
+                  $color={theme.color}
+                  $active={currentTheme === theme.id}
+                  onClick={() => switchTheme(theme.id)}
+                  title={theme.name}
+                />
+              ))}
+            </ThemeSwitcherWrapper>
+            
+            <DemoLink onClick={handleDemoClick}>
+              Ausprobieren <span>→</span>
+            </DemoLink>
+          </ThemeSwitcherContainer>
           
           <CTAButton href="#contact">Kontakt</CTAButton>
           
@@ -305,9 +302,6 @@ function MarketingNav() {
         <MobileNavLink href="#pricing" onClick={() => setMobileOpen(false)}>Preise</MobileNavLink>
         <MobileNavLink href="#about" onClick={() => setMobileOpen(false)}>Über uns</MobileNavLink>
         <MobileNavLink href="#contact" onClick={() => setMobileOpen(false)}>Kontakt</MobileNavLink>
-        <MobileNavLink as="button" onClick={(e) => { handleDemoClick(e); setMobileOpen(false); }} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-          Demo ansehen →
-        </MobileNavLink>
         
         <MobileThemeSwitcher>
           {themes.map(theme => (

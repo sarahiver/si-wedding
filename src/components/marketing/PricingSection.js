@@ -14,7 +14,7 @@ const Section = styled.section`
 `
 
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 `
 
@@ -59,18 +59,19 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
+  margin-bottom: 100px;
   
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
     max-width: 450px;
-    margin: 0 auto;
+    margin: 0 auto 80px;
   }
 `
 
 const Card = styled.div`
   background: ${p => p.$popular ? 'rgba(184, 151, 106, 0.05)' : 'rgba(255, 255, 255, 0.02)'};
   border: 1px solid ${p => p.$popular ? 'rgba(184, 151, 106, 0.4)' : 'rgba(255, 255, 255, 0.08)'};
-  padding: 50px 40px;
+  padding: 50px 35px;
   text-align: center;
   position: relative;
   opacity: ${p => p.$visible ? 1 : 0};
@@ -116,7 +117,7 @@ const TierSubtitle = styled.div`
 
 const Price = styled.div`
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 300;
   color: #ffffff;
   margin-bottom: 5px;
@@ -124,6 +125,10 @@ const Price = styled.div`
   span {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.5);
+  }
+  
+  small {
+    font-size: 1.5rem;
   }
 `
 
@@ -186,54 +191,141 @@ const CTA = styled.a`
   `}
 `
 
+// Add-Ons Section
+const AddOnsSection = styled.div`
+  opacity: ${p => p.$visible ? 1 : 0};
+  transform: translateY(${p => p.$visible ? 0 : '40px'});
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.4s;
+`
+
+const AddOnsHeader = styled.div`
+  text-align: center;
+  margin-bottom: 50px;
+`
+
+const AddOnsTitle = styled.h3`
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+`
+
+const AddOnsSubtitle = styled.p`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.4);
+`
+
+const AddOnsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const AddOnCard = styled.div`
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 25px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: rgba(184, 151, 106, 0.3);
+  }
+`
+
+const AddOnName = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 8px;
+`
+
+const AddOnPrice = styled.div`
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  color: #B8976A;
+  margin-bottom: 8px;
+`
+
+const AddOnNote = styled.div`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.3);
+`
+
 const tiers = [
   {
-    id: 'essential',
-    name: 'Essential',
-    subtitle: 'Für den perfekten Start',
-    price: '299',
+    id: 'klassik',
+    name: 'Klassik',
+    subtitle: 'Der perfekte Einstieg',
+    price: '1.490',
     popular: false,
     features: [
-      { text: '1 Theme nach Wahl', highlight: false },
-      { text: '7 Basis-Komponenten', highlight: false },
-      { text: 'RSVP mit Zusagen', highlight: false },
-      { text: '6 Monate aktiv', highlight: false },
+      { text: '10 Komponenten', highlight: false },
+      { text: '8 Monate Hosting', highlight: false },
+      { text: '1× 30 Min Beratung', highlight: false },
+      { text: 'Alle 6 Themes verfügbar', highlight: false },
       { text: 'Mobile-optimiert', highlight: false },
+      { text: 'Archivierung: Aufpreis', highlight: false },
     ],
     cta: 'Jetzt starten'
   },
   {
-    id: 'premium',
-    name: 'Premium',
+    id: 'signature',
+    name: 'Signature',
     subtitle: 'Unser Bestseller',
-    price: '499',
+    price: '2.190',
     popular: true,
     features: [
-      { text: 'Alle 6 Themes verfügbar', highlight: true },
-      { text: 'Alle 12 Komponenten', highlight: true },
-      { text: 'Video-Hintergründe', highlight: true },
-      { text: '12 Monate aktiv', highlight: false },
-      { text: 'Passwortschutz', highlight: false },
-      { text: 'Eigene Domain möglich', highlight: false },
+      { text: '16 Komponenten', highlight: true },
+      { text: '12 Monate Hosting', highlight: true },
+      { text: '2× 30 Min Beratung', highlight: true },
+      { text: 'Alle 6 Themes verfügbar', highlight: false },
+      { text: 'Save-the-Date: nur +125€', highlight: true },
+      { text: 'Archivierung: Aufpreis', highlight: false },
     ],
-    cta: 'Premium wählen'
+    cta: 'Signature wählen'
   },
   {
-    id: 'exclusive',
-    name: 'Exclusive',
+    id: 'couture',
+    name: 'Couture',
     subtitle: 'Maßgeschneidert',
-    price: '999',
+    price: '2.990',
+    pricePlus: true,
     popular: false,
     features: [
-      { text: 'Alles aus Premium', highlight: false },
-      { text: 'Custom Design-Anpassungen', highlight: true },
-      { text: 'Unbegrenzte Revisionen', highlight: true },
-      { text: '24 Monate aktiv', highlight: false },
-      { text: 'Priority Support', highlight: false },
-      { text: 'Print-Ready Export', highlight: false },
+      { text: 'Alle 23 Komponenten', highlight: true },
+      { text: '12 Monate Hosting', highlight: false },
+      { text: 'Unbegrenzte Beratung', highlight: true },
+      { text: 'Save-the-Date inklusive', highlight: true },
+      { text: '3 Monate Archiv inklusive', highlight: true },
+      { text: 'Custom Design möglich', highlight: true },
     ],
     cta: 'Beratung anfragen'
   }
+]
+
+const addOns = [
+  { name: 'Save-the-Date Seite', price: 'ab 125€', note: '+1 Monat Hosting' },
+  { name: 'Archivierung', price: '+190€', note: '3 Monate' },
+  { name: 'Hosting-Verlängerung', price: '29€/Mon', note: 'Nach Ablauf' },
+  { name: 'Zusätzliche Sprache', price: '+350€', note: 'Mehrsprachig' },
+  { name: 'QR-Code Paket', price: '+120€', note: 'Print-Ready' },
+  { name: 'Tischkarten-Design', price: '+290€', note: 'Passend zum Theme' },
+  { name: 'Save-the-Date Digital', price: '+190€', note: 'Animierte Karte' },
+  { name: 'Statischer Download', price: '49€', note: 'Nach Archivierung' },
 ]
 
 function PricingSection() {
@@ -254,9 +346,10 @@ function PricingSection() {
       <Container>
         <Header $visible={isVisible}>
           <Eyebrow>— Preise —</Eyebrow>
-          <Title>Transparente Pakete</Title>
+          <Title>Unsere Pakete</Title>
           <Subtitle>
-            Wählt das Paket, das zu euch passt. Keine versteckten Kosten.
+            Transparente Preise, keine versteckten Kosten. 
+            Wählt das Paket, das zu euch passt.
           </Subtitle>
         </Header>
         
@@ -271,7 +364,9 @@ function PricingSection() {
               {tier.popular && <PopularBadge>Bestseller</PopularBadge>}
               <TierName $popular={tier.popular}>{tier.name}</TierName>
               <TierSubtitle>{tier.subtitle}</TierSubtitle>
-              <Price>{tier.price}<span>€</span></Price>
+              <Price>
+                {tier.price}{tier.pricePlus && <small>+</small>}<span>€</span>
+              </Price>
               <PriceNote>einmalig, zzgl. MwSt.</PriceNote>
               <Features>
                 {tier.features.map((f, j) => (
@@ -282,6 +377,23 @@ function PricingSection() {
             </Card>
           ))}
         </Grid>
+        
+        <AddOnsSection $visible={isVisible}>
+          <AddOnsHeader>
+            <AddOnsTitle>Add-Ons & Extras</AddOnsTitle>
+            <AddOnsSubtitle>Erweitert euer Paket nach euren Wünschen</AddOnsSubtitle>
+          </AddOnsHeader>
+          
+          <AddOnsGrid>
+            {addOns.map((addon, i) => (
+              <AddOnCard key={i}>
+                <AddOnName>{addon.name}</AddOnName>
+                <AddOnPrice>{addon.price}</AddOnPrice>
+                <AddOnNote>{addon.note}</AddOnNote>
+              </AddOnCard>
+            ))}
+          </AddOnsGrid>
+        </AddOnsSection>
       </Container>
     </Section>
   )

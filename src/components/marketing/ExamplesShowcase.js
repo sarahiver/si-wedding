@@ -107,20 +107,6 @@ const PreviewImage = styled.img`
   transition: transform 0.6s ease;
 `
 
-const PlaceholderBadge = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(184, 151, 106, 0.9);
-  color: #0a0a0a;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.5rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 4px 8px;
-`
-
 const CardContent = styled.div`
   padding: 30px 25px;
   text-align: center;
@@ -182,6 +168,7 @@ const CardCTA = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 `
 
+// Theme examples mit echten Unsplash Bildern
 const themeExamples = [
   {
     id: 'video',
@@ -189,8 +176,8 @@ const themeExamples = [
     tagline: 'Cineastisch & Dramatisch',
     colors: ['#FAF8F5', '#1A1A1A', '#B8976A'],
     bgColor: '#0a0a0a',
-    // Platzhalter für Theme Screenshot
-    image: 'https://placehold.co/600x400/0a0a0a/B8976A?text=Video+Theme%0AScreenshot',
+    // Cinematic wedding - dramatic lighting
+    image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80',
     demoUrl: '/demo?theme=video'
   },
   {
@@ -199,7 +186,8 @@ const themeExamples = [
     tagline: 'Zeitlose Magazin-Ästhetik',
     colors: ['#FFFFFF', '#1A1A1A', '#666666'],
     bgColor: '#ffffff',
-    image: 'https://placehold.co/600x400/ffffff/1a1a1a?text=Editorial+Theme%0AScreenshot',
+    // Clean, editorial style wedding
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80',
     demoUrl: '/demo?theme=editorial'
   },
   {
@@ -208,7 +196,8 @@ const themeExamples = [
     tagline: 'Organisch & Natürlich',
     colors: ['#F8F6F0', '#2D3B2D', '#8B9D83'],
     bgColor: '#F8F6F0',
-    image: 'https://placehold.co/600x400/F8F6F0/2D3B2D?text=Botanical+Theme%0AScreenshot',
+    // Garden/nature wedding with greenery
+    image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80',
     demoUrl: '/demo?theme=botanical'
   },
   {
@@ -217,7 +206,8 @@ const themeExamples = [
     tagline: 'Modern & Playful',
     colors: ['#FF6B6B', '#4ECDC4', '#FFE66D'],
     bgColor: '#FAFAFA',
-    image: 'https://placehold.co/600x400/FAFAFA/FF6B6B?text=Contemporary+Theme%0AScreenshot',
+    // Modern, colorful wedding
+    image: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80',
     demoUrl: '/demo?theme=contemporary'
   },
   {
@@ -226,7 +216,8 @@ const themeExamples = [
     tagline: 'Opulent & Glamourös',
     colors: ['#FAF9F7', '#2A2A2A', '#D4AF37'],
     bgColor: '#0a0a0a',
-    image: 'https://placehold.co/600x400/0a0a0a/D4AF37?text=Luxe+Theme%0AScreenshot',
+    // Luxury, gold accents wedding
+    image: 'https://images.unsplash.com/photo-1549416878-7e58e89bae85?w=600&q=80',
     demoUrl: '/demo?theme=luxe'
   },
   {
@@ -235,7 +226,8 @@ const themeExamples = [
     tagline: 'Bold & Digital',
     colors: ['#0A0A0F', '#00FFFF', '#FF00FF'],
     bgColor: '#0A0A0F',
-    image: 'https://placehold.co/600x400/0A0A0F/00FFFF?text=Neon+Theme%0AScreenshot',
+    // Night wedding with lights
+    image: 'https://images.unsplash.com/photo-1528495612343-9ca9f4a4de28?w=600&q=80',
     demoUrl: '/demo?theme=neon'
   }
 ]
@@ -282,7 +274,6 @@ function ExamplesShowcase() {
                   src={theme.image} 
                   alt={`${theme.name} Theme Preview`}
                 />
-                <PlaceholderBadge>📷 Screenshot</PlaceholderBadge>
               </ImageWrapper>
               
               <CardContent>

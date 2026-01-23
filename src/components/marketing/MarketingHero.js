@@ -52,34 +52,6 @@ const VideoBackground = styled.div`
   }
 `
 
-const FallbackImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: ${p => p.$show ? 'block' : 'none'};
-`
-
-const PlaceholderNote = styled.div`
-  position: absolute;
-  top: 100px;
-  right: 20px;
-  background: rgba(184, 151, 106, 0.9);
-  color: #0a0a0a;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 10px 15px;
-  z-index: 10;
-  max-width: 200px;
-  text-align: center;
-  line-height: 1.5;
-`
-
 const Content = styled.div`
   position: relative;
   z-index: 1;
@@ -212,11 +184,11 @@ const ScrollIndicator = styled.div`
   }
 `
 
-// Video URL - hier ersetzen mit eigenem Video
+// Video URL - ersetzen mit eigenem Video
 const VIDEO_URL = "https://res.cloudinary.com/si-weddings/video/upload/v1769070616/si_comming_soon_video_hero_xga2ia.mp4"
 
-// Fallback Bild - hier ersetzen mit eigenem Bild
-const FALLBACK_IMAGE = "https://placehold.co/1920x1080/0a0a0a/B8976A?text=Hero+Hintergrund%0A(Video+oder+Bild)"
+// Fallback Bild - Unsplash Hochzeitsbild
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80"
 
 function MarketingHero() {
   const [videoError, setVideoError] = useState(false)
@@ -235,18 +207,12 @@ function MarketingHero() {
             <source src={VIDEO_URL} type="video/mp4" />
           </video>
         ) : (
-          <FallbackImage 
+          <img 
             src={FALLBACK_IMAGE} 
-            alt="Hero Background"
-            $show={true}
+            alt="Wedding background"
           />
         )}
       </VideoBackground>
-      
-      <PlaceholderNote>
-        🎬 Video/Bild ersetzen<br/>
-        Zeile 175-176 in MarketingHero.js
-      </PlaceholderNote>
       
       <Content>
         <Eyebrow>— Premium Wedding Websites —</Eyebrow>
