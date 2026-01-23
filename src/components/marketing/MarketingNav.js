@@ -3,11 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { useTheme } from '../../context/ThemeContext';
 
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
 const floatNav = keyframes`
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(-3px); }
@@ -272,6 +267,7 @@ const ThemeDot = styled.span`
   height: 12px;
   border-radius: 50%;
   background: ${p => p.$color};
+  transition: transform 0.3s ease;
 `;
 
 const DropdownArrow = styled.span`
@@ -290,8 +286,7 @@ const DropdownMenu = styled.div`
   opacity: ${p => p.$open ? 1 : 0};
   visibility: ${p => p.$open ? 'visible' : 'hidden'};
   transform: translateY(${p => p.$open ? 0 : '-10px'});
-  transition: all 0.3s ease;
-  animation: ${p => p.$open && fadeIn} 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1001;
   
   ${p => p.$themeId === 'video' && css`background: rgba(10,10,10,0.98); border: 1px solid rgba(184,151,106,0.2);`}
@@ -355,11 +350,12 @@ const DropdownItem = styled.button`
 
 const MobileMenuButton = styled.button`
   display: none;
+  width: 44px;
+  height: 44px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  padding: 10px;
+  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
@@ -372,20 +368,26 @@ const MobileMenuButton = styled.button`
   span {
     width: 24px;
     height: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
     
-    ${p => p.$themeId === 'video' && css`background: #B8976A;`}
+    ${p => p.$themeId === 'video' && css`background: ${p.$menuOpen ? '#B8976A' : '#B8976A'};`}
     ${p => p.$themeId === 'editorial' && css`background: #1A1A1A;`}
     ${p => p.$themeId === 'botanical' && css`background: #2D3B2D;`}
     ${p => p.$themeId === 'contemporary' && css`background: #0D0D0D;`}
     ${p => p.$themeId === 'luxe' && css`background: #D4AF37;`}
     ${p => p.$themeId === 'neon' && css`background: #00ffff;`}
     
-    ${p => p.$open && css`
-      &:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-      &:nth-child(2) { opacity: 0; }
-      &:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    `}
+    &:nth-child(1) {
+      transform: ${p => p.$menuOpen ? 'rotate(45deg) translate(5.5px, 5.5px)' : 'none'};
+    }
+    &:nth-child(2) {
+      opacity: ${p => p.$menuOpen ? 0 : 1};
+      transform: ${p => p.$menuOpen ? 'scaleX(0)' : 'scaleX(1)'};
+    }
+    &:nth-child(3) {
+      transform: ${p => p.$menuOpen ? 'rotate(-45deg) translate(5.5px, -5.5px)' : 'none'};
+    }
   }
 `;
 
@@ -400,7 +402,7 @@ const MobileMenuOverlay = styled.div`
     z-index: 999;
     opacity: ${p => p.$open ? 1 : 0};
     visibility: ${p => p.$open ? 'visible' : 'hidden'};
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     
     ${p => p.$themeId === 'video' && css`background: rgba(10,10,10,0.98);`}
     ${p => p.$themeId === 'editorial' && css`background: rgba(255,255,255,0.98);`}
@@ -417,17 +419,17 @@ const MobileMenuContent = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  gap: 25px;
+  gap: 20px;
   padding: 100px 30px 50px;
 `;
 
 const MobileNavLink = styled.a`
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   text-decoration: none;
-  transition: all 0.3s ease;
   opacity: ${p => p.$open ? 1 : 0};
-  transform: translateY(${p => p.$open ? 0 : '20px'});
-  transition-delay: ${p => p.$delay}s;
+  transform: translateY(${p => p.$open ? 0 : '30px'});
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: ${p => p.$open ? p.$delay : 0}s;
   
   ${p => p.$themeId === 'video' && css`
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -472,11 +474,11 @@ const MobileThemeSection = styled.div`
   margin-top: 30px;
   padding-top: 30px;
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   opacity: ${p => p.$open ? 1 : 0};
-  transform: translateY(${p => p.$open ? 0 : '20px'});
-  transition: all 0.5s ease;
-  transition-delay: 0.4s;
+  transform: translateY(${p => p.$open ? 0 : '30px'});
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: ${p => p.$open ? '0.35s' : '0s'};
   
   ${p => p.$themeId === 'video' && css`border-top: 1px solid rgba(184,151,106,0.2);`}
   ${p => p.$themeId === 'editorial' && css`border-top: 1px solid #E0E0E0;`}
@@ -504,7 +506,7 @@ const MobileThemeTitle = styled.p`
 const MobileThemeGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
 `;
 
 const MobileThemeButton = styled.button`
@@ -512,11 +514,11 @@ const MobileThemeButton = styled.button`
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 15px 10px;
+  padding: 15px 8px;
   background: transparent;
   border: 1px solid;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   
   ${p => p.$themeId === 'video' && css`
     border-color: ${p.$active ? '#B8976A' : 'rgba(184,151,106,0.2)'};
@@ -551,10 +553,11 @@ const MobileThemeDot = styled.span`
   height: 20px;
   border-radius: 50%;
   background: ${p => p.$color};
+  transition: transform 0.3s ease;
 `;
 
 const MobileThemeName = styled.span`
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   letter-spacing: 0.05em;
   
   ${p => p.$themeId === 'video' && css`font-family: 'Montserrat', sans-serif; color: rgba(255,255,255,0.6);`}
@@ -581,6 +584,21 @@ const navLinks = [
   { label: 'Über uns', href: '#about' },
   { label: 'Kontakt', href: '#contact' }
 ];
+
+// Smooth scroll function
+const smoothScrollTo = (elementId) => {
+  const element = document.getElementById(elementId);
+  if (element) {
+    const navHeight = 100; // Account for fixed nav
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - navHeight;
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  }
+};
 
 function MarketingNav() {
   const { currentTheme, switchTheme, themes } = useTheme();
@@ -622,10 +640,27 @@ function MarketingNav() {
 
   const handleMobileThemeSelect = (themeId) => {
     switchTheme(themeId);
+    // Close menu after theme change
+    setTimeout(() => {
+      setMobileMenuOpen(false);
+    }, 300);
   };
 
-  const handleMobileLinkClick = () => {
+  const handleNavLinkClick = (e, href) => {
+    e.preventDefault();
+    const elementId = href.replace('#', '');
+    smoothScrollTo(elementId);
+  };
+
+  const handleMobileLinkClick = (e, href) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
+    
+    // Wait for menu to close, then scroll
+    setTimeout(() => {
+      const elementId = href.replace('#', '');
+      smoothScrollTo(elementId);
+    }, 400);
   };
 
   return (
@@ -637,7 +672,13 @@ function MarketingNav() {
         
         <NavLinks $themeId={currentTheme}>
           {navLinks.map(link => (
-            <NavLink key={link.label} href={link.href} $themeId={currentTheme} $scrolled={scrolled}>
+            <NavLink 
+              key={link.label} 
+              href={link.href} 
+              $themeId={currentTheme} 
+              $scrolled={scrolled}
+              onClick={(e) => handleNavLinkClick(e, link.href)}
+            >
               {link.label}
             </NavLink>
           ))}
@@ -672,7 +713,7 @@ function MarketingNav() {
           
           <MobileMenuButton 
             $themeId={currentTheme} 
-            $open={mobileMenuOpen}
+            $menuOpen={mobileMenuOpen}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span />
@@ -691,8 +732,8 @@ function MarketingNav() {
               href={link.href} 
               $themeId={currentTheme}
               $open={mobileMenuOpen}
-              $delay={0.1 + i * 0.05}
-              onClick={handleMobileLinkClick}
+              $delay={0.05 + i * 0.05}
+              onClick={(e) => handleMobileLinkClick(e, link.href)}
             >
               {link.label}
             </MobileNavLink>
