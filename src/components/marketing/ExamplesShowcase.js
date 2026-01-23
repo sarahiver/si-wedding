@@ -35,11 +35,6 @@ const luxeReveal = keyframes`
   to { clip-path: inset(0 0 0 0); }
 `
 
-const newBadgePulse = keyframes`
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-`
-
 // ============================================
 // THEME DATA - Die 6 Demo-Themes
 // ============================================
@@ -102,8 +97,7 @@ const themeExamples = [
     fonts: "Cormorant Garamond + Inter",
     colors: ["#FAF8F5", "#1A1A1A", "#B8976A"],
     demoUrl: "/demo?theme=video",
-    externalUrl: "https://video-example-one.vercel.app/",
-    isNew: true
+    externalUrl: "https://video-example-one.vercel.app/"
   }
 ]
 
@@ -242,29 +236,6 @@ const Subtitle = styled.p`
   ${(p) => p.$themeId === "contemporary" && css`font-family: "Space Grotesk", sans-serif; font-size: 1rem; color: #666; margin: 0;`}
   ${(p) => p.$themeId === "luxe" && css`font-family: "Montserrat", sans-serif; font-size: 0.9rem; color: #888; max-width: 500px; margin: 0 auto;`}
   ${(p) => p.$themeId === "neon" && css`font-family: "Space Grotesk", sans-serif; font-size: 1rem; color: rgba(255, 255, 255, 0.6); max-width: 500px; margin: 0 auto;`}
-`
-
-// ============================================
-// NEW BADGE
-// ============================================
-const NewBadge = styled.span`
-  display: inline-block;
-  font-size: 0.55rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 8px;
-  border-radius: 3px;
-  margin-left: 10px;
-  vertical-align: middle;
-  animation: ${newBadgePulse} 2s ease-in-out infinite;
-  
-  ${p => p.$themeId === 'editorial' && css`background: #1a1a1a; color: #ffffff;`}
-  ${p => p.$themeId === 'gold' && css`background: linear-gradient(135deg, #d4af37, #f4d03f); color: #0a0a0a;`}
-  ${p => p.$themeId === 'botanical' && css`background: #2d3b2d; color: #ffffff;`}
-  ${p => p.$themeId === 'contemporary' && css`background: #FF6B6B; color: #ffffff;`}
-  ${p => p.$themeId === 'luxe' && css`background: #b4a08c; color: #ffffff;`}
-  ${p => p.$themeId === 'neon' && css`background: linear-gradient(135deg, #00ffff, #ff00ff); color: #0a0a0f;`}
 `
 
 // ============================================
@@ -778,7 +749,6 @@ function ExamplesShowcase() {
               <EditorialCard key={theme.id} onClick={() => handleCardClick(theme)}>
                 <EditorialName>
                   {theme.name}
-                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEU!</NewBadge>}
                 </EditorialName>
                 <EditorialTagline>{theme.tagline}</EditorialTagline>
                 <EditorialCTA>Demo ansehen</EditorialCTA>
@@ -795,7 +765,6 @@ function ExamplesShowcase() {
                 <GoldInitials>{theme.name.substring(0, 2).toUpperCase()}</GoldInitials>
                 <GoldName>
                   {theme.name}
-                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEU!</NewBadge>}
                 </GoldName>
                 <GoldTagline>{theme.tagline}</GoldTagline>
                 <ColorSwatches style={{ justifyContent: 'center' }}>
@@ -815,7 +784,6 @@ function ExamplesShowcase() {
                 <BotanicalEmoji $delay={`${i * 0.2}s`}>{themeEmojis[theme.id]}</BotanicalEmoji>
                 <BotanicalName>
                   {theme.name}
-                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEU!</NewBadge>}
                 </BotanicalName>
                 <BotanicalTagline>{theme.tagline}</BotanicalTagline>
                 <BotanicalCTA>Ansehen</BotanicalCTA>
@@ -832,7 +800,6 @@ function ExamplesShowcase() {
                 <ContemporaryNumber>{String(i + 1).padStart(2, "0")}</ContemporaryNumber>
                 <ContemporaryName>
                   {theme.name}
-                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEW!</NewBadge>}
                 </ContemporaryName>
                 <ContemporaryTagline>{theme.tagline}</ContemporaryTagline>
                 <ContemporaryCTA>View Demo →</ContemporaryCTA>
@@ -848,7 +815,6 @@ function ExamplesShowcase() {
               <LuxeCard key={theme.id} onClick={() => handleCardClick(theme)}>
                 <LuxeName $delay={`${i * 0.1}s`}>
                   {theme.name}
-                  {theme.isNew && <NewBadge $themeId={currentTheme}>NOUVEAU</NewBadge>}
                 </LuxeName>
                 <LuxeCenter><LuxeTagline>{theme.tagline}</LuxeTagline></LuxeCenter>
                 <LuxeRight><LuxeCTA>Ansehen</LuxeCTA></LuxeRight>
@@ -865,7 +831,6 @@ function ExamplesShowcase() {
                 <NeonIndex>{"// "}{String(i + 1).padStart(2, "0")}</NeonIndex>
                 <NeonName>
                   {theme.name}
-                  {theme.isNew && <NewBadge $themeId={currentTheme}>NEW!</NewBadge>}
                 </NeonName>
                 <NeonTagline>{theme.tagline}</NeonTagline>
                 <NeonCTA>LAUNCH_DEMO()</NeonCTA>
